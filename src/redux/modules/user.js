@@ -21,18 +21,19 @@ const initialState = {
 
 
 // 리듀서
-export default handleActions({
-    [SET_USER]: (state, action) => produce(state, (draft)=>{
-        // "is_login" : 함수이름, "success" : 저장할 값 
+export default handleActions(
+  {
+    [SET_USER]: (state, action) =>
+      produce(state, (draft) => {
+        // "is_login" : 함수이름, "success" : 저장할 값
         // setCookie("is_login", "success")
         // action creators에서 받아온 값
         draft.user = action.payload.user;
         // draft.is_login = true;
-    }),
-
-    initialState
-
-})
+      }),
+  },
+  initialState
+); 
 
 
 // action creator export
