@@ -1,14 +1,22 @@
 import React from "react";
 import styled from "styled-components";
+import { ConnectedRouter } from "connected-react-router";
+import {history} from "../redux/configureStore";
+import { Route } from "react-router-dom";
 
-import './App.css';
+
+import Login from '../pages/Login';
+import Signup from '../pages/Signup';
 
 
 function App() {
   return (
     <React.Fragment>
       <Container>
-          메인페이지
+          <ConnectedRouter history={history}>
+            <Route path="/login" exact component={Login} />
+            <Route path="/signup" exact component={Signup} />
+          </ConnectedRouter>
       </Container>
     </React.Fragment>
   );
@@ -16,10 +24,8 @@ function App() {
 
 const Container = styled.div`
   width: 80vw;
-  height: 80vh;
   margin: auto;
-  background-color: orange;
-  border 1px solid #ddd;
+  border: 1px solid #ddd;
   border-radius: 10px;
   // padding: 60px 20px 130px;
 
