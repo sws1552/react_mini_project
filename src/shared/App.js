@@ -12,17 +12,19 @@ import Signup from '../pages/Signup';
 function App() {
   return (
     <React.Fragment>
-      <Container>
+      <Background>
+        <Container>
           <ConnectedRouter history={history}>
             <Route path="/login" exact component={Login} />
             <Route path="/signup" exact component={Signup} />
           </ConnectedRouter>
-      </Container>
+        </Container>
+      </Background>
     </React.Fragment>
   );
 }
 
-const Back = styled.div`
+const Background = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: #eee;
