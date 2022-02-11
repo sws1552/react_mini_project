@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { ConnectedRouter } from "connected-react-router";
-import {history} from "../redux/configureStore";
+import { history } from "../redux/configureStore";
 import { Route } from "react-router-dom";
 
 
