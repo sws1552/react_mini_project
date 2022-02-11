@@ -10,9 +10,9 @@ import { idCheck, passwordCheck } from "../shared/common";
 
 const Signup = (props) => {
     const dispatch = useDispatch();
-    const [userID, setId] = React.useState("");
+    const [id, setId] = React.useState("");
     const [nickname, setNickname] = React.useState("");
-    const [password, setPwd] = React.useState("");
+    const [pwd, setPwd] = React.useState("");
     const [pwdCheck, setPwdCheck] = React.useState("");
 
     // debounce로 onChange 횟수 감소
@@ -46,13 +46,21 @@ const Signup = (props) => {
     };
 
     const signup = () => {
-        if(!passwordCheck(password)) {
+        if(id ==="" || nickname === "" || pwd ==="" || pwdCheck ==="") {
+            window.alert('모든 입력칸을 빠짐없이 채워주세요')
+        }
+
+        if(!idCheck(id)) {
+            window.alert('아이디 형식에 맞게 입력해주세요')
+        }
+
+        if(!passwordCheck(pwd)) {
             window.alert('비밀번호 형식에 맞게 입력해주세요')
             return;
         }
 
-        if(password !== pwdCheck) {
-            window.alert('비밀번호와 ')
+        if(pwd !== pwdCheck) {
+            window.alert('비밀번호와 비밀번호 확인 값이 일치하지 않습니다')
             return;
         }
     }
@@ -87,6 +95,7 @@ const Signup = (props) => {
           <Grid padding="16px">
             <Input
             label="비밀번호"
+            type="password"
             placeholder="숫자, 영어, 특수문자 포함 8글자 이상 입력해주세요"
             _onChange = {PwdValue}
             >
@@ -96,6 +105,7 @@ const Signup = (props) => {
           <Grid padding="16px">
             <Input
             label="비밀번호 확인"
+            type="password"
             placeholder="비밀번호를 다시 입력해주세요"
             _onChange = {PwdCheckValue}
             >
