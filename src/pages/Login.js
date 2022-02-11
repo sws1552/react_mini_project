@@ -4,7 +4,7 @@ import { Text, Input, Grid, Button } from "../elements";
 import {useDispatch} from "react-redux";
 import {actionCreators as userActions} from "../redux/modules/user";
 import { debounce } from "lodash";
-import {idCheck} from "../shared/common";
+import {idCheck, passwordCheck} from "../shared/common";
 
 const Login = (props) => {
     const dispatch = useDispatch();
@@ -39,6 +39,11 @@ const Login = (props) => {
 
         if(!idCheck(id)) {
             window.alert("아이디는 숫자, 영어로만 4글자 이상 20글 이하로 !!");
+            return;
+        }
+
+        if(!passwordCheck(pwd)){
+            window.alert("비밀번호는 숫자, 영어, 특수문자 포함 8글자 이상 !! ");
             return;
         }
 
