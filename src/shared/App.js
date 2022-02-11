@@ -22,6 +22,16 @@ function App() {
   );
 }
 
+const Back = styled.div`
+  height: 100vh;
+  width: 100vw;
+  background-color: #eee;
+  // display: flex;
+  // justify-content: center;
+  // align-items: center;
+
+`
+
 const Container = styled.div`
   width: 80vw;
   margin: auto;
