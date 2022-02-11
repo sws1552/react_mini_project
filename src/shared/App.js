@@ -4,9 +4,10 @@ import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 import { Route } from "react-router-dom";
 
-
+import PostList from '../pages/PostList';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
+import PostWrite from '../pages/PostWrite';
 
 
 function App() {
@@ -15,8 +16,11 @@ function App() {
       <Background>
         <Container>
           <ConnectedRouter history={history}>
+            <Route path="/" exact component={PostList} />
             <Route path="/login" exact component={Login} />
             <Route path="/signup" exact component={Signup} />
+            <Route path="/write" exact component={PostWrite} />
+
           </ConnectedRouter>
         </Container>
       </Background>
