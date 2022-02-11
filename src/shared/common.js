@@ -5,3 +5,7 @@ export const idCheck = (checkId) => {
 }
 
 
+export const passwordCheck = (password) => {
+    let _reg = /[a-zA-Z0-9].{8,}/
+    return _reg.test(password);
+}
