@@ -15,7 +15,7 @@ const Login = (props) => {
 
     const debounceid = debounce((e) => {
         setId(e.target.value);
-    }, 1000);
+    }, 500);
 
     const idKeyPress = React.useCallback(debounceid, []);
 
