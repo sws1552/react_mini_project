@@ -10,20 +10,20 @@ import { FiPlus } from "react-icons/fi";
 const PostList = (props) => {
   return (
     <React.Fragment>
-      <Grid margin="30px 0px">
+      {/* <Grid is_flex margin="30px 0px"> */}
         {/* post_list에 있는 카드 수만큼 그려주기 */}
         {/* {post_list.map((p, idx) => { */}
-          <Grid _wrap is_flex>
+          {/* <Grid _wrap is_flex> */}
+          <Postcards>
             <Post></Post>
             <Post></Post>
             <Post></Post>
             <Post></Post>
             <Post></Post>
-            <Post></Post>
-            
-          </Grid>
+          </Postcards>
+          {/* </Grid> */}
         {/* })} */}
-      </Grid>
+      {/* </Grid> */}
       <Button
         is_float
         _onClick={() => {
@@ -35,5 +35,21 @@ const PostList = (props) => {
     </React.Fragment>
   );
 };
+
+
+// 카드 나타나는 전체 넓이
+const Postcards = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin: auto;
+
+  // display: grid;
+  // grid-template-columns: 1fr 1fr 1fr;
+  // width: 100%;
+  // margin: auto;
+
+`
 
 export default PostList;

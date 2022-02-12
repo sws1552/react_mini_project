@@ -3,13 +3,11 @@ import React from "react";
 
 
 const Image = (props) => {
-    const {shape, src, size, radius, auto, width, block} = props;
+    const {shape, src, size, width, _onClick} = props;
 
     const styles = {
         src: src,
         size: size,
-        radius: radius,
-        auto: auto,
         width: width,
     }
 
@@ -21,48 +19,43 @@ const Image = (props) => {
 
     if(shape === "rectangle"){
         return (
-            <AspectOutter>
-                <AspectInner {...styles}></AspectInner>
+            <AspectOutter {...styles}>
+                <AspectInner onClick={_onClick} {...styles}></AspectInner>
             </AspectOutter>
         )
     }
 
-    return (
-        <React.Fragment>
-            
-        </React.Fragment>
-    )
 }
 
 Image.defaultProps = {
   shape: "rectangle",
   src: "https://thumb.mt.co.kr/06/2021/05/2021052009134127042_1.jpg/dims/optimize/",
   size: null,
-  auto: "auto",
+  auto: null,
   radius: null,
   block: null,
+  maxHeight: null,
+  _onClick: () => {},
 };
 
 const AspectOutter = styled.div`
     width: 100%;
     min-width: 250px;
-    
+    // ${(props) => (props.hover? `&:hover: ba;` : '')}
 `;
 
 const AspectInner = styled.div`
-    // position: relative;
-    // position: static;
+    position: relative;
     padding-top: 75%;
     // overflow: hidden;
     background-image: url("${(props) => props.src}");
     background-size: cover;
     // background-position: center;
-    ${(props) => (props.radius? `border-radius: ${props.radius};` : '')}
     ${(props) => (props.width? `width: ${props.width};` : '')}
-    ${(props) => (props.auto? `height: auto;` : '')}
 
 
 `;
+
 
 const ImageCircle = styled.div`
     --size: ${(props) => props.size}px;
