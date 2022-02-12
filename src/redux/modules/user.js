@@ -1,5 +1,6 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from "immer";
+import {history} from "../configureStore";
 
 // 액션타입
 const SET_USER = "SET_USER";
@@ -17,6 +18,26 @@ const initialState = {
 
 
 // 미들웨어 자리
+const signupFB = (id, pwd) => {
+  return function (dispatch, getState, {history}) {
+
+    
+
+  }
+}
+
+
+
+const loginFB = (id, pwd) => {
+  return function (dispatch, getState, {history}) {
+
+
+
+  }
+}
+
+
+
 
 
 
