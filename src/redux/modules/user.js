@@ -35,7 +35,7 @@ const signupFB = (id, pwd) => {
 const loginFB = (id, pwd) => {
   return function (dispatch, getState, {history}) {
 
-    
+    console.log("id, pwd !! ", id, pwd);
 
   }
 }
