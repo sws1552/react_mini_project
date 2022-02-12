@@ -68,7 +68,7 @@ const loginFB = (id, pwd) => {
     // 어떤 요청을 보낼 지, 별칭 메서드 사용
     axios.post('http://14.45.204.153:5000/api/user/login', // 미리 약속한 주소
       {
-        userID: id, 
+        userID: id,
         status: pwd,
       }, // 서버가 필요로 하는 데이터를 넘겨주고,
       // {
@@ -86,9 +86,6 @@ const loginFB = (id, pwd) => {
 
   }
 }
-
-
-
 
 
 
