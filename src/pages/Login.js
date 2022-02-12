@@ -47,6 +47,7 @@ const Login = (props) => {
             return;
         }
 
+        dispatch();
 
     }
 
