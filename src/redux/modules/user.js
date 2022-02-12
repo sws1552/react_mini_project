@@ -26,7 +26,7 @@ const signupFB = (id, pwd, nickname) => {
   let updatedAt = null
 
   return function (dispatch, getState, {history}) {
-    axios.post('http://14.45.204.153:5000/api/user/new',
+    axios.post('http://14.45.204.153:8080/api/user/new',
     {userID:id, nickname:nickname, password:pwd, createdAt:createdAt, updatedAt: updatedAt,},
     // {header: {'Authorization':'내토큰 보내주기?'},}
     )
