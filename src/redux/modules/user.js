@@ -1,6 +1,7 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from "immer";
 import {history} from "../configureStore";
+import axios from "axios";
 
 // 액션타입
 const SET_USER = "SET_USER";
@@ -14,17 +15,27 @@ const setUser = createAction(SET_USER, (user) => ({user}))
 
 // 초기값
 const initialState = {
-    userID: "iamuser",
-    nickname: "닉네임",
-    password: "12345678",
-    passwordCheck: "12345678"
+  user: null,
+  is_login: false,
 };
 
 
 // 미들웨어 자리
 const signupFB = (id, pwd, nickname) => {
+  let createdAt = new Date()
+  let updatedAt = null
+
   return function (dispatch, getState, {history}) {
-    
+    axios.post('/api/user/new',
+    {userID:id, nickname:nickname, password:pwd, createdAt:createdAt, updatedAt: updatedAt,},
+    // {header: {'Authorization':'내토큰 보내주기?'},}
+    ).then(function(response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
     history.push('/login')
   }
 }
