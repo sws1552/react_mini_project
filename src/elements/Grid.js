@@ -29,7 +29,7 @@ Grid.defaultProps = {
   margin: false,
   bg: false,
   center: false,
-  wrap: false,
+  wrap: null,
 };
 
 const GridBox = styled.div`
