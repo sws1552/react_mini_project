@@ -4,8 +4,12 @@ import {history} from "../configureStore";
 
 // 액션타입
 const SET_USER = "SET_USER";
+const LOG_OUT = "LOG_OUT";
+const GET_USER = "GET_USER";
 
 // 액션생성함수
+const logOut = createAction(LOG_OUT, (user)=>({user}));
+const getUser = createAction(GET_USER, (user)=>({user}));
 const setUser = createAction(SET_USER, (user) => ({user}))
 
 // 초기값
@@ -59,7 +63,11 @@ export default handleActions(
 
 // action creator export
 const actionCreators = {
-    setUser
+    setUser,
+    logOut,
+    getUser,
+    signupFB,
+    loginFB,
 
 };
 
