@@ -1,6 +1,7 @@
 import {createAction, handleActions} from "redux-actions";
 import {produce} from "immer";
 import {history} from "../configureStore";
+import axios from "axios";
 
 // 액션타입
 const SET_USER = "SET_USER";
@@ -35,6 +36,30 @@ const loginFB = (id, pwd) => {
   return function (dispatch, getState, {history}) {
 
     console.log("id, pwd !! ", id, pwd);
+
+    // axios는 axios.요청타입으로 요청을 보낼 수 있어요. 이 방식을 별칭 메서드라고 불러요.
+    // 예시)
+    // axios.get(url, config)
+    // axios.post(url, data, config)
+
+    // 어떤 요청을 보낼 지, 별칭 메서드 사용
+    axios.post('/api/user/login', // 미리 약속한 주소
+      {
+        userID: id, 
+        status: pwd,
+      }, // 서버가 필요로 하는 데이터를 넘겨주고,
+      // {
+      //   headers: { 'Authorization': '내 토큰 보내주기' },
+      //   // authorization: `Bearer ${localStorage.getItem("token")}`
+      // } // 누가 요청했는 지 알려줍니다. (config에서 해요!)
+    ).then(function (response) {
+      console.log(response);
+      history.push('/');
+      // localStorage.setItem('token', response.token);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
 
   }
 }
