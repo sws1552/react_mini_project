@@ -6,6 +6,7 @@ import styled from "styled-components";
 const Grid = (props) => {
   const { is_flex, width, margin, padding, bg, children, center, _wrap, } = props;
 
+
   const styles = {
       is_flex: is_flex,
       width: width,
@@ -46,7 +47,5 @@ const GridBox = styled.div`
       : ""}
   ${(props) => (props.center ? 'text-align: center' : '')}
   ${(props) => (props._wrap ? 'flex-flow: wrap' : '')} 
-  
-`;
 
 export default Grid;
