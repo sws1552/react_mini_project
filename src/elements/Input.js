@@ -50,8 +50,6 @@ const ElInput = styled.input`
   width: 100%;
   padding: 12px 4px;
   box-sizing: border-box;
-  // 포커스 할 때 아웃라인 없애기
-  // ${(props) => (props.is_focus ? `&:focus{outline: none;}` : '')}
 `;
 
 export default Input;
