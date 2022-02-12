@@ -26,10 +26,23 @@ const signupFB = (id, pwd, nickname) => {
   let updatedAt = null
 
   return function (dispatch, getState, {history}) {
-    axios.post('/api/user/new',
+    axios.post('http://14.45.204.153:5000/api/user/new',
     {userID:id, nickname:nickname, password:pwd, createdAt:createdAt, updatedAt: updatedAt,},
     // {header: {'Authorization':'내토큰 보내주기?'},}
-    ).then(function(response) {
+    )
+    // axios({
+    //   method: 'post',
+    //   url: 'http://211.244.213.44:80/api/user/new',
+    //   data: {
+    //     userID:id,
+    //     nickname:nickname,
+    //     password:pwd,
+    //     createdAt:createdAt,
+    //     updatedAt: updatedAt
+    //   }
+    // })
+    
+    .then(function(response) {
       console.log(response);
     })
     .catch(function (error) {
