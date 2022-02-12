@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Text, Button, Image } from "../elements"
 import styled from "styled-components";
+import Badge from 'react-bootstrap/Badge'
 
 const Post = (props) => {
     // localStorage에서 토큰값 여부로 헤더 판별
@@ -8,12 +9,20 @@ const Post = (props) => {
     return (
 
     <React.Fragment>
+
         <Grid width="30%" height="auto" margin="10px">
-            <Text>{props.title}</Text>
+            <Text margin="0px" bold>{props.title}</Text>
             <Image width="100%" auto shape="rectangle" radius="10px" src={props.imgUrl}></Image>
-            {/* 태그는 map 돌려야 하나? */}
-            {props.tags}
+            {/* 태그 map*/}
+            {props.tags.map((p,idx)=> {
+                return (
+                    <Badge pill bg="dark" key={idx} style={{
+                        margin:"7px 2px"
+                    }}>{p}</Badge>
+                )
+            })}
         </Grid>
+
     </React.Fragment>
         
 
