@@ -67,8 +67,6 @@ const loginCheckFB = () => {
 const loginFB = (id, pwd) => {
   return function (dispatch, getState, {history}) {
 
-    console.log("id, pwd !! ", id, pwd);
-
     // axios는 axios.요청타입으로 요청을 보낼 수 있어요. 이 방식을 별칭 메서드라고 불러요.
     // 예시)
     // axios.get(url, config)
