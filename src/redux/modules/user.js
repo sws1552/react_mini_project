@@ -66,8 +66,15 @@ const loginFB = (id, pwd) => {
       // } // 누가 요청했는 지 알려줍니다. (config에서 해요!)
     ).then(function (response) {
       console.log(response);
+
+      dispatch(setUser({
+        userID: response.data.userID,
+        nickname: response.data.nickname,
+        token : response.data.token,
+      }));
+
       history.push('/');
-      // localStorage.setItem('token', response.token);
+      
     })
     .catch(function (error) {
       console.log(error);
@@ -86,6 +93,8 @@ export default handleActions(
         // "is_login" : 함수이름, "success" : 저장할 값
         // setCookie("is_login", "success")
         // action creators에서 받아온 값
+
+        console.log("action.payload.user !! ", action.payload.user);
 
         localStorage.setItem('token', action.payload.user.token)
         draft.user = action.payload.user;
