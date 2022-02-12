@@ -5,7 +5,10 @@ import App from './shared/App';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from "react-redux";
 
-import store from "./redux/configureStore"
+import store from "./redux/configureStore";
+import axios from "axios";
+
+axios.defaults.baseURL = "http://14.45.204.153:5000";
 
 ReactDOM.render(
   <Provider store={store}>
