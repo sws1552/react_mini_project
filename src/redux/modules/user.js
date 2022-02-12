@@ -87,12 +87,22 @@ export default handleActions(
         // "is_login" : 함수이름, "success" : 저장할 값
         // setCookie("is_login", "success")
         // action creators에서 받아온 값
+
+        localStorage.setItem('token', )
         draft.user = action.payload.user;
-        // draft.is_login = true;
+        draft.is_login = true;
+      }),
+
+      [LOG_OUT]: (state, action) => produce(state, (draft)=>{
+        localStorage.removeItem('token')
+      
+        draft.user = null;
+        draft.is_login = false;
       }),
   },
   initialState
 ); 
+
 
 
 // action creator export
