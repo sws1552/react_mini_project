@@ -53,10 +53,16 @@ const loginCheckFB = () => {
     
     .then(function(response) {
       console.log(response);
-    })
+      
+      if(response.user) {
+        dispatch(setUser(response.user));
+    } else {
+      dispatch(logOut());
+    }
+  })
+    
     .catch(function (error) {
       console.log(error);
-      dispatch(logOut());
     });
 
   }
