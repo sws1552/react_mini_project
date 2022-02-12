@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
+
 const Button = (props) => {
   const { text, _onClick, is_float, children, margin, padding, width, disabled } = props;
 
@@ -45,23 +46,42 @@ const ElButton = styled.button`
   box-sizing: border-box;
   border: none;
   ${(props) => (props.margin? `margin: ${props.margin};` : '')}
+
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const FloatButton = styled.button`
-  width: 50px;
-  height: 50px;
+  width: 60px;
+  height: 60px;
   background-color: #212121;
   color: #ffffff;
   box-sizing: border-box;
   font-size: 36px;
   font-weight: 800;
   position: fixed;
-  bottom: 50px;
-  right: 16px;
+  bottom: 30px;
+  right: 30px;
   text-align: center;
   vertical-align: middle;
   border: none;
   border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  :hover {
+    cursor: pointer;
+    transition: all ease 1.2s;
+    transform: rotate(90deg);
+  }
+
+  :not(:hover) {
+    transition: all ease 1.5s;
+    transform: rotate(-90deg);
+  }
+
 `;
 
 export default Button;

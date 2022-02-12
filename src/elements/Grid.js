@@ -1,9 +1,10 @@
 import { wrap } from "lodash";
 import React from "react";
+import isNull from "redux-actions/lib/utils/isNull";
 import styled from "styled-components";
 
 const Grid = (props) => {
-  const { is_flex, width, margin, padding, bg, children, center, wrap } = props;
+  const { is_flex, width, margin, padding, bg, children, center, _wrap, } = props;
 
   const styles = {
       is_flex: is_flex,
@@ -12,7 +13,7 @@ const Grid = (props) => {
       padding: padding,
       bg: bg,
       center: center,
-      wrap: wrap,
+      _wrap: _wrap,
   };
   return (
     <React.Fragment>
@@ -29,7 +30,7 @@ Grid.defaultProps = {
   margin: false,
   bg: false,
   center: false,
-  wrap: null,
+  _wrap: null,
 };
 
 const GridBox = styled.div`
@@ -44,7 +45,8 @@ const GridBox = styled.div`
       ? `display: flex; align-items: center; justify-content: space-between; `
       : ""}
   ${(props) => (props.center ? 'text-align: center' : '')}
-  ${(props) => (props.wrap ? 'flex-flow: wrap' : '')}   
+  ${(props) => (props._wrap ? 'flex-flow: wrap' : '')} 
+  
 `;
 
 export default Grid;

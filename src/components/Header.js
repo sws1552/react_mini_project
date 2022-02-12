@@ -1,4 +1,6 @@
 import React from "react";
+import { history } from "../redux/configureStore";
+ 
 import { Grid, Text, Button } from "../elements"
 
 
@@ -25,8 +27,12 @@ const Header = (props) => {
     </Grid>
 
     <Grid is_flex>
-        <Button margin="3px">로그인</Button>
-        <Button margin="3px">회원가입</Button>
+        <Button margin="3px" _onClick={()=> {
+            history.push('/login')
+        }}>로그인</Button>
+        <Button margin="3px" _onClick={()=> {
+            history.push('/signup')
+        }}>회원가입</Button>
     </Grid>
     </Grid>
     </React.Fragment>

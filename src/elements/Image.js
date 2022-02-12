@@ -3,13 +3,14 @@ import React from "react";
 
 
 const Image = (props) => {
-    const {shape, src, size, radius, auto} = props;
+    const {shape, src, size, radius, auto, width, block} = props;
 
     const styles = {
         src: src,
         size: size,
         radius: radius,
         auto: auto,
+        width: width,
     }
 
     if(shape === "circle"){
@@ -34,11 +35,12 @@ const Image = (props) => {
 }
 
 Image.defaultProps = {
-  shape: "circle",
-  src: "https://thumb.mtstarnews.com/06/2021/05/2021050511312249749_1.jpg/dims/optimize",
+  shape: "rectangle",
+  src: "https://thumb.mt.co.kr/06/2021/05/2021052009134127042_1.jpg/dims/optimize/",
   size: null,
   auto: "auto",
   radius: null,
+  block: null,
 };
 
 const AspectOutter = styled.div`
@@ -48,13 +50,15 @@ const AspectOutter = styled.div`
 `;
 
 const AspectInner = styled.div`
-    position: relative;
+    // position: relative;
+    // position: static;
     padding-top: 75%;
     // overflow: hidden;
     background-image: url("${(props) => props.src}");
     background-size: cover;
     // background-position: center;
     ${(props) => (props.radius? `border-radius: ${props.radius};` : '')}
+    ${(props) => (props.width? `width: ${props.width};` : '')}
     ${(props) => (props.auto? `height: auto;` : '')}
 
 
