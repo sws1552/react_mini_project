@@ -83,6 +83,14 @@ const loginFB = (id, pwd) => {
   }
 }
 
+const logoutFB = () => {
+  return function (dispatch, getState, {history}) {
+    // 서버에서 로그아웃하는 작업 해줘야 하나?
+    dispatch(logOut());
+    history.replace('/')
+  }
+}
+
 
 
 // 리듀서
@@ -120,7 +128,7 @@ const actionCreators = {
     getUser,
     signupFB,
     loginFB,
-
+    logoutFB,
 };
 
 export { actionCreators }
