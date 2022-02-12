@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 import { Route } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { actionCreators as userActions } from "../redux/modules/user";
 
 import Header from "../components/Header";
 import {Grid, Button} from "../elements";
@@ -16,6 +18,17 @@ import PostDetail from "../pages/PostDetail";
 
 
 function App() {
+
+  const dispatch = useDispatch();
+  const is_token = localStorage.getItem("token") ? true : false;
+
+  React.useEffect(()=>{
+   
+    if (is_token){
+      dispatch(userActions.loginCheckFB());
+    }
+  }, []);
+
   return (
     <React.Fragment>
       

@@ -44,6 +44,26 @@ const signupFB = (id, pwd, nickname) => {
 
 
 
+const loginCheckFB = () => {
+  return function (dispatch, getState, {history}) {
+    axios.post('/api/users/me',
+    // {userID:id, nickname:nickname, password:pwd, createdAt:createdAt, updatedAt: updatedAt,},
+    {header: {'Authorization':`Bearer ${localStorage.getItem("token")}`},}
+    )
+    
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+      dispatch(logOut());
+    });
+
+  }
+
+  }
+
+
 const loginFB = (id, pwd) => {
   return function (dispatch, getState, {history}) {
 
@@ -127,6 +147,7 @@ const actionCreators = {
     signupFB,
     loginFB,
     logoutFB,
+    loginCheckFB,
 };
 
 export { actionCreators }
