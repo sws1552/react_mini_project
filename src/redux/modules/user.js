@@ -22,11 +22,10 @@ const initialState = {
 
 
 // 미들웨어 자리
-const signupFB = (id, pwd) => {
+const signupFB = (id, pwd, nickname) => {
   return function (dispatch, getState, {history}) {
-
     
-
+    history.push('/login')
   }
 }
 

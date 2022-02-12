@@ -64,7 +64,7 @@ const Signup = (props) => {
             return;
         }
 
-        dispatch(userActions.signupSV(id, pwd, nickname));
+        dispatch(userActions.signupFB(id, pwd, nickname));
 
     }
     
