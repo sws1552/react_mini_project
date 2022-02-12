@@ -4,7 +4,7 @@ import isNull from "redux-actions/lib/utils/isNull";
 import styled from "styled-components";
 
 const Grid = (props) => {
-  const { is_flex, width, margin, padding, bg, children, center, _wrap, } = props;
+  const { is_flex, width, margin, padding, bg, children, center, _wrap, tag_flex,} = props;
 
 
   const styles = {
@@ -15,6 +15,7 @@ const Grid = (props) => {
       bg: bg,
       center: center,
       _wrap: _wrap,
+      tag_flex: tag_flex,
   };
   return (
     <React.Fragment>
@@ -32,6 +33,7 @@ Grid.defaultProps = {
   bg: false,
   center: false,
   _wrap: null,
+  tag_flex: false,
 };
 
 const GridBox = styled.div`
@@ -46,6 +48,7 @@ const GridBox = styled.div`
       ? `display: flex; align-items: center; justify-content: space-between;`: "")}
   ${(props) => (props.center ? `text-align: center` : '')}
   ${(props) => (props._wrap ? `flex-flow: wrap` : '')}
+  ${(props) => (props.tag_flex ? `display: flex` : "" )}
   
 `
   
