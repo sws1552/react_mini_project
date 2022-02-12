@@ -11,29 +11,13 @@ import Upload from "../shared/Upload";
 
 const PostWrite = (props) => {
 
-    const [inputType, setType] = React.useState('button');
-    
-    const [count, setCount] = React.useState(1);
-
     const [tagData, setData] = React.useState([]);
 
-    const tag_count = Array.from({length: count}, (v, i) => i);
-
-    const tagPlus = (e) => setType("text");
-    
-    const enterkey = (e) => {
-        if(window.event.keyCode === 13){
-            if(count < 5){ 
-                setCount(count+1);
-                setData([...tagData, e.target.value]);
-            }
-            
-        }
+    const tagPlus = () => {
+        
     }
 
-    console.log("tagData !! ", tagData);
 
-    const tagRef = useRef();
     const postBtn = () => {
         console.log("버튼 클릭!");
     }
@@ -58,12 +42,8 @@ const PostWrite = (props) => {
                 <Text bold>태그 설정</Text>
                 <Text >최소 1개 이상의 태그를 작성해주세요 (최대 5개) </Text>
                 <Grid>
-                    {tag_count.map((item, i) => {
-
-                        return ( inputType === "button" ? <TagPlusBtn key={i} type={inputType} value="태그+" onClick={tagPlus}/> 
-                        :
-                        <TagPlustInput key={i} type="text" onKeyUp={enterkey} placeholder="칸 추가는 Enter" ref={tagRef}/> )
-                    })}
+                    <Button text="태그 추가" width="15%" _onClick={tagPlus}></Button>
+                    <TagInput />
                 </Grid>
             </Grid>
 
@@ -74,24 +54,12 @@ const PostWrite = (props) => {
     )
 }
 
-const TagPlusBtn = styled.input`
-    height:30px;
-    background-color: black;
-    color: white;
-    border: none;
-    padding: 5px;
-    border-radius: 5vw; 
-`;
-
-const TagPlustInput = styled.input`
-    margin-left: 5px;
-    width: 12vw;
-    height:30px;
-    padding:5px;
+const TagInput = styled.input`
+    padding: 10px 0;
     box-sizing: border-box;
-    border-radius: 6vw;
     border: 1px solid black;
+    margin-left: 10px;
+    width: 15%;
 `;
-
 
 export default PostWrite;

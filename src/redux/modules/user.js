@@ -26,7 +26,7 @@ const signupFB = (id, pwd, nickname) => {
   let updatedAt = null
 
   return function (dispatch, getState, {history}) {
-    axios.post('http://14.45.204.153:5000/api/user/new',
+    axios.post('/api/user/new',
     {userID:id, nickname:nickname, password:pwd, createdAt:createdAt, updatedAt: updatedAt,},
     // {header: {'Authorization':'내토큰 보내주기?'},}
     )
@@ -55,7 +55,7 @@ const loginFB = (id, pwd) => {
     // axios.post(url, data, config)
 
     // 어떤 요청을 보낼 지, 별칭 메서드 사용
-    axios.post('http://14.45.204.153:5000/api/user/login', // 미리 약속한 주소
+    axios.post('/api/user/login', // 미리 약속한 주소
       {
         userID: id,
         password: pwd,
@@ -101,8 +101,6 @@ export default handleActions(
         // "is_login" : 함수이름, "success" : 저장할 값
         // setCookie("is_login", "success")
         // action creators에서 받아온 값
-
-        console.log("action.payload.user !! ", action.payload.user);
 
         localStorage.setItem('token', action.payload.user.token)
         draft.user = action.payload.user;
