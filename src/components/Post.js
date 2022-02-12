@@ -24,11 +24,8 @@ const Post = (props) => {
         </Grid>
 
     </React.Fragment>
-        
-
 
         )
-    
 }
 
 Post.defaultProps = {

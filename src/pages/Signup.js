@@ -63,6 +63,9 @@ const Signup = (props) => {
             window.alert('비밀번호와 비밀번호 확인 값이 일치하지 않습니다')
             return;
         }
+
+        dispatch(userActions.signupSV(id, pwd, nickname));
+
     }
     
 
