@@ -31,7 +31,7 @@ const signupFB = (id, pwd) => {
 const loginFB = (id, pwd) => {
   return function (dispatch, getState, {history}) {
 
-
+    
 
   }
 }
