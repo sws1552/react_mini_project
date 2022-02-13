@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 
 const Button = (props) => {
-  const { text, _onClick, is_float, children, margin, padding, width, disabled } = props;
+  const { text, _onClick, is_float, children, margin, padding, width, disabled, radius } = props;
 
   if (is_float) {
     return (
@@ -17,6 +17,7 @@ const Button = (props) => {
     margin: margin,
     width: width,
     padding: padding,
+    radius: radius,
   };
 
   return (
@@ -35,6 +36,7 @@ Button.defaultProps = {
   width: '100%',
   padding: "12px 0px",
   disabled: false,
+  radius: null,
 };
 
 const ElButton = styled.button`
@@ -45,6 +47,7 @@ const ElButton = styled.button`
   padding: ${(props) => props.padding};
   box-sizing: border-box;
   border: none;
+  ${(props) => (props.radius? `border-radius: ${props.radius};` : '')}
   ${(props) => (props.margin? `margin: ${props.margin};` : '')}
 
   :hover {

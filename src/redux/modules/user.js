@@ -46,6 +46,7 @@ const signupFB = (id, pwd, nickname) => {
 
 const loginCheckFB = () => {
   return function (dispatch, getState, {history}) {
+    // post가 아니라 get을 해야하지 않나?
     axios.post('/api/users/me',
     // {userID:id, nickname:nickname, password:pwd, createdAt:createdAt, updatedAt: updatedAt,},
     {header: {'Authorization':`Bearer ${localStorage.getItem("token")}`},}

@@ -15,10 +15,10 @@ const Header = (props) => {
     return (
       // 로그인 되어 있을 때
       <React.Fragment>
-        <Grid is_flex>
+        <Grid padding="5px" is_flex bg="#FFFFFF">
           <Grid>
             <Text size="20px" bold>
-              내 최애는?
+              나의 최애는?
             </Text>
           </Grid>
 
@@ -34,15 +34,18 @@ const Header = (props) => {
   } else {
     return (
       <React.Fragment>
-        <Grid is_flex>
+        <Grid padding="5px" is_flex bg="#FFFFFF">
+          
           <Grid>
             <Text size="20px" bold>
-              내 최애는?
+              나의 최애는?
             </Text>
           </Grid>
 
-          <Grid is_flex>
+          <Grid flex_basic>
             <Button
+              radius="100px"
+              width="160px"
               margin="3px"
               _onClick={() => {
                 history.push("/login");
@@ -51,6 +54,8 @@ const Header = (props) => {
               로그인
             </Button>
             <Button
+              radius="100px"
+              width="160px"
               margin="3px"
               _onClick={() => {
                 history.push("/signup");

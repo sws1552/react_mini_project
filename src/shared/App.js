@@ -62,7 +62,7 @@ const Background = styled.div`
 `
 
 const Container = styled.div`
-  width: 80vw;
+  width: 90vw;
   margin: auto;
   // border: 1px solid #ddd;
   border-radius: 10px;
