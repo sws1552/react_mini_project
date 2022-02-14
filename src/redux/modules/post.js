@@ -5,11 +5,13 @@ import axios from "axios";
 
 // 액션타입
 const SET_POST = "SET_POST"
+// const LIKED_POST = "LIKED_POST"
 const ADD_POST = "ADD_POST"
 
 
 // 액션 생성 함수
 const setPost = createAction(SET_POST, (post_list)=> ({post_list}))
+// const likedPost = createAction(LIKED_POST, (post_list)=> ({post_list}))
 const addPost = createAction(ADD_POST, (post)=> ({post}))
 
 let createdAt = new Date()
@@ -47,13 +49,29 @@ const initialState = {
 const getPostFB = () => {
     return function (dispatch, getState, {history}) {
         // let post_list = []
-        axios.get()
 
+        axios
+          .get("/api/posts")
+          .then(function (response) {
+            console.log(response);
+            // 서버 연결 확인 후 setPost로 dispatch할 데이터 가공해서 보내주기
+            
+            // post_list.push(post)
+            // dispatch(setPost(post_list))
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
 
-        // post_list.push(post)
-        // dispatch(setPost(post_list))
     }
 }
+
+
+// 내가찜한사진만 불러오기 (getPostFB에서 조건 줘서 실행?)
+// const likedPostFB = () => {
+
+
+// }
 
 
 
@@ -67,6 +85,10 @@ export default handleActions (
 
         }),
 
+        // [LIKED_POST] : (state, action) => produce(state, (draft)=> {
+
+        // }),
+
 
     }, initialState
 );
@@ -75,8 +97,10 @@ export default handleActions (
 
 const actionCreators = {
     setPost,
+    // likedPost,
     addPost,
     getPostFB,
+    // likedPostFB,
 }
 
 export {actionCreators}

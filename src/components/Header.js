@@ -24,6 +24,9 @@ const Header = (props) => {
           </Grid>
 
           <Grid flex_basic>
+            {/* toggle 사용하면 될 듯
+            내가찜한사진 클릭 > likedPostFB
+            한번 더 클릭 > getPostFB*/}
             <Button
               radius="100px"
               width="160px"
