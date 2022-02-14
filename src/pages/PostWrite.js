@@ -28,51 +28,63 @@ const PostWrite = (props) => {
 
     const preview = useSelector((state) => state.image.preview);
 
-    const [tagData, setData] = React.useState([]);
+    const [tagData, setData] = React.useState([""]);
 
     const tagRef = useRef([]);
+    const deleteRef = useRef([]);
 
-    const [count, setCount] = React.useState(0);
-
-    const input_count = Array.from({length: count}, (v, i) => i );
-
+    // 태그 추가 버튼
     const tagPlus = () => {
-        if(count < 5){
-            setCount(count+1);
+        if(tagData.length < 5){
+            if(tagData.includes('')){
+                window.alert('빈칸 입력후 추가 해주세요~');
+                return false;
+            }
+            setData([...tagData, ""]);
         }
     }
 
-    const tagAdd = (e) => {
-        if(e.keyCode === 13){
+    // enter 클릭시 태그 작성 완료.
+    const tagAdd = (e, index) => {
+        if(e.keyCode === 13 && e.target.value !== ""){
             e.target.disabled = true;
             e.target.style.backgroundColor = "black";
             e.target.style.color = "white";
-            setData([...tagData, e.target.value]);
+            deleteRef.current[index].style.display = "inline";
+            setData([...tagData.slice(0, index), e.target.value, ...tagData.slice(index + 1)]);
+            
         }
     }
 
+    // 휴지통아이콘 클릭시 삭제
     const tagDelete = (e, index) => {
         // console.log(tagRef.current[index].value);
-
         const delData = tagData.filter((item, i) => {
-            return item !== tagRef.current[index].value;
+            return i !== index;
         });
-
-        setData(delData);
         
-    } 
+        setData(delData);
 
+        delData.forEach((item, i) => {
+            tagRef.current[i].value = item;
+        });
+        
+    }
+    
+    // 게시글 작성 완료 버튼
     const postBtn = () => {
         console.log("버튼 클릭!");
-        console.log('tagData !! ',tagData);
+
+        const tagResult = tagData.filter((item, i) => item !== '');
+        if(tagResult.length === 0){window.alert('한개이상의 태그 작성해주세요~'); return;}
+
         const imageForm = new FormData();
         let image = fileInput.current.files[0];
-        // console.log(image);
         imageForm.append('image', image);
 
         // dispatch(imageActions.uploadImageFB(imageForm));
 
-        // dispatch(postActions.addPostFB(title, tagData, imageForm));
+        // dispatch(postActions.addPostFB(title, tagResult, imageForm));
 
     }
 
@@ -107,17 +119,19 @@ const PostWrite = (props) => {
                 <Text >최소 1개 이상의 태그를 작성해주세요 (최대 5개) </Text>
                 <Grid>
                     <Button text="태그 추가" width="15%" _onClick={tagPlus}></Button>
-                        {input_count.map((item, i) => {
+                        {tagData.map((item, i) => {
                             return (
                                 <TagDiv key={i}>
-                                    <TagInput key={i+1} placeholder="입력후 Enter" onKeyUp={tagAdd} 
+                                    <TagInput key={i+1} placeholder="입력후 Enter" onKeyUp={(e) => {tagAdd(e, i)}} 
                                     ref={el => (tagRef.current[i] = el)} id={i}/>
                                     <span
+                                    ref={el => (deleteRef.current[i] = el)}
                                     key={i+2}
                                     onClick={(e) => {
                                         tagDelete(e, i);
                                     }}
                                     style={{
+                                        display: 'none',
                                         fontSize:"2rem",
                                         color:"red",
                                         position:"absolute",
