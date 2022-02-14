@@ -14,37 +14,34 @@ const setLike = createAction(LIKE_SET,(post_list) => ({post_list}))
 
 
 const initialState = {
-    like:false,
-};
-
-const initialPost = {
     list:[],
-}
+};
 
 
 // 미들웨어
-const likePostFB = (postId, liked) => {
+const likePostFB = (postId) => {
     return function (dispatch, getState, {history}) {
         const _user = getState().user.user;
-        console.log('유저정보확인', _user)
+        // console.log('유저정보확인', _user)
+        // console.log('겟!', getState().likes.like)
 
-        if(liked === true) {
-            axios.get(`/api/post/15/likes`,
-            {headers: {'Authorization':`Bearer ${localStorage.getItem("token")}`},}
-            )
+        if(getState().likes.like === true) {
+            axios.delete(`/api/post/15/likes`,
+            {headers: {'Authorization':`Bearer ${localStorage.getItem("token")}`},})
             .then(function (response) {
                 console.log(response.data.Likers)
-                dispatch(likePost(_user,response.data.Likers))
+                // dispatch(likePost(_user.id,response.data.Likers))
               })
               .catch(function (error) {
                 console.log(error);
               })
         } else {
-            axios.delete(`/api/post/15/likes`,
-            {headers: {'Authorization':`Bearer ${localStorage.getItem("token")}`},})
+            axios.get(`/api/post/15/likes`,
+            {headers: {'Authorization':`Bearer ${localStorage.getItem("token")}`},}
+            )
             .then(function (response) {
                 console.log(response.data.Likers)
-                dispatch(likePost(_user,response.data.Likers))
+                // dispatch(likePost(_user,response.data.Likers))
               })
               .catch(function (error) {
                 console.log(error);

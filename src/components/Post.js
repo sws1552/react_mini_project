@@ -15,11 +15,12 @@ const Post = (props) => {
   const dispatch = useDispatch();
   const like = useSelector((state)=>state.likes.like)
 
-  const [liked, setLiked] = React.useState(false);
+  // const [liked, setLiked] = React.useState(false);
 
   const likeButton = () => {
-    setLiked(!liked)
-    dispatch(likeActions.likePostFB(props.id, liked))
+    // setLiked(!liked)
+    // dispatch(likeActions.likePostFB(props.id, liked))
+    dispatch(likeActions.likePostFB(props.id))
   }
     // localStorage에서 토큰값 여부로 헤더 판별
     // state에서 is_login도 같이 판별 필요
