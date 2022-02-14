@@ -21,6 +21,7 @@ const initialState = {
 
 
 // 미들웨어 자리
+// 회원가입
 const signupFB = (id, pwd, nickname) => {
   let createdAt = new Date()
   let updatedAt = null
@@ -36,14 +37,31 @@ const signupFB = (id, pwd, nickname) => {
     })
     .catch(function (error) {
       console.log(error);
+      window.alert(error);
     });
 
     history.push('/login')
   }
 }
 
+// 회원가입 시 아이디 중복 확인
+const idCheckingFB = (id) => {
+  axios.post('/api/user/check',
+    {userID:id},
+    )
+  .then(function(response) {
+    console.log(response);
+    // if (response == '중복') {
+    //   window.alert('사용 불가능한 아이디 입니다.')
+    // }
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
+}
 
 
+// 로그인 된 상태인지 확인
 const loginCheckFB = () => {
   return function (dispatch, getState, {history}) {
 
@@ -75,7 +93,7 @@ const loginCheckFB = () => {
 
   }
 
-
+// 로그인
 const loginFB = (id, pwd) => {
   return function (dispatch, getState, {history}) {
 
@@ -113,9 +131,9 @@ const loginFB = (id, pwd) => {
   }
 }
 
+// 로그아웃
 const logoutFB = () => {
   return function (dispatch, getState, {history}) {
-    // 서버에서 로그아웃하는 작업 해줘야 하나?
     dispatch(logOut());
     history.replace('/')
   }
@@ -155,6 +173,7 @@ const actionCreators = {
     logOut,
     getUser,
     signupFB,
+    idCheckingFB,
     loginFB,
     logoutFB,
     loginCheckFB,

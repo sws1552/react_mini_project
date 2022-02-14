@@ -1,4 +1,5 @@
 import React from "react";
+// import {useRef, useState} from "react"
 import _ from "lodash"; // lodash 부르기
 
 import { Text, Input, Grid, Button } from "../elements";
@@ -67,6 +68,15 @@ const Signup = (props) => {
         dispatch(userActions.signupFB(id, pwd, nickname));
 
     }
+
+
+    const idChecking = () => {
+      if (id === '') {
+        window.alert('아이디를 입력 후 중복확인을 진행해주세요')
+      } else {
+        dispatch(userActions.idCheckingFB(id));
+      }
+    }
     
 
     return (
@@ -82,9 +92,10 @@ const Signup = (props) => {
             placeholder="숫자 혹은 영어로만 4글자 이상 20글자 이하로 입력해주세요"
             _onChange = {IdValue}
             >
-            
             </Input>
-            <Button text="중복확인" width="150px" margin="10px"></Button>
+            <Button
+            _onClick={idChecking}
+            text="중복확인" width="150px" margin="0px 10px"></Button>
           </Grid>
 
           <Grid padding="16px">
