@@ -15,7 +15,7 @@ const Post = (props) => {
   const dispatch = useDispatch();
   const like = useSelector((state)=>state.likes.like)
 
-  // const [liked, setLiked] = React.useState(false);
+  const [liked, setLiked] = React.useState(false);
 
   const likeButton = () => {
     // setLiked(!liked)
@@ -54,6 +54,8 @@ const Post = (props) => {
           </ImageBox>
           {/* 태그 map*/}
 
+
+          <div style={{padding:"15px"}}>
           <Text margin="0px" bold>
             {props.title}
           </Text>
@@ -68,6 +70,9 @@ const Post = (props) => {
                   key={idx}
                   style={{
                     margin: "7px 2px",
+                    padding: "6px 10px",
+                    fontSize: "0.8rem",
+                    fontFamily: "Pretendard-Thin"
                   }}
                 >
                   {p.name}
@@ -75,6 +80,7 @@ const Post = (props) => {
               );
             })}
           </Tag>
+          </div>
         </Postcard>
       </React.Fragment>
     );
@@ -91,6 +97,10 @@ const Postcard = styled.div`
     margin:30px 8px 8px 8px;
     width: 20%;
     min-width: 200px;
+    border-radius: 15px;
+    box-shadow: 4px 4px 10px 2px #dadada;
+    background-color: white;
+
 `
 
 const ImageBox = styled.div`
@@ -109,6 +119,10 @@ const PostImage = styled.img`
     min-height: 100px;
     height: auto;
     border-radius: 15px;
+
+    :hover {
+      transition: all 0.3s ease-in;
+    }
 
 `
 

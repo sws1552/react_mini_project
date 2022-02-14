@@ -42,31 +42,23 @@ const initialState = {
   ],
 };
 
-// const initialPost = {
-
-//     id: 1,
-//     // 수정/삭제 버튼 보여주려면 둘중에 하나 있어야 할 듯(서버에서 요청할 때도!) userID: "ID입니다" 이나 nickname:"닉네임입니다"
-//     title: "전지현 너무 예뻐",
-//     createdAt: createdAt,
-//     imageUrl:"https://thumb.mt.co.kr/06/2021/09/2021092406423496252_1.jpg/dims/optimize/",
-//     tags: ["전지현", "화보"]
-
-// }
 
 
 // 미들웨어
 const getPostFB = () => {
     return function (dispatch, getState, {history}) {
-        // let post_list = []
+        let post_list = []
+        // let user = getState().user.user
+        // console.log("getPost사용자정보",user)
 
         axios
           .get("/api/posts")
           .then(function (response) {
-            console.log(response);
-            // 서버 연결 확인 후 setPost로 dispatch할 데이터 가공해서 보내주기
+            console.log(response.data);
+            let postDB = response.data;
             
-            // post_list.push(post)
-            // dispatch(setPost(post_list))
+            post_list.push(...postDB)
+            dispatch(setPost(post_list))
           })
           .catch(function (error) {
             console.log(error);
@@ -117,26 +109,6 @@ const addPostFB = (title, tagData, imageForm) => {
             });
 
 
-    
-    // axios
-    //   .post("/api/post/new",
-    //     {
-    //       title: title,
-    //       imageUrl: 'https://thumb.mt.co.kr/06/2021/05/2021052009134127042_1.jpg/dims/optimize/',
-    //       tags: tagData,
-    //     },
-    //     {
-    //       headers: {'Authorization':`Bearer ${localStorage.getItem("token")}`},
-    //     }
-    //   )
-    //   .then(function (res) {
-    //     console.log('addPostFB res !! ', res);
-        
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
-
   }
 }
 
@@ -145,7 +117,7 @@ const addPostFB = (title, tagData, imageForm) => {
 export default handleActions (
     {
         [SET_POST]: (state, action) => produce(state, (draft)=> {
-            // draft.list = action.payload.post_list;
+            draft.list = action.payload.post_list;
         }),
 
         [ADD_POST]: (state, action) => produce(state, (draft)=> {

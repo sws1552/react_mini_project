@@ -40,7 +40,7 @@ const signupFB = (id, pwd, nickname) => {
       window.alert(error);
     });
 
-    history.push('/login')
+    history.replace('/login')
   }
 }
 

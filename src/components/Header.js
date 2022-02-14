@@ -15,10 +15,10 @@ const Header = (props) => {
     return (
       // 로그인 되어 있을 때
       <React.Fragment>
-        <Grid padding="5px" is_flex bg="#FFFFFF">
+        <Grid padding="5px 20px" is_flex bg="#FFFFFF">
           
           <Grid>
-            <Text size="20px" bold>
+            <Text margin="0px" size="20px" bold>
               나의 최애는?
             </Text>
           </Grid>
@@ -29,11 +29,11 @@ const Header = (props) => {
             한번 더 클릭 > getPostFB*/}
             <Button
               radius="100px"
-              width="160px"
+              width="120px"
               margin="3px">내가찜한사진</Button>
             <Button
               radius="100px"
-              width="160px"
+              width="120px"
               margin="3px"
               _onClick={()=>{
                 dispatch(userActions.logoutFB());
@@ -45,10 +45,10 @@ const Header = (props) => {
   } else {
     return (
       <React.Fragment>
-        <Grid padding="5px" is_flex bg="#FFFFFF">
+        <Grid padding="5px 20px" is_flex bg="#FFFFFF">
           
           <Grid>
-            <Text size="20px" bold>
+            <Text margin="0px" hover size="20px" bold _onClick={()=>{history.push('/')}}>
               나의 최애는?
             </Text>
           </Grid>
@@ -56,7 +56,7 @@ const Header = (props) => {
           <Grid flex_basic>
             <Button
               radius="100px"
-              width="160px"
+              width="130px"
               margin="3px"
               _onClick={() => {
                 history.push("/login");
@@ -66,7 +66,7 @@ const Header = (props) => {
             </Button>
             <Button
               radius="100px"
-              width="160px"
+              width="130px"
               margin="3px"
               _onClick={() => {
                 history.push("/signup");

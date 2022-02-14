@@ -22,7 +22,7 @@ const PostList = (props) => {
     // 이미 리스트 있을 때는 getPostFB 따로 안하고 기존에 있던 리덕스에서 불러옴
     // if(post_list.length === 0) {
         // dispatch(postActions.getPostFB());
-        dispatch(postActions.setPost());
+        dispatch(postActions.getPostFB());
         
     // }
 // 처음 페이지 켰을 때 한번만 불러오기 때문에 빈 배열

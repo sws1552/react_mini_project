@@ -13,6 +13,7 @@ import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import PostWrite from '../pages/PostWrite';
 import PostDetail from "../pages/PostDetail";
+import './App.css';
 
 
 
