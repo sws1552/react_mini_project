@@ -37,8 +37,11 @@ const PostList = (props) => {
             {post_list.map((e,idx) => {
               return (
                 <Post
-                key={e.id}
-                {...e}
+                _onClick={() => {
+                  history.push(`/detail/${e.id}`)
+                }}
+                  key={e.id}
+                  {...e}
                 />
               )
                 
@@ -52,7 +55,7 @@ const PostList = (props) => {
       <Button
         is_float
         _onClick={() => {
-          history.push("/write");
+          history.push(`/write`);
         }}
       >
         <FiPlus style={{ color: "white" }} />

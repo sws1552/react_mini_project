@@ -46,7 +46,7 @@ const Post = (props) => {
                     margin: "7px 2px",
                   }}
                 >
-                  {p}
+                  {p.name}
                 </Badge>
               );
             })}

@@ -27,9 +27,17 @@ const initialState = {
       createdAt: createdAt,
       imageUrl:
         "https://thumb.mt.co.kr/06/2021/09/2021092406423496252_1.jpg/dims/optimize/",
-      tags: ["전지현", "화보"],
+      tags: [
+        {
+          id: 12,
+          name: "전지현",
+        },
+        {
+          id: 13,
+          name: "화보",
+        },
+      ],
     },
-    
   ],
 };
 
