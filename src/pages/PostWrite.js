@@ -14,7 +14,9 @@ const PostWrite = (props) => {
 
     const dispatch = useDispatch();
 
-    // const is_login = useSelector((state) => state.user.is_login);
+    // const is_login = useSelector((state) => state.user.is_login);\
+
+    const preview = useSelector((state) => state.image.preview);
 
     const [tagData, setData] = React.useState([]);
 
@@ -60,7 +62,7 @@ const PostWrite = (props) => {
 
             <Grid padding="16px">
                 <Upload />
-                <Image shape="rectangle"></Image>
+                <Image shape="rectangle" src={preview ? preview : "https://thumb.mt.co.kr/06/2021/05/2021052009134127042_1.jpg/dims/optimize/"}></Image>
                 
             </Grid>
 

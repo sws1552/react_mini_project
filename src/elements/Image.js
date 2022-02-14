@@ -50,7 +50,7 @@ const AspectInner = styled.div`
     // overflow: hidden;
     background-image: url("${(props) => props.src}");
     background-size: cover;
-    // background-position: center;
+    background-position: center;
     ${(props) => (props.width? `width: ${props.width};` : '')}
 
 
