@@ -46,23 +46,29 @@ const signupFB = (id, pwd, nickname) => {
 
 const loginCheckFB = () => {
   return function (dispatch, getState, {history}) {
+
     axios.get('/api/user/me',
     // {userID:id, nickname:nickname, password:pwd, createdAt:createdAt, updatedAt: updatedAt,},
-    {header: {'Authorization':`Bearer ${localStorage.getItem("token")}`},}
+    {
+      headers: {'Authorization':`Bearer ${localStorage.getItem("token")}`},}
     )
     
     .then(function(response) {
-      console.log(response);
+      console.log("logincheckFB !! ", response);
       
-      if(response.user) {
-        dispatch(setUser(response.user));
+      if(response.data.user) {
+        dispatch(setUser({
+          userID: response.data.userID,
+          nickname: response.data.nickname,
+          token : localStorage.getItem("token"),
+        }));
       } else {
         dispatch(logOut());
       }
   })
     
     .catch(function (error) {
-      console.log(error);
+      console.log('logincheckFB error !!', error);
     });
 
   }
