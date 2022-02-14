@@ -20,23 +20,26 @@ const initialState = {
 }
 
 
-const uploadImageFB = (image) => {
+const uploadImageFB = (imageForm) => {
     return function (dispatch, getState, {history}) {
         
         dispatch(uploading(true));
 
-        axios.post('/api/post/image', // 미리 약속한 주소
-                {
-                    name: 'perl',
-                    status: 'cute'
-                }, // 서버가 필요로 하는 데이터를 넘겨주고,
-                {
-                    headers: {
-                        'Authorization': '내 토큰 보내주기'
-                    },
-                } // 누가 요청했는 지 알려줍니다. (config에서 해요!)
-            ).then(function (response) {
-                console.log(response);
+        console.log(imageForm);
+
+        axios.post('/api/post/image',imageForm, // 미리 약속한 주소
+                
+                    
+                 // 서버가 필요로 하는 데이터를 넘겨주고,
+                // {
+                //     headers: {
+                //         'Content-Type': 'multipart/form-data'
+                //     },
+                // } // 누가 요청했는 지 알려줍니다. (config에서 해요!)
+            ).then(function (res) {
+                console.log("upload response !! ", res);
+
+                dispatch(uploadImage(`http://14.45.204.153:8080/${res.data}`));
             })
             .catch(function (error) {
                 console.log(error);
@@ -49,7 +52,7 @@ const uploadImageFB = (image) => {
 export default handleActions({
 
     [UPLOAD_IMAGE]: (state, action) => produce(state, (draft) => {
-        
+        draft.image_url = action.payload.image_url;
         draft.uploading = false;
     }),
 
@@ -68,6 +71,7 @@ const actionCreators = {
     uploadImage,
     uploadImageFB,
     setpreview,
+    uploading,
 }
 
 export {actionCreators};

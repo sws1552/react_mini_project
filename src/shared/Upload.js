@@ -8,14 +8,11 @@ import {Button} from "../elements";
 
 const Upload = (props) => {
 
-    const fileInput = React.useRef();
-    const is_uploading = useSelector((state) => state.image.uploading);
-    
     const dispatch = useDispatch();
 
     const selectfile = (e) => {
         const reader = new FileReader();
-        const file = fileInput.current.files[0];
+        const file = props._ref.current.files[0];
         
         reader.readAsDataURL(file);
 
@@ -28,7 +25,8 @@ const Upload = (props) => {
 
     return (
         <React.Fragment>
-            <input type="file" onChange={selectfile} ref={fileInput}/>
+            
+            <input type="file" onChange={selectfile} ref={props._ref}/>
             {/* <Button _onClick={() => {}}>업로드</Button> */}
         </React.Fragment>
     )

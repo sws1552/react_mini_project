@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { history } from "../redux/configureStore";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { Text, Input, Grid, Button } from "../elements";
+import Permit from "../shared/Permit";
 
 import Post from "../components/Post";
 
@@ -52,14 +53,16 @@ const PostList = (props) => {
           {/* </Grid> */}
         {/* })} */}
       {/* </Grid> */}
-      <Button
-        is_float
-        _onClick={() => {
-          history.push(`/write`);
-        }}
-      >
-        <FiPlus style={{ color: "white" }} />
-      </Button>
+      <Permit>
+        <Button
+          is_float
+          _onClick={() => {
+            history.push(`/write`);
+          }}
+        >
+          <FiPlus style={{ color: "white" }} />
+        </Button>
+      </Permit>
     </React.Fragment>
   );
 };
