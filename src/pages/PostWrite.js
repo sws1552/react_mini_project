@@ -1,7 +1,9 @@
 import React, {useRef} from "react";
 import styled from "styled-components";
 import {MdDeleteForever} from "react-icons/md";
-
+import { history } from "../redux/configureStore";
+import {actionCreators as imageActions} from "../redux/modules/image";
+import {actionCreators as postActions} from "../redux/modules/post";
 
 import {Button, Grid, Image, Input, Text} from "../elements";
 import Upload from "../shared/Upload";
@@ -14,13 +16,21 @@ const PostWrite = (props) => {
 
     const dispatch = useDispatch();
 
-    // const is_login = useSelector((state) => state.user.is_login);\
+    const [title, setTitle] = React.useState('');
+
+    const changeTitle = (e) => {
+        setTitle(e.target.value);
+    }
+
+    const fileInput = useRef();
+
+    const is_login = useSelector((state) => state.user.is_login);
 
     const preview = useSelector((state) => state.image.preview);
 
     const [tagData, setData] = React.useState([]);
 
-    const tagRef = useRef();
+    const tagRef = useRef([]);
 
     const [count, setCount] = React.useState(0);
 
@@ -41,14 +51,40 @@ const PostWrite = (props) => {
         }
     }
 
-    const tagDelete = (e) => {
-        console.log(tagRef.current.value);
+    const tagDelete = (e, index) => {
+        // console.log(tagRef.current[index].value);
+
+        const delData = tagData.filter((item, i) => {
+            return item !== tagRef.current[index].value;
+        });
+
+        setData(delData);
+        
     } 
 
     const postBtn = () => {
         console.log("버튼 클릭!");
-        console.log("tagData !! ", tagData);
+        console.log('tagData !! ',tagData);
+        const imageForm = new FormData();
+        let image = fileInput.current.files[0];
+        // console.log(image);
+        imageForm.append('image', image);
+
+        // dispatch(imageActions.uploadImageFB(imageForm));
+
+        // dispatch(postActions.addPostFB(title, tagData, imageForm));
+
     }
+
+    // if(!is_login) {
+    //     return (
+    //       <Grid margin="100px 0px" padding="16px" center>
+    //         <Text size="32px" bold>앗! 리액트 화난다</Text>
+    //         <Text size="32px">로그인 후에만 쓸수 있음</Text>
+    //         <Button _onClick={() => {history.replace("/login")}}>로그인 하러 가기</Button>
+    //       </Grid>
+    //     );
+    // }
     
     return (
         <React.Fragment>
@@ -57,11 +93,11 @@ const PostWrite = (props) => {
             </Grid>
 
             <Grid padding="16px">
-                <Input _onChange={() => {}} placeholder="사진 제목" />
+                <Input _onChange={changeTitle} placeholder="사진 제목" />
             </Grid>
 
             <Grid padding="16px">
-                <Upload />
+                <Upload _ref={fileInput} />
                 <Image shape="rectangle" src={preview ? preview : "https://thumb.mt.co.kr/06/2021/05/2021052009134127042_1.jpg/dims/optimize/"}></Image>
                 
             </Grid>
@@ -74,10 +110,13 @@ const PostWrite = (props) => {
                         {input_count.map((item, i) => {
                             return (
                                 <TagDiv key={i}>
-                                    <TagInput key={i+1} placeholder="입력후 Enter" onKeyUp={tagAdd} ref={tagRef} id={i}/>
+                                    <TagInput key={i+1} placeholder="입력후 Enter" onKeyUp={tagAdd} 
+                                    ref={el => (tagRef.current[i] = el)} id={i}/>
                                     <span
-                                    key={i+2} 
-                                    onClick={tagDelete}
+                                    key={i+2}
+                                    onClick={(e) => {
+                                        tagDelete(e, i);
+                                    }}
                                     style={{
                                         fontSize:"2rem",
                                         color:"red",

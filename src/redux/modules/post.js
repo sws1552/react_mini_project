@@ -2,6 +2,7 @@ import {createAction, handleActions} from "redux-actions"
 import {history} from "../configureStore";
 import {produce} from "immer"
 import axios from "axios";
+import {actionCreators as imageActions} from "./image";
 
 // 액션타입
 const SET_POST = "SET_POST"
@@ -82,6 +83,64 @@ const getPostFB = () => {
 // }
 
 
+const addPostFB = (title, tagData, imageForm) => {
+  return function (dispatch, getState, {history}){
+
+    dispatch(imageActions.uploading(true));
+
+    axios.post('/api/post/image',imageForm, // 미리 약속한 주소
+            ).then(function (res) {
+                console.log("upload response !! ", res);
+
+                axios
+                  .post("/api/post/new",
+                    {
+                      title: title,
+                      imageUrl: `http://14.45.204.153:8080/${res.data}`,
+                      tags: tagData,
+                    },
+                    {
+                      headers: {'Authorization':`Bearer ${localStorage.getItem("token")}`},
+                    }
+                  )
+                  .then(function (res2) {
+                    console.log('addPostFB res !! ', res2);
+                    
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+
+
+    
+    // axios
+    //   .post("/api/post/new",
+    //     {
+    //       title: title,
+    //       imageUrl: 'https://thumb.mt.co.kr/06/2021/05/2021052009134127042_1.jpg/dims/optimize/',
+    //       tags: tagData,
+    //     },
+    //     {
+    //       headers: {'Authorization':`Bearer ${localStorage.getItem("token")}`},
+    //     }
+    //   )
+    //   .then(function (res) {
+    //     console.log('addPostFB res !! ', res);
+        
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+
+  }
+}
+
+
 
 export default handleActions (
     {
@@ -90,7 +149,7 @@ export default handleActions (
         }),
 
         [ADD_POST]: (state, action) => produce(state, (draft)=> {
-
+          draft.list.unshift(action.payload.post);
         }),
 
         // [LIKED_POST] : (state, action) => produce(state, (draft)=> {
@@ -109,6 +168,7 @@ const actionCreators = {
     addPost,
     getPostFB,
     // likedPostFB,
+    addPostFB,
 }
 
 export {actionCreators}
