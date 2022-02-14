@@ -66,7 +66,6 @@ const loginCheckFB = () => {
   return function (dispatch, getState, {history}) {
 
     axios.get('/api/user/me',
-    // {userID:id, nickname:nickname, password:pwd, createdAt:createdAt, updatedAt: updatedAt,},
     {
       headers: {'Authorization':`Bearer ${localStorage.getItem("token")}`},}
     )
@@ -76,8 +75,9 @@ const loginCheckFB = () => {
       
       if(response.data.user) {
         dispatch(setUser({
-          userID: response.data.userID,
-          nickname: response.data.nickname,
+          userID: response.data.user.userID,
+          id:response.data.user.id,
+          nickname: response.data.user.nickname,
           token : localStorage.getItem("token"),
         }));
       } else {
@@ -113,11 +113,12 @@ const loginFB = (id, pwd) => {
       //   // authorization: `Bearer ${localStorage.getItem("token")}`
       // } // 누가 요청했는 지 알려줍니다. (config에서 해요!)
     ).then(function (response) {
-      console.log(response);
+      console.log('로그인정보확인',response);
 
       dispatch(setUser({
-        userID: response.data.userID,
-        nickname: response.data.nickname,
+        userID: response.data.user.userID,
+        id:response.data.user.id,
+        nickname: response.data.user.nickname,
         token : response.data.token,
       }));
 

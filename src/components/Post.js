@@ -1,14 +1,26 @@
 import React from "react";
+import { useState } from "react";
 import { Grid, Text, Button, Image } from "../elements"
 import styled from "styled-components";
 
-import Badge from 'react-bootstrap/Badge'
+import { useSelector, useDispatch } from "react-redux"
+import { actionCreators as likeActions } from "../redux/modules/likes";
 import { history } from "../redux/configureStore";
+
+import Badge from 'react-bootstrap/Badge'
 import { BsColumns, BsHeart, BsHeartFill } from "react-icons/bs";
 import { TiHeartOutline, TiHeart } from "react-icons/ti";
 
-
 const Post = (props) => {
+  const dispatch = useDispatch();
+  const like = useSelector((state)=>state.likes.like)
+
+  const [liked, setLiked] = React.useState(false);
+
+  const likeButton = () => {
+    setLiked(!liked)
+    dispatch(likeActions.likePostFB(props.id, liked))
+  }
     // localStorage에서 토큰값 여부로 헤더 판별
     // state에서 is_login도 같이 판별 필요
     return (
@@ -25,8 +37,19 @@ const Post = (props) => {
               ></PostImage>
             {/* 하트 클릭 시 색깔 변경, 데이터 속성 넘겨주기 */}
             {/* 삼항연산자 써서 해야하나? */}
+
+              {/* useSelector로 받아온 liked가 true/false이냐에 따라서 나누면 될 듯 */}
+            {(like===false)?
             <TiHeartOutline
-              style={{ position: "absolute", fontSize:"2rem", fontWeight:"bolder", color:"white", top:"10px", right:"10px", zIndex: "1" }} />
+              onClick={likeButton}
+              style={{ position: "absolute", fontSize:"1.7rem", top:"10px", right:"10px", zIndex: "1", color:"white"}} />
+              :
+              <TiHeart
+              onClick={likeButton}
+              style={{ position: "absolute", fontSize:"1.7rem", top:"10px", right:"10px", zIndex: "1", color:"red",}} />
+              }
+
+
           </ImageBox>
           {/* 태그 map*/}
 
