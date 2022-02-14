@@ -76,7 +76,7 @@ const Signup = (props) => {
                 회원가입 정보 작성
             </Text>
 
-          <Grid padding="16px" is_flex>
+          <Grid padding="16px" base_align>
             <Input
             label="아이디"
             placeholder="숫자 혹은 영어로만 4글자 이상 20글자 이하로 입력해주세요"
@@ -84,7 +84,7 @@ const Signup = (props) => {
             >
             
             </Input>
-            <Button text="중복확인"></Button>
+            <Button text="중복확인" width="150px" margin="10px"></Button>
           </Grid>
 
           <Grid padding="16px">
