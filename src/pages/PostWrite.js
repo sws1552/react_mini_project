@@ -5,11 +5,16 @@ import {MdDeleteForever} from "react-icons/md";
 
 import {Button, Grid, Image, Input, Text} from "../elements";
 import Upload from "../shared/Upload";
+import { useDispatch, useSelector } from "react-redux";
 
 
 
 
 const PostWrite = (props) => {
+
+    const dispatch = useDispatch();
+
+    // const is_login = useSelector((state) => state.user.is_login);
 
     const [tagData, setData] = React.useState([]);
 

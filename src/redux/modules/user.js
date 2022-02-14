@@ -56,9 +56,9 @@ const loginCheckFB = () => {
       
       if(response.user) {
         dispatch(setUser(response.user));
-    } else {
-      dispatch(logOut());
-    }
+      } else {
+        dispatch(logOut());
+      }
   })
     
     .catch(function (error) {
