@@ -46,7 +46,7 @@ const signupFB = (id, pwd, nickname) => {
 
 const loginCheckFB = () => {
   return function (dispatch, getState, {history}) {
-    axios.post('/api/users/me',
+    axios.get('/api/user/me',
     // {userID:id, nickname:nickname, password:pwd, createdAt:createdAt, updatedAt: updatedAt,},
     {header: {'Authorization':`Bearer ${localStorage.getItem("token")}`},}
     )

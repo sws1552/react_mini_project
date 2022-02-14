@@ -1,39 +1,95 @@
 import React from "react";
 import { Grid, Text, Button, Image } from "../elements"
 import styled from "styled-components";
+
 import Badge from 'react-bootstrap/Badge'
+import { history } from "../redux/configureStore";
+import { BsColumns, BsHeart, BsHeartFill } from "react-icons/bs";
+import { TiHeartOutline, TiHeart } from "react-icons/ti";
+
 
 const Post = (props) => {
     // localStorage에서 토큰값 여부로 헤더 판별
     // state에서 is_login도 같이 판별 필요
     return (
+      <React.Fragment>
+        <Postcard>
 
-    <React.Fragment>
+          <ImageBox>
+            {/* 이미지 클릭 시 상세페이지로 이동 */}
+            <PostImage
+              onClick={()=> {
+                history.push(`/detail/${props.id}`)
+              }}
+              src={props.imageUrl}
+              ></PostImage>
+            {/* 하트 클릭 시 색깔 변경, 데이터 속성 넘겨주기 */}
+            {/* 삼항연산자 써서 해야하나? */}
+            <TiHeartOutline
+              style={{ position: "absolute", fontSize:"2rem", fontWeight:"bolder", color:"white", top:"10px", right:"10px", zIndex: "1" }} />
+          </ImageBox>
+          {/* 태그 map*/}
 
-        <Grid width="30%" height="auto" margin="10px">
-            <Text margin="0px" bold>{props.title}</Text>
-            <Image width="100%" auto shape="rectangle" radius="10px" src={props.imgUrl}></Image>
-            {/* 태그 map*/}
-            {props.tags.map((p,idx)=> {
-                return (
-                    <Badge pill bg="dark" key={idx} style={{
-                        margin:"7px 2px"
-                    }}>{p}</Badge>
-                )
+          <Text margin="0px" bold>
+            {props.title}
+          </Text>
+
+          <Tag>
+            {/* 서버 tags DB 저장형태에 따라 수정해야 할 수 있음 */}
+            {props.tags.map((p, idx) => {
+              return (
+                <Badge
+                  pill
+                  bg="dark"
+                  key={idx}
+                  style={{
+                    margin: "7px 2px",
+                  }}
+                >
+                  {p}
+                </Badge>
+              );
             })}
-        </Grid>
-
-    </React.Fragment>
-
-        )
+          </Tag>
+        </Postcard>
+      </React.Fragment>
+    );
 }
 
 Post.defaultProps = {
     title: "존예존예존예존예!",
     tags: ["태그1", "태그2"],
-    imgUrl: "https://thumb.mtstarnews.com/06/2021/05/2021050511312249749_1.jpg/dims/optimize",
+    imageUrl: "https://thumb.mt.co.kr/06/2021/09/2021092406423496252_1.jpg/dims/optimize/",
 }
 
+// 포스트 전체크기
+const Postcard = styled.div`
+    margin:30px 8px 8px 8px;
+    width: 20%;
+    min-width: 200px;
+`
 
+const ImageBox = styled.div`
+position: relative;
+
+:hover {
+  cursor:pointer;
+}
+
+`
+
+// 이미지 크기
+const PostImage = styled.img`
+    // position: relative;
+    width: 100%;
+    min-height: 100px;
+    height: auto;
+    border-radius: 15px;
+
+`
+
+const Tag = styled.div`
+    display: flex;
+`
 
 export default Post;
