@@ -8,12 +8,14 @@ import {actionCreators as imageActions} from "./image";
 const SET_POST = "SET_POST"
 // const LIKED_POST = "LIKED_POST"
 const ADD_POST = "ADD_POST"
+const ONE_POST = "ONE_POST"
 
 
 // 액션 생성 함수
 const setPost = createAction(SET_POST, (post_list)=> ({post_list}))
 // const likedPost = createAction(LIKED_POST, (post_list)=> ({post_list}))
 const addPost = createAction(ADD_POST, (post)=> ({post}))
+const onePost = createAction(ONE_POST, (one_post)=> ({one_post}));
 
 let createdAt = new Date()
 
@@ -40,6 +42,17 @@ const initialState = {
     //   ],
     // },
   ],
+  one_post: {
+    user: {
+      userID: ""
+    },
+    imageUrl: "",
+    tags: [
+      {
+        name: ''
+      }
+    ]
+  }
 };
 
 
@@ -128,6 +141,25 @@ const addPostFB = (title, tagData, imageForm) => {
 }
 
 
+const getOnePostFB = (postId) => {
+  return function(dispatch, getState, {history}){
+    console.log("postId !! ",postId);
+
+    axios
+          .get(`/api/posts/detail/${postId}`)
+          .then(function (res) {
+            
+            dispatch(onePost(res.data));
+            
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+  }
+}
+
+
 
 export default handleActions (
     {
@@ -143,6 +175,9 @@ export default handleActions (
 
         // }),
 
+        [ONE_POST] : (state, action) => produce(state, (draft)=> {
+          draft.one_post = action.payload.one_post;
+        }),
 
     }, initialState
 );
@@ -156,6 +191,7 @@ const actionCreators = {
     getPostFB,
     // likedPostFB,
     addPostFB,
+    getOnePostFB,
 }
 
 export {actionCreators}
