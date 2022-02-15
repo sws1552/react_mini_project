@@ -15,7 +15,11 @@ const PostList = (props) => {
 
   const dispatch = useDispatch();
   const post_list = useSelector((state)=> state.post.list)
-  // console.log(post_list)
+  // const _like = useSelector((state)=> state.likes)
+  // console.log("like스토어", _like)
+  // const _user = useSelector((state)=> state.user.user)
+  // console.log("props리스트",post_list)
+  // console.log("props유저",_user)
   // const liked = useSelector((state)=>state.likes.list)
   // console.log('Post like 확인', liked)
 

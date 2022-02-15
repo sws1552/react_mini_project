@@ -1,4 +1,5 @@
 import {createAction, handleActions} from "redux-actions"
+import {actionCreators as postActions} from "./post";
 import {history} from "../configureStore";
 import {produce} from "immer"
 import axios from "axios";
@@ -19,13 +20,13 @@ const initialState = {
 
 
 // 미들웨어
-const likePostFB = (postId, islike) => {
+const likePostFB = (postId) => {
     return function (dispatch, getState, {history}) {
-        const _user = getState().user.user;
+        // const _user = getState().user.user;
         // 로그인 한 _user.id는 숫자로 나옴 > 1,2,3,4, 등
         // console.log('유저정보확인', _user.id)
-        const user_id = { id : _user.id }
-        const post_id = { postId: postId }
+        // const user_id = { id : _user.id }
+        // const post_id = { postId: postId }
         // console.log('겟!', getState().likes.like)
         
         // true(데이터 추가해야 될 때)
@@ -36,7 +37,7 @@ const likePostFB = (postId, islike) => {
               },
             })
             .then(function (response) {
-            //   console.log('추가된데이터', response);
+              console.log('추가된데이터', response);
             })
             .catch(function (error) {
               console.log(error);
@@ -44,14 +45,14 @@ const likePostFB = (postId, islike) => {
 
             // 전체리스트 조회
             axios
-              .get("/api/posts/likes", {
+              .get("/api/posts", {
                 headers: {
                   Authorization: `Bearer ${localStorage.getItem("token")}`,
                 },
               })
               .then(function (response) {
                 console.log("좋아요리스트", response.data);
-                // dispatch(likePost())
+                dispatch(postActions.setPost(response.data))
               })
               .catch(function (error) {
                 console.log(error);
@@ -62,7 +63,7 @@ const likePostFB = (postId, islike) => {
             
     }
 
-const deleteLikeFB = (postId, islike) => {
+const deleteLikeFB = (postId) => {
     return function (dispatch, getState, {history}) {
 
     const _user = getState().user.user;
@@ -78,19 +79,20 @@ const deleteLikeFB = (postId, islike) => {
             },
         })
         .then(function (response) {
-        //   console.log('삭제된데이터',response);
+          console.log('삭제된데이터',response);
         })
         .catch(function (error) {
             console.log(error);
         });
 
 
-        axios.get('/api/posts/likes',
+        axios.get('/api/posts',
         {headers: {'Authorization':`Bearer ${localStorage.getItem("token")}`},}
         )
         .then(function (response) {
             console.log('좋아요리스트', response.data)
-            // dispatch(likePost())
+            dispatch(postActions.setPost(response.data))
+
             })
             .catch(function (error) {
             console.log(error);

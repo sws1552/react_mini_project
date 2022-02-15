@@ -67,7 +67,7 @@ const getPostFB = () => {
         axios
           .get("/api/posts")
           .then(function (response) {
-            console.log(response.data);
+            console.log('게시물조회',response.data);
             let postDB = response.data;
             
             post_list.push(...postDB)
@@ -165,6 +165,7 @@ export default handleActions (
     {
         [SET_POST]: (state, action) => produce(state, (draft)=> {
             draft.list = action.payload.post_list;
+            
         }),
 
         [ADD_POST]: (state, action) => produce(state, (draft)=> {

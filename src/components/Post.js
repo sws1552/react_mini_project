@@ -5,6 +5,7 @@ import styled from "styled-components";
 
 import { useSelector, useDispatch } from "react-redux"
 import { actionCreators as likeActions } from "../redux/modules/likes";
+import { actionCreators as postActions } from "../redux/modules/post";
 import { history } from "../redux/configureStore";
 
 import Badge from 'react-bootstrap/Badge'
@@ -13,34 +14,36 @@ import { TiHeartOutline, TiHeart } from "react-icons/ti";
 
 const Post = (props) => {
   const dispatch = useDispatch();
-  // const user = useSelector((state)=>state.user.user)
+  const _user = useSelector((state)=>state.user.user)
   // const likers = useSelector((state)=>state.likes.list)
 
 
-  const [islike, setLiked] = useState(false);
 
-  React.useEffect(()=>{
-   
-    console.log("useEffect", islike)
+  // 전체 게시물에서 아이디 찾아서 default값 주기
+  // 전체 리스트
+  // console.log('포스트좋아요', props.Likers)
+  let target = props.Likers.filter(e=> {
+    return parseInt(e.id) === _user.id
+  })
 
-  }, [islike]);
+  let initLike = (target.length > 0)?true:false;
+
+  const [islike, setLiked] = useState(initLike);
 
 
   const likeButton = () => {
     setLiked(!islike);
-    console.log("일반",islike)
+    // console.log("일반",islike)
 
     if(islike === true) {
-      dispatch(likeActions.likePostFB(props.id, islike))
+      dispatch(likeActions.likePostFB(props.id))
       
     } else {
-      dispatch(likeActions.deleteLikeFB(props.id, islike))
+      dispatch(likeActions.deleteLikeFB(props.id))
     }
-
-    // console.log("뷰like반전", islike)
-    // 조건을 두개
     
   }
+
     // localStorage에서 토큰값 여부로 헤더 판별
     // state에서 is_login도 같이 판별 필요
     return (
@@ -59,15 +62,15 @@ const Post = (props) => {
             {/* 삼항연산자 써서 해야하나? */}
 
               {/* useSelector로 받아온 liked가 true/false이냐에 따라서 나누면 될 듯 */}
-            {/* {(user_like===false)? */}
+            {(islike===false)?
             <TiHeartOutline
               onClick={likeButton}
               style={{ position: "absolute", fontSize:"1.7rem", top:"10px", right:"10px", zIndex: "1", color:"white"}} />
-             {/* :
+              :
               <TiHeart
               onClick={likeButton}
               style={{ position: "absolute", fontSize:"1.7rem", top:"10px", right:"10px", zIndex: "1", color:"red",}} />
-             } */}
+             }
 
 
           </ImageBox>
