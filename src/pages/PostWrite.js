@@ -82,7 +82,7 @@ const PostWrite = (props) => {
         let image = fileInput.current.files[0];
         imageForm.append('image', image);
 
-        dispatch(imageActions.uploadImageFB(imageForm));
+        // dispatch(imageActions.uploadImageFB(imageForm));
 
         dispatch(postActions.addPostFB(title, tagResult, imageForm));
 
