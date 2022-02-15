@@ -16,20 +16,30 @@ const Post = (props) => {
   // const user = useSelector((state)=>state.user.user)
   // const likers = useSelector((state)=>state.likes.list)
 
+
   const [islike, setLiked] = useState(false);
+
+  React.useEffect(()=>{
+   
+    console.log("useEffect", islike)
+
+  }, [islike]);
+
 
   const likeButton = () => {
     setLiked(!islike);
-    console.log(islike)
-    dispatch(likeActions.likePostFB(props.id, islike))
+    console.log("일반",islike)
+
+    if(islike === true) {
+      dispatch(likeActions.likePostFB(props.id, islike))
+      
+    } else {
+      dispatch(likeActions.deleteLikeFB(props.id, islike))
+    }
+
     // console.log("뷰like반전", islike)
     // 조건을 두개
-    // if(islike === false) {
-    //   dispatch(likeActions.likeDelFB(props.id))
-      
-    // } else {
-    //   dispatch(likeActions.likePostFB(props.id))
-    // }
+    
   }
     // localStorage에서 토큰값 여부로 헤더 판별
     // state에서 is_login도 같이 판별 필요
