@@ -38,6 +38,7 @@ function App() {
         <Header></Header>
           <Container>
             <ConnectedRouter history={history}>
+              
               <Route path="/" exact component={PostList} />
               <Route path="/login" exact component={Login} />
               <Route path="/signup" exact component={Signup} />

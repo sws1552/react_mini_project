@@ -34,7 +34,7 @@ const Post = (props) => {
               onClick={()=> {
                 history.push(`/detail/${props.id}`)
               }}
-              src={`http://14.45.204.153:8080/${props.imageUrl}`}
+              src={`http://14.45.204.153:8023/${props.imageUrl}`}
               ></PostImage>
             {/* 하트 클릭 시 색깔 변경, 데이터 속성 넘겨주기 */}
             {/* 삼항연산자 써서 해야하나? */}

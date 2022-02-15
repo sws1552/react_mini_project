@@ -110,7 +110,7 @@ const PostWrite = (props) => {
 
             <Grid padding="16px">
                 <Upload _ref={fileInput} />
-                <Image shape="rectangle" src={preview ? preview : "https://thumb.mt.co.kr/06/2021/05/2021052009134127042_1.jpg/dims/optimize/"}></Image>
+                <Image shape="rectangle" src={preview ? preview : "https://wpi.digication.com/srvs/filemanager/campus/jDt5abnGTNWMW3zpvKz5/resize=fit:crop,align:center,width:1182,height:667/compress/cache?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnQiOiJjYW1wdXMiLCJrZXkiOiJqRHQ1YWJuR1ROV01XM3pwdkt6NSIsImV4cCI6OTk5OTk5OTk5OX0.UJ6s9UfmkeztKB_VajDR7LD1aOvLSrtPLz-gfi5I2_M"}></Image>
                 
             </Grid>
 

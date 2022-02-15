@@ -15,7 +15,9 @@ const setUser = createAction(SET_USER, (user) => ({user}))
 
 // 초기값
 const initialState = {
-  user: null,
+  user: {
+    userID: '',
+  },
   is_login: false,
 };
 
