@@ -15,6 +15,7 @@ const PostList = (props) => {
 
   const dispatch = useDispatch();
   const post_list = useSelector((state)=> state.post.list)
+  const _user = useSelector((state)=>state.user.user)
   // const _like = useSelector((state)=> state.likes)
   // console.log("like스토어", _like)
   // const _user = useSelector((state)=> state.user.user)
@@ -48,7 +49,7 @@ const PostList = (props) => {
                   history.push(`/detail/${e.id}`)
                 }}
                   key={e.id}
-                  {...e}
+                  post={e}
                 />
               )
                 
@@ -81,7 +82,7 @@ const Postcards = styled.div`
   justify-content: center;
   width: 100%;
   margin: auto;
-  
+
   // display: grid;
   // grid-template-columns: 1fr 1fr 1fr;
 

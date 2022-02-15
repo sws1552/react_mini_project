@@ -12,37 +12,43 @@ import Badge from 'react-bootstrap/Badge'
 import { BsColumns, BsHeart, BsHeartFill } from "react-icons/bs";
 import { TiHeartOutline, TiHeart } from "react-icons/ti";
 
-const Post = (props) => {
+const Post = ({post}) => {
   const dispatch = useDispatch();
   const _user = useSelector((state)=>state.user.user)
   // const likers = useSelector((state)=>state.likes.list)
-
-
-
+  const isLiking = post.Likers.find(liker => liker.id === _user.id)
+ 
+  // const [islike, setLiked] = useState(isLike);
   // 전체 게시물에서 아이디 찾아서 default값 주기
   // 전체 리스트
   // console.log('포스트좋아요', props.Likers)
-  let target = props.Likers.filter(e=> {
-    return parseInt(e.id) === _user.id
-  })
+  
 
-  let initLike = (target.length > 0)?true:false;
-  console.log('initLike', initLike)
+  // React.useEffect(()=>{
 
-  const [islike, setLiked] = useState(initLike);
+
+    // let target = props.Likers.filter(e=> {
+    //   return parseInt(e.id) === _user.id
+    // })
+    // let initLike = (target.length > 0)?true:false;
+    
+    // setLiked(islike)
+    // console.log('initLike', initLike)
+    
+
+  // },[])
+
+  React.useEffect(()=> {
+    console.log('isliking',isLiking)
+  },[])
 
 
   const likeButton = () => {
-    setLiked(!islike);
-    // console.log("일반",islike)
+      dispatch(likeActions.likePostFB(post.id))
+  }
 
-    if(islike === false) {
-      dispatch(likeActions.likePostFB(props.id))
-      
-    } else {
-      dispatch(likeActions.deleteLikeFB(props.id))
-    }
-    
+  const dislikeButton = () => {
+      dispatch(likeActions.deleteLikeFB(post.id))
   }
 
     // localStorage에서 토큰값 여부로 헤더 판별
@@ -55,19 +61,21 @@ const Post = (props) => {
             {/* 이미지 클릭 시 상세페이지로 이동 */}
             <PostImage
               onClick={()=> {
-                history.push(`/detail/${props.id}`)
+                history.push(`/detail/${post.id}`)
               }}
-              src={`http://14.45.204.153:8023/${props.imageUrl}`}
+              src={`http://14.45.204.153:8023/${post.imageUrl}`}
               ></PostImage>
             {/* 하트 클릭 시 색깔 변경, 데이터 속성 넘겨주기 */}
             {/* 삼항연산자 써서 해야하나? */}
 
               {/* useSelector로 받아온 liked가 true/false이냐에 따라서 나누면 될 듯 */}
-            {(islike===false)?
+            {!isLiking?
+            // 빈하트
             <TiHeartOutline
-              onClick={likeButton}
+              onClick={dislikeButton}
               style={{ position: "absolute", fontSize:"1.7rem", top:"10px", right:"10px", zIndex: "1", color:"white"}} />
               :
+               // 채워진
               <TiHeart
               onClick={likeButton}
               style={{ position: "absolute", fontSize:"1.7rem", top:"10px", right:"10px", zIndex: "1", color:"red",}} />
@@ -80,12 +88,12 @@ const Post = (props) => {
 
           <div style={{padding:"15px"}}>
           <Text margin="0px" bold>
-            {props.title}
+            {post.title}
           </Text>
 
           <Tag>
             {/* 서버 tags DB 저장형태에 따라 수정해야 할 수 있음 */}
-            {props.tags.map((p, idx) => {
+            {post.tags.map((p, idx) => {
               return (
                 <Badge
                   pill

@@ -67,7 +67,7 @@ const getPostFB = () => {
         axios
           .get("/api/posts")
           .then(function (response) {
-            console.log('게시물조회',response.data);
+            // console.log('게시물조회',response.data);
             let postDB = response.data;
             
             post_list.push(...postDB)
@@ -93,7 +93,7 @@ const addPostFB = (title, tagData, imageForm) => {
 
     axios.post('/api/post/image',imageForm, // 미리 약속한 주소
             ).then(function (res) {
-                console.log("upload response !! ", res);
+                // console.log("upload response !! ", res);
 
                 axios
                   .post("/api/post/new",
@@ -107,7 +107,7 @@ const addPostFB = (title, tagData, imageForm) => {
                     }
                   )
                   .then(function (res2) {
-                    console.log('addPostFB res !! ', res2);
+                    // console.log('addPostFB res !! ', res2);
 
                     const post = {
                       id: res2.data.id,
@@ -118,7 +118,7 @@ const addPostFB = (title, tagData, imageForm) => {
                       user: res2.data.user,
                     };
 
-                    console.log('리듀서에 보낼 post !! ', post);
+                    // console.log('리듀서에 보낼 post !! ', post);
 
                     dispatch(addPost(post));
 
@@ -143,7 +143,7 @@ const addPostFB = (title, tagData, imageForm) => {
 
 const getOnePostFB = (postId) => {
   return function(dispatch, getState, {history}){
-    console.log("postId !! ",postId);
+    // console.log("postId !! ",postId);
 
     axios
           .get(`/api/posts/detail/${postId}`)
