@@ -57,8 +57,8 @@ const PostDetail = (props) => {
 
             <Grid padding="16px" is_flex>
                 <Permit>
-                    <Button width="20%" disabled={_disabled} _onClick={() => {}} text="수정하기" ></Button>
-                    <Button width="20%" _onClick={() => {}} text="삭제하기" ></Button>
+                    <Button width="20%" displayNone={_disabled} _onClick={() => {}} text="수정하기" ></Button>
+                    <Button width="20%" displayNone={_disabled} _onClick={() => {}} text="삭제하기" ></Button>
                 </Permit>
                 <Button width="20%" _onClick={() => {
                     props.history.replace('/');
