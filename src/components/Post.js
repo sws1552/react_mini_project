@@ -18,36 +18,29 @@ const Post = ({post}) => {
   // const likers = useSelector((state)=>state.likes.list)
   const isLiking = post.Likers.find(liker => liker.id === _user.id)
  
-  // const [islike, setLiked] = useState(isLike);
-  // 전체 게시물에서 아이디 찾아서 default값 주기
-  // 전체 리스트
-  // console.log('포스트좋아요', props.Likers)
+  // console.log(post)
+
   
-
-  // React.useEffect(()=>{
-
-
-    // let target = props.Likers.filter(e=> {
-    //   return parseInt(e.id) === _user.id
-    // })
-    // let initLike = (target.length > 0)?true:false;
+  // const [islike, setlike] = React.useState(isLiking)
+  
+  React.useEffect(()=>{
     
-    // setLiked(islike)
-    // console.log('initLike', initLike)
-    
+    console.log(isLiking)
 
-  // },[])
-
-  React.useEffect(()=> {
-    console.log('isliking',isLiking)
   },[])
 
+  // React.useEffect(()=> {
+  //   console.log('isliking',isLiking)
+  // },[])
 
-  const likeButton = () => {
+
+  let likeButton = () => {
+      
       dispatch(likeActions.likePostFB(post.id))
   }
 
-  const dislikeButton = () => {
+  let dislikeButton = () => {
+      
       dispatch(likeActions.deleteLikeFB(post.id))
   }
 
@@ -72,12 +65,12 @@ const Post = ({post}) => {
             {!isLiking?
             // 빈하트
             <TiHeartOutline
-              onClick={dislikeButton}
+              onClick={likeButton}
               style={{ position: "absolute", fontSize:"1.7rem", top:"10px", right:"10px", zIndex: "1", color:"white"}} />
               :
                // 채워진
               <TiHeart
-              onClick={likeButton}
+              onClick={dislikeButton}
               style={{ position: "absolute", fontSize:"1.7rem", top:"10px", right:"10px", zIndex: "1", color:"red",}} />
              }
 
