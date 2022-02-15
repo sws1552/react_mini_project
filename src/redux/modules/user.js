@@ -161,7 +161,7 @@ export default handleActions(
       [LOG_OUT]: (state, action) => produce(state, (draft)=>{
         localStorage.removeItem('token')
       
-        draft.user = null;
+        draft.user = '';
         draft.is_login = false;
       }),
   },

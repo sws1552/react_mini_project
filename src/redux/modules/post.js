@@ -164,6 +164,8 @@ const getOnePostFB = (postId) => {
 export default handleActions (
     {
         [SET_POST]: (state, action) => produce(state, (draft)=> {
+            draft.one_post = initialState.one_post;
+
             draft.list = action.payload.post_list;
         }),
 
