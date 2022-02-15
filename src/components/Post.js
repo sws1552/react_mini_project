@@ -27,6 +27,7 @@ const Post = (props) => {
   })
 
   let initLike = (target.length > 0)?true:false;
+  console.log('initLike', initLike)
 
   const [islike, setLiked] = useState(initLike);
 
@@ -35,7 +36,7 @@ const Post = (props) => {
     setLiked(!islike);
     // console.log("일반",islike)
 
-    if(islike === true) {
+    if(islike === false) {
       dispatch(likeActions.likePostFB(props.id))
       
     } else {

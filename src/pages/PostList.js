@@ -81,7 +81,7 @@ const Postcards = styled.div`
   justify-content: center;
   width: 100%;
   margin: auto;
-
+  
   // display: grid;
   // grid-template-columns: 1fr 1fr 1fr;
 
