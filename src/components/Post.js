@@ -13,20 +13,23 @@ import { TiHeartOutline, TiHeart } from "react-icons/ti";
 
 const Post = (props) => {
   const dispatch = useDispatch();
-  const like = useSelector((state)=>state.likes.like)
+  // const user = useSelector((state)=>state.user.user)
+  // const likers = useSelector((state)=>state.likes.list)
 
-  const [islike, setLiked] = React.useState(false);
+  const [islike, setLiked] = useState(false);
 
   const likeButton = () => {
-    // setLiked(!liked)
+    setLiked(!islike);
+    console.log(islike)
+    dispatch(likeActions.likePostFB(props.id, islike))
+    // console.log("뷰like반전", islike)
     // 조건을 두개
-    if(islike == false) {
-      dispatch(likeActions.likePostFB(props.id, islike))
-    } else {
-      dispatch(likeActions.likeDelFB(props.id, islike))
-    }
-    
-    // dispatch(likeActions.likePostFB(props.id))
+    // if(islike === false) {
+    //   dispatch(likeActions.likeDelFB(props.id))
+      
+    // } else {
+    //   dispatch(likeActions.likePostFB(props.id))
+    // }
   }
     // localStorage에서 토큰값 여부로 헤더 판별
     // state에서 is_login도 같이 판별 필요
@@ -46,15 +49,15 @@ const Post = (props) => {
             {/* 삼항연산자 써서 해야하나? */}
 
               {/* useSelector로 받아온 liked가 true/false이냐에 따라서 나누면 될 듯 */}
-            {(like===false)?
+            {/* {(user_like===false)? */}
             <TiHeartOutline
               onClick={likeButton}
               style={{ position: "absolute", fontSize:"1.7rem", top:"10px", right:"10px", zIndex: "1", color:"white"}} />
-              :
+             {/* :
               <TiHeart
               onClick={likeButton}
               style={{ position: "absolute", fontSize:"1.7rem", top:"10px", right:"10px", zIndex: "1", color:"red",}} />
-              }
+             } */}
 
 
           </ImageBox>
@@ -106,9 +109,10 @@ const Postcard = styled.div`
     border-radius: 15px;
     box-shadow: 4px 4px 10px 2px #dadada;
     background-color: white;
+    height: auto;
 
 `
-
+// 하트포함 이미지
 const ImageBox = styled.div`
 position: relative;
 
@@ -134,6 +138,7 @@ const PostImage = styled.img`
 
 const Tag = styled.div`
     display: flex;
+    flex-wrap: wrap;
 `
 
 export default Post;
