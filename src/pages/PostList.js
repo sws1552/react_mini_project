@@ -15,7 +15,9 @@ const PostList = (props) => {
 
   const dispatch = useDispatch();
   const post_list = useSelector((state)=> state.post.list)
-  console.log(post_list)
+  // console.log(post_list)
+  // const liked = useSelector((state)=>state.likes.list)
+  // console.log('Post like 확인', liked)
 
   React.useEffect(() => {
     // post_list가 0일 때만 getPostFB 하는거!
