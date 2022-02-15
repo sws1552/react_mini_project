@@ -14,12 +14,12 @@ const setLike = createAction(LIKE_SET,(post_list) => ({post_list}))
 
 
 const initialState = {
-    list:[],
+    like:false,
 };
 
 
 // 미들웨어
-const likePostFB = (postId) => {
+const likePostFB = (postId, islike) => {
     return function (dispatch, getState, {history}) {
         const _user = getState().user.user;
         // console.log('유저정보확인', _user)
