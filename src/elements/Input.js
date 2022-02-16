@@ -53,9 +53,11 @@ const ElInput = styled.input`
   padding: 12px 4px;
   box-sizing: border-box;
   border-radius: 20px;
+  box-shadow: 3px 3px 3px 3px gray;
 
   &:focus{
-    
+    outline: none;
+    box-shadow: 0 0 0 3px #9E56EB;
   }
 
 `;

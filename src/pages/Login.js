@@ -5,6 +5,7 @@ import {useDispatch} from "react-redux";
 import {actionCreators as userActions} from "../redux/modules/user";
 import { debounce } from "lodash";
 import {idCheck, passwordCheck} from "../shared/common";
+import styled from "styled-components";
 
 const Login = (props) => {
     const dispatch = useDispatch();
@@ -53,6 +54,7 @@ const Login = (props) => {
 
     return (
         <React.Fragment>
+            <Container>
             <Grid padding="16px">
                 <Text size="32px" bold>로그인</Text>
             </Grid>
@@ -72,6 +74,7 @@ const Login = (props) => {
 
             <Button text="로그인하기"
             _onClick={login}></Button>
+            </Container>
         </React.Fragment>
         
 
@@ -79,6 +82,15 @@ const Login = (props) => {
 
 
 }
+
+
+const Container = styled.div`
+    width: 50%;
+    margin: auto;
+    border: 3px solid white;
+    padding: 30px;
+    border-radius: 20px;
+`;
 
 
 export default Login;
