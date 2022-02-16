@@ -10,7 +10,7 @@ const SET_POST = "SET_POST"
 // const LIKED_POST = "LIKED_POST"
 const ADD_POST = "ADD_POST"
 const ONE_POST = "ONE_POST"
-const UPDATE_POST = "UPDATE_POST"
+// const UPDATE_POST = "UPDATE_POST"
 
 const LIKE_POST = "LIKE_POST"
 
@@ -19,7 +19,7 @@ const setPost = createAction(SET_POST, (post_list)=> ({post_list}))
 // const likedPost = createAction(LIKED_POST, (post_list)=> ({post_list}))
 const addPost = createAction(ADD_POST, (post)=> ({post}))
 const onePost = createAction(ONE_POST, (one_post)=> ({one_post}));
-const updatePost = createAction(UPDATE_POST, (one_post)=> ({one_post}));
+// const updatePost = createAction(UPDATE_POST, (one_post)=> ({one_post}));
 const likePost = createAction(LIKE_POST, (post)=> ({post}));
 
 
@@ -171,20 +171,25 @@ const getOnePostFB = (postId) => {
 
 const updateOnePostFB = (postId, title, tags) => {
   return function(dispatch, getState, {history}) {
-    console.log("postid !! ", postId);
-    console.log("title !! ", title);
-    console.log("tags !! ", tags);
+    // console.log("postid !! ", postId);
+    // console.log("title !! ", title);
+    // console.log("tags !! ", tags);
 
     axios
       .patch(`/api/post/${postId}`, 
         {
           title: title,
           tags: tags,
+        },
+        {
+          headers: {'Authorization':`Bearer ${localStorage.getItem("token")}`},
         }
       )
       .then(function (res) {
 
-        console.log('update res !! ', res);
+        console.log('update res !! ', res.data);
+
+        history.replace('/');
 
       })
       .catch(function (error) {
@@ -218,9 +223,9 @@ export default handleActions (
           draft.one_post = action.payload.one_post;
         }),
 
-        [UPDATE_POST] : (state, action) => produce(state, (draft)=> {
+        // [UPDATE_POST] : (state, action) => produce(state, (draft)=> {
           
-        }),
+        // }),
 
         [LIKE_POST] : (state, action) => produce(state, (draft)=> {
           console.log('반영전',draft.list)
