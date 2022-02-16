@@ -7,21 +7,17 @@ import { filter } from "lodash";
 
 // 액션타입
 const SET_POST = "SET_POST"
-// const LIKED_POST = "LIKED_POST"
 const ADD_POST = "ADD_POST"
 const ONE_POST = "ONE_POST"
-// const UPDATE_POST = "UPDATE_POST"
-
 const LIKE_POST = "LIKE_POST"
+const TAG_CLICK = "TAG_CLICK"
 
 // 액션 생성 함수
 const setPost = createAction(SET_POST, (post_list)=> ({post_list}))
-// const likedPost = createAction(LIKED_POST, (post_list)=> ({post_list}))
 const addPost = createAction(ADD_POST, (post)=> ({post}))
 const onePost = createAction(ONE_POST, (one_post)=> ({one_post}));
-// const updatePost = createAction(UPDATE_POST, (one_post)=> ({one_post}));
 const likePost = createAction(LIKE_POST, (post)=> ({post}));
-
+const tagClick = createAction(TAG_CLICK, ()=>({}));
 
 let createdAt = new Date()
 
@@ -58,7 +54,8 @@ const initialState = {
         name: ''
       }
     ]
-  }
+  },
+  tagclick: false,
 };
 
 
@@ -87,12 +84,6 @@ const getPostFB = () => {
     }
 }
 
-
-// 내가찜한사진만 불러오기 (getPostFB에서 조건 줘서 실행?)
-// const likedPostFB = () => {
-
-
-// }
 
 
 const addPostFB = (title, tagData, imageForm) => {
@@ -128,7 +119,6 @@ const addPostFB = (title, tagData, imageForm) => {
                     };
 
                     console.log('리듀서에 보낼 post !! ', post);
-                    // console.log('리듀서에 보낼 post !! ', post);
 
                     dispatch(addPost(post));
 
@@ -171,9 +161,6 @@ const getOnePostFB = (postId) => {
 
 const updateOnePostFB = (postId, title, tags) => {
   return function(dispatch, getState, {history}) {
-    // console.log("postid !! ", postId);
-    // console.log("title !! ", title);
-    // console.log("tags !! ", tags);
 
     axios
       .patch(`/api/post/${postId}`, 
@@ -223,6 +210,20 @@ const deleteOnePostFB = (postId) => {
   }
 }
 
+const tagListFB = (tagName) => {
+  return function(dispatch, getState, {history}) {
+    axios
+      .get(`/api/posts?tag=${tagName}`)
+      .then(function (res) {
+        // console.log('조회되나?',res.data)
+        dispatch(setPost(res.data))
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+}
+
 
 
 
@@ -232,30 +233,20 @@ export default handleActions (
     {
         [SET_POST]: (state, action) => produce(state, (draft)=> {
             draft.one_post = initialState.one_post;
-
             draft.list = action.payload.post_list;
-            console.log('draft', draft.list)
-            
+            // console.log('draft', draft.list)
         }),
 
         [ADD_POST]: (state, action) => produce(state, (draft)=> {
           draft.list.unshift(action.payload.post);
         }),
 
-        // [LIKED_POST] : (state, action) => produce(state, (draft)=> {
-
-        // }),
-
         [ONE_POST] : (state, action) => produce(state, (draft)=> {
           draft.one_post = action.payload.one_post;
         }),
 
-        // [UPDATE_POST] : (state, action) => produce(state, (draft)=> {
-          
-        // }),
-
         [LIKE_POST] : (state, action) => produce(state, (draft)=> {
-          console.log('반영전',draft.list)
+          // console.log('반영전',draft.list)
           draft.list = draft.list.map(target => {
             if(target.id === action.payload.post.id) {
               return action.payload.post;
@@ -263,23 +254,12 @@ export default handleActions (
               return target;
             }
           })
-          console.log('좋아요반영확인', draft.list)
         }),
 
-        // [ADD_LIKE] : (state, action) => produce(state, (draft)=> {
-        //   let target = draft.list.filter(target => {
-        //     return target.id === action.payload.post.id;
-        //   })
-        //   console.log('타겟포스트',target)
-        //   target.Likers.unshift(...action.payload.post.Likers);
-        // }),
+        [TAG_CLICK] : (state, action) => produce(state, (draft)=> {
+          draft.tagclick = draft.tagclick===true?false:true;
+        }),
 
-        // [DELETE_LIKE] : (state, action) => produce(state, (draft)=> {
-        //   let deleted = draft.list.Likers.filter(target => {
-        //     return target.id !== action.payload.post.Likers.id;
-        //   })
-        //   draft.list.Likers = deleted;
-        // }),
 
     }, initialState
 );
@@ -288,17 +268,15 @@ export default handleActions (
 
 const actionCreators = {
     setPost,
-    // likedPost,
     addPost,
     getPostFB,
-    // likedPostFB,
     addPostFB,
     getOnePostFB,
     updateOnePostFB,
     likePost,
     deleteOnePostFB,
-    // addLike,
-    // deleteLike,
+    tagListFB,
+    tagClick,
 }
 
 export {actionCreators}

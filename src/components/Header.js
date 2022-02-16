@@ -1,8 +1,10 @@
 import React from "react";
 import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
+import { useParams } from "react-router-dom"
 
 import { actionCreators as userActions } from "../redux/modules/user"
+import { actionCreators as postActions } from "../redux/modules/post"
 import { actionCreators as likeActions } from "../redux/modules/likes"
 import { Grid, Text, Button } from "../elements"
 
@@ -11,7 +13,14 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
   const likeButton = useSelector((state)=>state.likes.click);
+  const tagButton = useSelector((state)=>state.post.tagclick);
   const is_token = localStorage.getItem("token") ? true : false;
+  const post_list = useSelector((state)=> state.post.list);
+  // const get_url = useParams();
+  // console.log('파라미터 가져오기',get_url)
+
+  console.log('태그리스트', tagButton)
+
 
   const myLike = () => {
     dispatch(likeActions.callLike());
@@ -25,7 +34,14 @@ const Header = (props) => {
         <Grid padding="5px 20px" margin="0px 0px 50px 0px" is_flex bg="#FFFFFF">
           
           <Grid>
-            <Text margin="0px" size="20px" bold>
+            <Text
+            margin="0px"
+            size="20px"
+            bold
+            _onClick={() => {
+              history.replace("/");
+              dispatch(postActions.getPostFB());
+            }}>
               나의 최애는?
             </Text>
           </Grid>
@@ -53,7 +69,7 @@ const Header = (props) => {
   } else {
     return (
       <React.Fragment>
-        <Grid padding="5px 20px" is_flex bg="#FFFFFF">
+        <Grid padding="5px 20px" margin="0px 0px 50px 0px" is_flex bg="#FFFFFF">
           
           <Grid>
             <Text margin="0px" hover size="20px" bold _onClick={()=>{history.push('/')}}>

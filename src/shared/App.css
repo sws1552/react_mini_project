@@ -16,3 +16,7 @@
 *{
   font-family: 'Pretendard-Regular'
 }
+
+.tag:hover {
+  cursor: pointer;
+}

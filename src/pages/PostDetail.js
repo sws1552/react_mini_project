@@ -63,7 +63,7 @@ const PostDetail = (props) => {
 
             <Grid padding="16px">
                 
-                <Image shape="rectangle" src={`http://14.45.204.153:8023/${one_post.imageUrl}`}></Image>
+                <Image shape="rectangle" src={one_post.imageUrl}></Image>
                 
             </Grid>
 

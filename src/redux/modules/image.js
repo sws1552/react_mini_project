@@ -39,7 +39,8 @@ const uploadImageFB = (imageForm) => {
             ).then(function (res) {
                 console.log("upload response !! ", res);
 
-                dispatch(uploadImage(`http://14.45.204.153:8080/${res.data}`));
+                // dispatch(uploadImage(`http://14.45.204.153:8080/${res.data}`));
+                dispatch(uploadImage(`http://3.34.137.81:80/${res.data}`));
             })
             .catch(function (error) {
                 console.log(error);

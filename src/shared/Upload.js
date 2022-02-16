@@ -30,7 +30,7 @@ const Upload = (props) => {
                 <Image shape="rectangle" src={props.preview ? props.preview : "https://wpi.digication.com/srvs/filemanager/campus/jDt5abnGTNWMW3zpvKz5/resize=fit:crop,align:center,width:1182,height:667/compress/cache?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnQiOiJjYW1wdXMiLCJrZXkiOiJqRHQ1YWJuR1ROV01XM3pwdkt6NSIsImV4cCI6OTk5OTk5OTk5OX0.UJ6s9UfmkeztKB_VajDR7LD1aOvLSrtPLz-gfi5I2_M"}></Image>
             </Label>
 
-            <FileInput id="ex_file" accept="image/jpg, image/png, image/jpeg" type="file" onChange={selectfile} ref={props._ref}/>
+            <FileInput id="ex_file" accept="image/jpg, image/png, image/jpeg, image/gif" type="file" onChange={selectfile} ref={props._ref}/>
 
             {/* <Button _onClick={() => {}}>업로드</Button> */}
         </React.Fragment>

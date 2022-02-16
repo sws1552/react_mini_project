@@ -29,11 +29,9 @@ const PostList = (props) => {
     // 이미 리스트 있을 때는 getPostFB 따로 안하고 기존에 있던 리덕스에서 불러옴
     // if(post_list.length === 0) {
         if(!likeButton){
-          console.log('전체사진볼거야')
           dispatch(postActions.getPostFB());
         }
         else {
-          console.log('내가찜한사진볼거야')
           dispatch(likeActions.setLikeFB());
         }
       // }

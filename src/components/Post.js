@@ -7,30 +7,19 @@ import { useSelector, useDispatch } from "react-redux"
 import { actionCreators as likeActions } from "../redux/modules/likes";
 import { actionCreators as postActions } from "../redux/modules/post";
 import { history } from "../redux/configureStore";
+import { batch } from 'react-redux'
 
 import Badge from 'react-bootstrap/Badge'
 import { BsColumns, BsHeart, BsHeartFill } from "react-icons/bs";
 import { TiHeartOutline, TiHeart } from "react-icons/ti";
 
+import '../shared/App.css';
+
 const Post = ({post}) => {
   const dispatch = useDispatch();
   const _user = useSelector((state)=>state.user.user)
-  // const likers = useSelector((state)=>state.likes.list)
   const isLiking = post.Likers!==undefined ? post.Likers.find(liker => liker.id === _user.id) : null
  
-  
-  // const [islike, setlike] = React.useState(isLiking)
-  
-  React.useEffect(()=>{
-    
-    console.log(isLiking)
-
-  },[])
-
-  // React.useEffect(()=> {
-  //   console.log('isliking',isLiking)
-  // },[])
-
 
   let likeButton = () => {
       
@@ -41,6 +30,7 @@ const Post = ({post}) => {
       
       dispatch(likeActions.deleteLikeFB(post.id))
   }
+
 
     // localStorage에서 토큰값 여부로 헤더 판별
     // state에서 is_login도 같이 판별 필요
@@ -54,7 +44,7 @@ const Post = ({post}) => {
               onClick={()=> {
                 history.push(`/detail/${post.id}`)
               }}
-              src={`http://14.45.204.153:8023/${post.imageUrl}`}
+              src={post.imageUrl}
               ></PostImage>
             {/* 하트 클릭 시 색깔 변경, 데이터 속성 넘겨주기 */}
             {/* 삼항연산자 써서 해야하나? */}
@@ -87,7 +77,14 @@ const Post = ({post}) => {
             {post.tags.map((p, idx) => {
               return (
                 <Badge
+                  className="tag"
                   pill
+                  onClick={() => {
+                    batch(() => {
+                    dispatch(postActions.tagListFB(p.name))
+                    dispatch(postActions.tagClick())
+                    })
+                  }}
                   bg="dark"
                   key={idx}
                   style={{
