@@ -53,6 +53,7 @@ const AspectInner = styled.div`
     background-position: center;
     ${(props) => (props.width? `width: ${props.width};` : '')}
     border-radius: 5%;
+    box-shadow: 3px 3px 3px 3px gray;
 
 `;
 

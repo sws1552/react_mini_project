@@ -100,6 +100,7 @@ const PostWrite = (props) => {
     
     return (
         <React.Fragment>
+            <Container>
             <Grid padding="16px">
                 <Text margin="0px" size="36px" bold>게시글 작성</Text>
             </Grid>
@@ -110,7 +111,7 @@ const PostWrite = (props) => {
 
             <Grid padding="16px">
                 <Upload _ref={fileInput} />
-                <Image shape="rectangle" src={preview ? preview : "https://wpi.digication.com/srvs/filemanager/campus/jDt5abnGTNWMW3zpvKz5/resize=fit:crop,align:center,width:1182,height:667/compress/cache?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnQiOiJjYW1wdXMiLCJrZXkiOiJqRHQ1YWJuR1ROV01XM3pwdkt6NSIsImV4cCI6OTk5OTk5OTk5OX0.UJ6s9UfmkeztKB_VajDR7LD1aOvLSrtPLz-gfi5I2_M"}></Image>
+                <Image postWrite shape="rectangle" src={preview ? preview : "https://wpi.digication.com/srvs/filemanager/campus/jDt5abnGTNWMW3zpvKz5/resize=fit:crop,align:center,width:1182,height:667/compress/cache?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnQiOiJjYW1wdXMiLCJrZXkiOiJqRHQ1YWJuR1ROV01XM3pwdkt6NSIsImV4cCI6OTk5OTk5OTk5OX0.UJ6s9UfmkeztKB_VajDR7LD1aOvLSrtPLz-gfi5I2_M"}></Image>
                 
             </Grid>
 
@@ -152,9 +153,18 @@ const PostWrite = (props) => {
             <Grid padding="16px">
                 <Button _onClick={postBtn} text="게시글 작성" ></Button>
             </Grid>
+            </Container>
         </React.Fragment>
     )
 }
+
+const Container = styled.div`
+    width: 70%;
+    margin: auto;
+    border: 3px solid white;
+    padding: 30px;
+    border-radius: 20px;
+`;
 
 const TagInput = styled.input`
     padding: 10px 3px;
@@ -163,6 +173,12 @@ const TagInput = styled.input`
     margin-left: 10px;
     width: 15%;
     text-align: center;
+    border-radius: 20px;
+    box-shadow: 3px 3px 3px 3px gray;
+    &:focus{
+        outline: none;
+        box-shadow: 0 0 0 3px #9E56EB;
+    }
 `;
 
 const TagDiv = styled.div`

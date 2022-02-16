@@ -28,6 +28,7 @@ const P = styled.p`
   font-weight: ${(props) => (props.bold? "600" : "400")};
   ${(props) => (props.margin? `margin: ${props.margin};` : '')}
   ${(props) => (props.hover? `&:hover{cursor:pointer};` : '')}
+  text-shadow: 1px 0 1px gray;
 `;
 
 export default Text;
