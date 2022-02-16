@@ -21,12 +21,10 @@ const Post = ({post}) => {
   // console.log(post)
 
   let likeButton = () => {
-      
       dispatch(likeActions.likePostFB(post.id))
   }
 
   let dislikeButton = () => {
-      
       dispatch(likeActions.deleteLikeFB(post.id))
   }
 

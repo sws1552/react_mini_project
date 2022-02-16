@@ -7,6 +7,9 @@ import { actionCreators as userActions } from "../redux/modules/user"
 import { actionCreators as postActions } from "../redux/modules/post"
 import { actionCreators as likeActions } from "../redux/modules/likes"
 import { Grid, Text, Button } from "../elements"
+import { IoHome } from "react-icons/io5";
+import '../shared/App.css';
+
 
 
 const Header = (props) => {
@@ -31,21 +34,25 @@ const Header = (props) => {
     return (
       // 로그인 되어 있을 때
       <React.Fragment>
+
         <Grid padding="5px 20px" margin="0px 0px 50px 0px" is_flex bg="#FFFFFF">
           
           <Grid>
             <Text
             margin="0px"
-            size="20px"
+            size="25px"
             bold
-            hover 
+            hover
+            fontFamily='Malssami815' 
             _onClick={() => {
               history.replace("/");
               dispatch(postActions.getPostFB());
             }}>
-              나의 최애는?
+            {/* <IoHome style={{fontSize:"2rem"}}/> */}
+            나의 최애는?
             </Text>
           </Grid>
+
 
           <Grid flex_end>
             {/* toggle 사용하면 될 듯
@@ -65,6 +72,7 @@ const Header = (props) => {
             }}>로그아웃</Button>
           </Grid>
         </Grid>
+
       </React.Fragment>
     );
   } else {
@@ -73,8 +81,9 @@ const Header = (props) => {
         <Grid padding="5px 20px" margin="0px 0px 50px 0px" is_flex bg="#FFFFFF">
           
           <Grid>
-            <Text margin="0px" hover size="20px" bold _onClick={()=>{history.push('/')}}>
-              나의 최애는?
+            <Text fontFamily='Malssami815' margin="0px" hover size="25px" bold _onClick={()=>{history.push('/')}}>
+            {/* <IoHome style={{fontSize:"2rem"}}/> */}
+            나의 최애는?
             </Text>
           </Grid>
 
@@ -101,9 +110,14 @@ const Header = (props) => {
             </Button>
           </Grid>
         </Grid>
+
       </React.Fragment>
+
+
     );
+
   }
+
 };
 
 

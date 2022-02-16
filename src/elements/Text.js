@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 const Text = (props) => {
-  const { bold, _onClick, color, size, children, margin, hover, textAlign} = props;
+  const { bold, _onClick, color, size, children, margin, hover, textAlign, fontFamily} = props;
 
-  const styles = {bold: bold, color: color, size: size, margin, hover, textAlign:textAlign};
+  const styles = {bold: bold, color: color, size: size, margin, hover, textAlign:textAlign, fontFamily:fontFamily};
   return (
       <P {...styles} onClick={_onClick}>
           {children}
@@ -20,7 +20,8 @@ Text.defaultProps = {
   margin: false,
   _onClick: () => {},
   hover: false,
-  textAlign:''
+  textAlign:'',
+  fontFamily:'',
 };
 
 const P = styled.p`
@@ -31,6 +32,8 @@ const P = styled.p`
   ${(props) => (props.margin? `margin: ${props.margin};` : '')}
   ${(props) => (props.hover? `&:hover{cursor:pointer};` : '')}
   text-shadow: 1px 0 1px gray;
+  ${(props) => (props.fontFamily? `font-family:${props.fontFamily}`:'')};
+
 `;
 
 export default Text;

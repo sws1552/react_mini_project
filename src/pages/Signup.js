@@ -7,12 +7,13 @@ import { Text, Input, Grid, Button } from "../elements";
 
 import { useDispatch } from "react-redux"
 import { actionCreators as userActions } from "../redux/modules/user"
-import { idCheck, passwordCheck } from "../shared/common";
+import { idCheck, passwordCheck, nicknameCheck } from "../shared/common";
 import axios from "axios";
 
 
 const Signup = (props) => {
     const dispatch = useDispatch();
+
     const [id, setId] = React.useState("");
     const [nickname, setNickname] = React.useState("");
     const [pwd, setPwd] = React.useState("");
@@ -51,16 +52,23 @@ const Signup = (props) => {
     const signup = () => {
         if(id ==="" || nickname === "" || pwd ==="" || pwdCheck ==="") {
             window.alert('모든 입력칸을 빠짐없이 채워주세요')
+            return
         }
 
         if(!idCheck(id)) {
-            window.alert('아이디 형식에 맞게 입력해주세요')
+            window.alert('아이디 형식에 맞게 입력해주세요\n(숫자 혹은 영어로만 4글자 이상)')
+            return
+        }
+
+        if(!nicknameCheck(nickname)) {
+            window.alert('닉네임 형식에 맞게 입력해주세요\n(한글, 숫자, 영어 중 10글자 이하)')
+            return;
         }
 
         if(!passwordCheck(pwd)) {
-            window.alert('비밀번호 형식에 맞게 입력해주세요')
-            return;
-        }
+          window.alert('비밀번호 형식에 맞게 입력해주세요\n(숫자, 영어, 특수문자 중 8글자 이상)')
+          return;
+      }
 
         if(pwd !== pwdCheck) {
             window.alert('비밀번호와 비밀번호 확인 값이 일치하지 않습니다')
@@ -78,7 +86,10 @@ const Signup = (props) => {
         if (id === '') {
           window.alert('아이디를 입력 후 중복확인을 진행해주세요')
           return
-        } 
+        } else if(!idCheck(id)) {
+          window.alert('아이디 형식에 맞게 입력 후 중복확인 해주세요\n(숫자 혹은 영어로만 4글자 이상)')
+          return
+        }
           // dispatch(userActions.idCheckingFB(id));
           // console.log(id)
           axios.post('/api/user/check',
@@ -89,7 +100,7 @@ const Signup = (props) => {
             if (response.data.msg === '가입가능') {
               window.alert('사용 가능한 ID입니다')
             } else if (response.data.errorMessage==="이미 있는 아이디입니다."){
-              window.alert(response.data.errorMessage)
+              window.alert('사용불가! 이미 사용 중인 아이디입니다.')
             };
           })
           .catch(function (error) {
@@ -104,7 +115,7 @@ const Signup = (props) => {
       <React.Fragment>
         <Container>
         <Grid>
-            <Text margin="10px 0px" textAlign="center" size="32px" bold>
+            <Text fontFamily='Malssami815' margin="10px 0px" textAlign="center" size="32px" bold>
                 회원가입 정보 작성
             </Text>
 

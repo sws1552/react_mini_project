@@ -102,7 +102,7 @@ const PostWrite = (props) => {
         <React.Fragment>
             <Container>
             <Grid padding="16px">
-                <Text margin="0px" size="36px" bold>게시글 작성</Text>
+                <Text margin="0px" size="36px" bold fontFamily='Malssami815'>게시글 작성</Text>
             </Grid>
 
             <Grid padding="16px">

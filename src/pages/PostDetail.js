@@ -54,7 +54,7 @@ const PostDetail = (props) => {
         <React.Fragment>
             <Container>
             <Grid padding="16px">
-                <Text margin="0px" size="36px" bold>상세페이지</Text>
+                <Text margin="0px" size="36px" bold fontFamily='Malssami815'>상세페이지</Text>
             </Grid>
 
             <Grid padding="16px">
@@ -62,9 +62,7 @@ const PostDetail = (props) => {
             </Grid>
 
             <Grid padding="16px">
-                
                 <Image shape="rectangle" src={one_post.imageUrl}></Image>
-                
             </Grid>
 
             <Grid padding="16px">

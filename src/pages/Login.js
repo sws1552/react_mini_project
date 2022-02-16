@@ -56,7 +56,7 @@ const Login = (props) => {
         <React.Fragment>
             <Container>
             <Grid padding="16px">
-                <Text margin="10px 0px" textAlign="center" size="32px" bold>로그인</Text>
+                <Text fontFamily='Malssami815' margin="10px 0px" textAlign="center" size="32px" bold>로그인</Text>
             </Grid>
 
             <Grid padding="16px">

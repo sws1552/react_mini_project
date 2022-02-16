@@ -12,13 +12,13 @@ const GET_USER = "GET_USER";
 const logOut = createAction(LOG_OUT, (user)=>({user}));
 const getUser = createAction(GET_USER, (user)=>({user}));
 const setUser = createAction(SET_USER, (user) => ({user}))
-
 // 초기값
 const initialState = {
   user: {
     userID: '',
   },
   is_login: false,
+  msg: '',
 };
 
 
@@ -31,39 +31,24 @@ const signupFB = (id, pwd, nickname) => {
   return function (dispatch, getState, {history}) {
     axios.post('/api/user/new',
     {userID:id, nickname:nickname, password:pwd, createdAt:createdAt, updatedAt: updatedAt,},
-    // {header: {'Authorization':'내토큰 보내주기?'},}
     )
     
     .then(function(response) {
-      console.log(response);
-      // 에러메시지 중복 > 중복체크를 다시 진행해주세요
+      // console.log('회원가입 확인', response);
+
+      window.alert('회원가입 완료! 로그인 후 이용해주세요!')
+      history.replace('/login')
     })
     .catch(function (error) {
-      console.log(error);
-      window.alert(error);
+      console.log('에러확인', error);
+
+      window.alert('입력정보를 조건에 맞게 작성해주세요')
+      return
     });
 
-    history.replace('/login')
+
   }
 }
-
-// 회원가입 시 아이디 중복 확인
-// const idCheckingFB = (id) => {
-//   axios.post('/api/user/check',
-//     {userID:id},
-//     )
-//   .then(function(response) {
-//     console.log(response);
-//     if (response.data.msg === '가입가능') {
-//       window.alert('사용 가능한 ID입니다')
-//     } else if (response.data.errorMessage==="이미 있는 아이디입니다."){
-//       window.alert(response.data.errorMessage)
-//     };
-//   })
-//   .catch(function (error) {
-//     console.log(error);
-//   });
-// }
 
 
 // 로그인 된 상태인지 확인
@@ -167,6 +152,7 @@ export default handleActions(
         draft.user = '';
         draft.is_login = false;
       }),
+
   },
   initialState
 ); 
@@ -179,7 +165,6 @@ const actionCreators = {
     logOut,
     getUser,
     signupFB,
-    // idCheckingFB,
     loginFB,
     logoutFB,
     loginCheckFB,
