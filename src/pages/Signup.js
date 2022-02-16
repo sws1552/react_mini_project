@@ -1,6 +1,7 @@
 import React from "react";
 // import {useRef, useState} from "react"
 import _ from "lodash"; // lodash 부르기
+import styled from "styled-components";
 
 import { Text, Input, Grid, Button } from "../elements";
 
@@ -101,8 +102,9 @@ const Signup = (props) => {
 
     return (
       <React.Fragment>
+        <Container>
         <Grid>
-            <Text size="32px" bold>
+            <Text margin="10px 0px" textAlign="center" size="32px" bold>
                 회원가입 정보 작성
             </Text>
 
@@ -147,9 +149,10 @@ const Signup = (props) => {
             </Input>
           </Grid>
 
-        <Button _onClick={signup} text="회원가입"></Button>
+        <Button width="96%" padding="16px" displayBlock _onClick={signup} margin="20px auto" text="회원가입"></Button>
 
         </Grid>
+        </Container>
       </React.Fragment>
     );
 
@@ -158,5 +161,14 @@ const Signup = (props) => {
 
 
 Signup.defaultProps = {};
+
+const Container = styled.div`
+    width: 50%;
+    margin: 0px auto 50px auto;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
+    padding: 30px;
+    border-radius: 20px;
+`;
 
 export default Signup;

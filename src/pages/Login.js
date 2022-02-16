@@ -56,7 +56,7 @@ const Login = (props) => {
         <React.Fragment>
             <Container>
             <Grid padding="16px">
-                <Text size="32px" bold>로그인</Text>
+                <Text margin="10px 0px" textAlign="center" size="32px" bold>로그인</Text>
             </Grid>
 
             <Grid padding="16px">
@@ -72,22 +72,21 @@ const Login = (props) => {
                 _onChange={changePwd} />
             </Grid>
 
-            <Button text="로그인하기"
+            <Button width="96%" padding="16px" displayBlock margin="20px auto 50px auto" text="로그인하기"
             _onClick={login}></Button>
             </Container>
         </React.Fragment>
         
 
     )
-
-
 }
 
 
 const Container = styled.div`
     width: 50%;
-    margin: auto;
-    border: 3px solid white;
+    margin: 0px auto 50px auto;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
     padding: 30px;
     border-radius: 20px;
 `;

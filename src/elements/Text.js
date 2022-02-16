@@ -2,9 +2,9 @@ import React from "react";
 import styled from "styled-components";
 
 const Text = (props) => {
-  const { bold, _onClick, color, size, children, margin, hover } = props;
+  const { bold, _onClick, color, size, children, margin, hover, textAlign} = props;
 
-  const styles = {bold: bold, color: color, size: size, margin, hover};
+  const styles = {bold: bold, color: color, size: size, margin, hover, textAlign:textAlign};
   return (
       <P {...styles} onClick={_onClick}>
           {children}
@@ -20,12 +20,14 @@ Text.defaultProps = {
   margin: false,
   _onClick: () => {},
   hover: false,
+  textAlign:''
 };
 
 const P = styled.p`
   color: ${(props) => props.color};
   font-size: ${(props) => props.size};
   font-weight: ${(props) => (props.bold? "600" : "400")};
+  ${(props) => (props.textAlign? `text-align:${props.textAlign}`:'')};
   ${(props) => (props.margin? `margin: ${props.margin};` : '')}
   ${(props) => (props.hover? `&:hover{cursor:pointer};` : '')}
   text-shadow: 1px 0 1px gray;
