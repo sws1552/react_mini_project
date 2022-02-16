@@ -36,6 +36,7 @@ const signupFB = (id, pwd, nickname) => {
     
     .then(function(response) {
       console.log(response);
+      // 에러메시지 중복 > 중복체크를 다시 진행해주세요
     })
     .catch(function (error) {
       console.log(error);
@@ -53,9 +54,11 @@ const idCheckingFB = (id) => {
     )
   .then(function(response) {
     console.log(response);
-    // if (response == '중복') {
-    //   window.alert('사용 불가능한 아이디 입니다.')
-    // }
+    if (response.data.msg === '가입가능') {
+      window.alert('사용 가능한 ID입니다')
+    } else if (response.data.errorMessage==="이미 있는 아이디입니다."){
+      window.alert(response.data.errorMessage)
+    };
   })
   .catch(function (error) {
     console.log(error);

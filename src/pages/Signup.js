@@ -4,8 +4,8 @@ import _ from "lodash"; // lodash 부르기
 
 import { Text, Input, Grid, Button } from "../elements";
 
-import {useDispatch} from "react-redux"
-import {actionCreators as userActions} from "../redux/modules/user"
+import { useDispatch } from "react-redux"
+import { actionCreators as userActions } from "../redux/modules/user"
 import { idCheck, passwordCheck } from "../shared/common";
 
 
@@ -18,7 +18,7 @@ const Signup = (props) => {
 
     // debounce로 onChange 횟수 감소
     // 입력 속도 고려하여 0.5초로 반영
-    const debounceId = _.debounce((k) => setId(k), 500);
+    const debounceId = _.debounce((k) => setId(k), 300);
     const keyPressId = React.useCallback(debounceId, []);
 
     const IdValue = (e) => {
@@ -39,7 +39,7 @@ const Signup = (props) => {
       keyPressPwd(e.target.value);
     };
 
-    const debounceCheck = _.debounce((k) => setPwdCheck(k), 500);
+    const debounceCheck = _.debounce((k) => setPwdCheck(k), 300);
     const keyPressCheck = React.useCallback(debounceCheck, []);
 
     const PwdCheckValue = (e) => {
@@ -70,13 +70,18 @@ const Signup = (props) => {
     }
 
 
-    const idChecking = () => {
-      if (id === '') {
-        window.alert('아이디를 입력 후 중복확인을 진행해주세요')
-      } else {
-        dispatch(userActions.idCheckingFB(id));
-      }
+      const idChecking = () => {
+        // console.log(id)
+
+        if (id === '') {
+          window.alert('아이디를 입력 후 중복확인을 진행해주세요')
+        } else if (id !== undefined) {
+          dispatch(userActions.idCheckingFB(id));
+        }
+        
+
     }
+    
     
 
     return (

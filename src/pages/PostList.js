@@ -95,19 +95,10 @@ const PostList = (props) => {
 
 // 카드 나타나는 전체 넓이
 const Postcards = styled.div`
-  // display: flex;
-  // flex-wrap: wrap;
-  // justify-content: center;
-  // width: 100%;
-  // margin: auto;
-
   margin-top: 30px;
 
   column-count: 4;
   column-gap: 1em;
-
-  
-
   
 `
 

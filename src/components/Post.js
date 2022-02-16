@@ -64,12 +64,12 @@ const Post = ({post}) => {
             // 빈하트
             <TiHeartOutline
               onClick={likeButton}
-              style={{ position: "absolute", fontSize:"1.7rem", top:"10px", right:"10px", zIndex: "1", color:"white"}} />
+              style={{ position: "absolute", fontSize:"2.5rem", top:"10px", right:"10px", zIndex: "1", color:"white"}} />
               :
                // 채워진
               <TiHeart
               onClick={dislikeButton}
-              style={{ position: "absolute", fontSize:"1.7rem", top:"10px", right:"10px", zIndex: "1", color:"red",}} />
+              style={{ position: "absolute", fontSize:"2.5rem", top:"10px", right:"10px", zIndex: "1", color:"red",}} />
              }
 
 
@@ -91,7 +91,7 @@ const Post = ({post}) => {
                   bg="dark"
                   key={idx}
                   style={{
-                    margin: "7px 2px",
+                    margin: "2px",
                     padding: "6px 10px",
                     fontSize: "0.8rem",
                     fontFamily: "Pretendard-Thin"
@@ -122,7 +122,6 @@ margin-bottom:1rem;
 background-color: white;
 // 줄바꿈 방지
 display:inline-block;
-
 
 `
 
