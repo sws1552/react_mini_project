@@ -14,8 +14,6 @@ import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import PostWrite from '../pages/PostWrite';
 import PostDetail from "../pages/PostDetail";
-import Masonry from "react-masonry-css";
-import "./styles.css";
 import './App.css';
 
 
