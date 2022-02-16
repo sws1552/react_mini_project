@@ -10,18 +10,17 @@ const SET_POST = "SET_POST"
 // const LIKED_POST = "LIKED_POST"
 const ADD_POST = "ADD_POST"
 const ONE_POST = "ONE_POST"
+const UPDATE_POST = "UPDATE_POST"
+
 const LIKE_POST = "LIKE_POST"
-// const ADD_LIKE = "ADD_LIKE"
-// const DELETE_LIKE = "DELETE_LIKE"
 
 // 액션 생성 함수
 const setPost = createAction(SET_POST, (post_list)=> ({post_list}))
 // const likedPost = createAction(LIKED_POST, (post_list)=> ({post_list}))
 const addPost = createAction(ADD_POST, (post)=> ({post}))
 const onePost = createAction(ONE_POST, (one_post)=> ({one_post}));
+const updatePost = createAction(UPDATE_POST, (one_post)=> ({one_post}));
 const likePost = createAction(LIKE_POST, (post)=> ({post}));
-// const addLike = createAction(ADD_LIKE, (post)=> ({post}))
-// const deleteLike = createAction(DELETE_LIKE, (post)=> ({post}))
 
 
 let createdAt = new Date()
@@ -74,6 +73,7 @@ const getPostFB = () => {
         axios
           .get("/api/posts")
           .then(function (response) {
+            console.log('게시물조회',response.data);
             // console.log('게시물조회',response.data);
             let postDB = response.data;
             
@@ -100,6 +100,7 @@ const addPostFB = (title, tagData, imageForm) => {
 
     axios.post('/api/post/image',imageForm, // 미리 약속한 주소
             ).then(function (res) {
+                console.log("upload response !! ", res);
                 // console.log("upload response !! ", res);
 
                 axios
@@ -114,6 +115,7 @@ const addPostFB = (title, tagData, imageForm) => {
                     }
                   )
                   .then(function (res2) {
+                    console.log('addPostFB res !! ', res2);
                     // console.log('addPostFB res !! ', res2);
 
                     const post = {
@@ -125,6 +127,7 @@ const addPostFB = (title, tagData, imageForm) => {
                       user: res2.data.user,
                     };
 
+                    console.log('리듀서에 보낼 post !! ', post);
                     // console.log('리듀서에 보낼 post !! ', post);
 
                     dispatch(addPost(post));
@@ -148,18 +151,45 @@ const addPostFB = (title, tagData, imageForm) => {
 
 const getOnePostFB = (postId) => {
   return function(dispatch, getState, {history}){
+    console.log("postId !! ",postId);
     // console.log("postId !! ",postId);
 
     axios
-          .get(`/api/posts/detail/${postId}`)
-          .then(function (res) {
-            
-            dispatch(onePost(res.data));
-            
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+      .get(`/api/posts/detail/${postId}`)
+      .then(function (res) {
+
+        dispatch(onePost(res.data));
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+}
+
+
+const updateOnePostFB = (postId, title, tags) => {
+  return function(dispatch, getState, {history}) {
+    console.log("postid !! ", postId);
+    console.log("title !! ", title);
+    console.log("tags !! ", tags);
+
+    axios
+      .patch(`/api/post/${postId}`, 
+        {
+          title: title,
+          tags: tags,
+        }
+      )
+      .then(function (res) {
+
+        console.log('update res !! ', res);
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
   }
 }
@@ -180,8 +210,16 @@ export default handleActions (
           draft.list.unshift(action.payload.post);
         }),
 
+        // [LIKED_POST] : (state, action) => produce(state, (draft)=> {
+
+        // }),
+
         [ONE_POST] : (state, action) => produce(state, (draft)=> {
           draft.one_post = action.payload.one_post;
+        }),
+
+        [UPDATE_POST] : (state, action) => produce(state, (draft)=> {
+          
         }),
 
         [LIKE_POST] : (state, action) => produce(state, (draft)=> {
@@ -218,10 +256,13 @@ export default handleActions (
 
 const actionCreators = {
     setPost,
+    // likedPost,
     addPost,
     getPostFB,
+    // likedPostFB,
     addPostFB,
     getOnePostFB,
+    updateOnePostFB,
     likePost,
     // addLike,
     // deleteLike,
