@@ -3,6 +3,7 @@ import {history} from "../configureStore";
 import {produce} from "immer"
 import axios from "axios";
 import {actionCreators as imageActions} from "./image";
+import { filter } from "lodash";
 
 // 액션타입
 const SET_POST = "SET_POST"
@@ -11,6 +12,7 @@ const ADD_POST = "ADD_POST"
 const ONE_POST = "ONE_POST"
 const UPDATE_POST = "UPDATE_POST"
 
+const LIKE_POST = "LIKE_POST"
 
 // 액션 생성 함수
 const setPost = createAction(SET_POST, (post_list)=> ({post_list}))
@@ -18,6 +20,7 @@ const setPost = createAction(SET_POST, (post_list)=> ({post_list}))
 const addPost = createAction(ADD_POST, (post)=> ({post}))
 const onePost = createAction(ONE_POST, (one_post)=> ({one_post}));
 const updatePost = createAction(UPDATE_POST, (one_post)=> ({one_post}));
+const likePost = createAction(LIKE_POST, (post)=> ({post}));
 
 
 let createdAt = new Date()
@@ -71,6 +74,7 @@ const getPostFB = () => {
           .get("/api/posts")
           .then(function (response) {
             console.log('게시물조회',response.data);
+            // console.log('게시물조회',response.data);
             let postDB = response.data;
             
             post_list.push(...postDB)
@@ -97,6 +101,7 @@ const addPostFB = (title, tagData, imageForm) => {
     axios.post('/api/post/image',imageForm, // 미리 약속한 주소
             ).then(function (res) {
                 console.log("upload response !! ", res);
+                // console.log("upload response !! ", res);
 
                 axios
                   .post("/api/post/new",
@@ -111,6 +116,7 @@ const addPostFB = (title, tagData, imageForm) => {
                   )
                   .then(function (res2) {
                     console.log('addPostFB res !! ', res2);
+                    // console.log('addPostFB res !! ', res2);
 
                     const post = {
                       id: res2.data.id,
@@ -122,6 +128,7 @@ const addPostFB = (title, tagData, imageForm) => {
                     };
 
                     console.log('리듀서에 보낼 post !! ', post);
+                    // console.log('리듀서에 보낼 post !! ', post);
 
                     dispatch(addPost(post));
 
@@ -138,8 +145,6 @@ const addPostFB = (title, tagData, imageForm) => {
             .catch(function (error) {
                 console.log(error);
             });
-
-
   }
 }
 
@@ -147,6 +152,7 @@ const addPostFB = (title, tagData, imageForm) => {
 const getOnePostFB = (postId) => {
   return function(dispatch, getState, {history}){
     console.log("postId !! ",postId);
+    // console.log("postId !! ",postId);
 
     axios
       .get(`/api/posts/detail/${postId}`)
@@ -196,6 +202,7 @@ export default handleActions (
             draft.one_post = initialState.one_post;
 
             draft.list = action.payload.post_list;
+            console.log('draft', draft.list)
             
         }),
 
@@ -215,6 +222,33 @@ export default handleActions (
           
         }),
 
+        [LIKE_POST] : (state, action) => produce(state, (draft)=> {
+          console.log('반영전',draft.list)
+          draft.list = draft.list.map(target => {
+            if(target.id === action.payload.post.id) {
+              return action.payload.post;
+            } else {
+              return target;
+            }
+          })
+          console.log('좋아요반영확인', draft.list)
+        }),
+
+        // [ADD_LIKE] : (state, action) => produce(state, (draft)=> {
+        //   let target = draft.list.filter(target => {
+        //     return target.id === action.payload.post.id;
+        //   })
+        //   console.log('타겟포스트',target)
+        //   target.Likers.unshift(...action.payload.post.Likers);
+        // }),
+
+        // [DELETE_LIKE] : (state, action) => produce(state, (draft)=> {
+        //   let deleted = draft.list.Likers.filter(target => {
+        //     return target.id !== action.payload.post.Likers.id;
+        //   })
+        //   draft.list.Likers = deleted;
+        // }),
+
     }, initialState
 );
 
@@ -229,6 +263,9 @@ const actionCreators = {
     addPostFB,
     getOnePostFB,
     updateOnePostFB,
+    likePost,
+    // addLike,
+    // deleteLike,
 }
 
 export {actionCreators}
