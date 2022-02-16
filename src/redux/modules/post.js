@@ -9,6 +9,7 @@ const SET_POST = "SET_POST"
 // const LIKED_POST = "LIKED_POST"
 const ADD_POST = "ADD_POST"
 const ONE_POST = "ONE_POST"
+const UPDATE_POST = "UPDATE_POST"
 
 
 // 액션 생성 함수
@@ -16,6 +17,8 @@ const setPost = createAction(SET_POST, (post_list)=> ({post_list}))
 // const likedPost = createAction(LIKED_POST, (post_list)=> ({post_list}))
 const addPost = createAction(ADD_POST, (post)=> ({post}))
 const onePost = createAction(ONE_POST, (one_post)=> ({one_post}));
+const updatePost = createAction(UPDATE_POST, (one_post)=> ({one_post}));
+
 
 let createdAt = new Date()
 
@@ -146,15 +149,41 @@ const getOnePostFB = (postId) => {
     console.log("postId !! ",postId);
 
     axios
-          .get(`/api/posts/detail/${postId}`)
-          .then(function (res) {
-            
-            dispatch(onePost(res.data));
-            
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
+      .get(`/api/posts/detail/${postId}`)
+      .then(function (res) {
+
+        dispatch(onePost(res.data));
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+}
+
+
+const updateOnePostFB = (postId, title, tags) => {
+  return function(dispatch, getState, {history}) {
+    console.log("postid !! ", postId);
+    console.log("title !! ", title);
+    console.log("tags !! ", tags);
+
+    axios
+      .patch(`/api/post/${postId}`, 
+        {
+          title: title,
+          tags: tags,
+        }
+      )
+      .then(function (res) {
+
+        console.log('update res !! ', res);
+
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
   }
 }
@@ -182,6 +211,10 @@ export default handleActions (
           draft.one_post = action.payload.one_post;
         }),
 
+        [UPDATE_POST] : (state, action) => produce(state, (draft)=> {
+          
+        }),
+
     }, initialState
 );
 
@@ -195,6 +228,7 @@ const actionCreators = {
     // likedPostFB,
     addPostFB,
     getOnePostFB,
+    updateOnePostFB,
 }
 
 export {actionCreators}

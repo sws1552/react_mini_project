@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import styled from "styled-components";
 import {Button, Grid, Image, Input, Text} from "../elements"
 import Permit from "../shared/Permit";
@@ -17,17 +17,33 @@ const PostDetail = (props) => {
     
     const _userId = useSelector((state) => state.user.user.userID);
 
-    console.log('_userId !! ',_userId);
+    // console.log('_userId !! ',_userId);
 
     var one_post = useSelector((state) => state.post.one_post);
-    console.log("one_post !! ", one_post);
+    // console.log("one_post !! ", one_post);
 
     let _disabled = false;
     if(_userId !== one_post.user.userID) {
         _disabled = true;
     }
 
-    // console.log(_disabled);
+    const titleRef = useRef();
+    const tagRef = useRef([]);
+
+    const updatePostBtn = () => {
+
+        const tags = one_post.tags.reduce((acc, cur, i) => {
+            if(tagRef.current[i].value !== ''){
+                acc.push(tagRef.current[i].value);
+            }
+            return acc;
+        }, []);
+
+        const upTitle = titleRef.current.value;
+        
+        dispatch(postActions.updateOnePostFB(postId, upTitle, tags))
+
+    }
 
     
     return (
@@ -37,7 +53,7 @@ const PostDetail = (props) => {
             </Grid>
 
             <Grid padding="16px">
-                <Input _onChange={() => {}} placeholder="사진 제목" disabled={_disabled} defaultValue={one_post.title} />
+                <TitleInput placeholder="사진 제목" disabled={_disabled} defaultValue={one_post.title} ref={titleRef} />
             </Grid>
 
             <Grid padding="16px">
@@ -50,14 +66,16 @@ const PostDetail = (props) => {
                 <Text bold margin="0">tag</Text>
                 <Grid>
                 {one_post.tags.map((item, i) => {
-                    return <Taginput key={i} defaultValue={item.name} disabled={_disabled}/>
+                    return <Taginput key={i} 
+                    ref={el => (tagRef.current[i] = el)}
+                    defaultValue={item.name} disabled={_disabled}/>
                 })}
                 </Grid>
             </Grid>
 
             <Grid padding="16px" is_flex>
                 <Permit>
-                    <Button width="20%" displayNone={_disabled} _onClick={() => {}} text="수정하기" ></Button>
+                    <Button width="20%" displayNone={_disabled} _onClick={updatePostBtn} text="수정하기" ></Button>
                     <Button width="20%" displayNone={_disabled} _onClick={() => {}} text="삭제하기" ></Button>
                 </Permit>
                 <Button width="20%" _onClick={() => {
@@ -70,6 +88,12 @@ const PostDetail = (props) => {
 
 }
 
+const TitleInput = styled.input`
+    border: 1px solid #212121;
+    width: 100%;
+    padding: 12px 4px;
+    box-sizing: border-box;
+`;
 
 const Taginput = styled.input`
     margin-left: 10px;
