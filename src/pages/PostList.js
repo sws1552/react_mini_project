@@ -19,7 +19,8 @@ const PostList = (props) => {
   const like_list = useSelector((state)=> state.likes.list)
   const likeButton = useSelector((state)=>state.likes.click)
   const _user = useSelector((state)=>state.user.user)
-  // const _like = useSelector((state)=> state.likes)
+  
+  // likeButton 눌렀는지 확인 > true면 눌린거
   console.log('useS', likeButton)
   
 
@@ -27,13 +28,15 @@ const PostList = (props) => {
     // post_list가 0일 때만 getPostFB 하는거!
     // 이미 리스트 있을 때는 getPostFB 따로 안하고 기존에 있던 리덕스에서 불러옴
     // if(post_list.length === 0) {
-        // if(!likeButton){
+        if(!likeButton){
           dispatch(postActions.getPostFB());
-        // }
-        // else {
-        //   dispatch(likeActions.setLike());
-        // }
-}, []);
+        }
+        else {
+          console.log('클릭했음')
+          // dispatch(likeActions.setLike());
+        }
+      // }
+}, [likeButton]);
 
   // React.useEffect(() => {
   //   // post_list가 0일 때만 getPostFB 하는거!
@@ -51,27 +54,27 @@ const PostList = (props) => {
   return (
     <React.Fragment>
       {/* <Grid is_flex margin="30px 0px"> */}
-        {/* post_list에 있는 카드 수만큼 그려주기 */}
-        {/* {post_list.map((p, idx) => { */}
-          {/* <Grid _wrap is_flex> */}
-          <Postcards>
-            {post_list.map((e,idx) => {
-              return (
-                <Post
+      {/* post_list에 있는 카드 수만큼 그려주기 */}
+      {/* {post_list.map((p, idx) => { */}
+      {/* <Grid _wrap is_flex> */}
+
+        <Postcards>
+          {post_list.map((e, idx) => {
+            return (
+              <Post
                 _onClick={() => {
-                  history.push(`/detail/${e.id}`)
+                  history.push(`/detail/${e.id}`);
                 }}
-                  key={e.id}
-                  post={e}
-                />
-              )
-                
-            })}
+                key={e.id}
+                post={e}
+              />
+            );
+          })}
+        </Postcards>
 
 
-          </Postcards>
-          {/* </Grid> */}
-        {/* })} */}
+      {/* </Grid> */}
+      {/* })} */}
       {/* </Grid> */}
       <Permit>
         <Button

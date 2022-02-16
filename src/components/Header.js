@@ -10,6 +10,7 @@ import { Grid, Text, Button } from "../elements"
 const Header = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
+  const likeButton = useSelector((state)=>state.likes.click);
   const is_token = localStorage.getItem("token") ? true : false;
 
   const myLike = () => {

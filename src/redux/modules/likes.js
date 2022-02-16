@@ -104,7 +104,8 @@ export default handleActions (
         }),
 
         [CALL_LIKE] : (state, action) => produce(state, (draft)=> {
-          draft.click = true;
+          // draft.click이 true면 false, false면 true로 바꾸는거 작업 필요
+          draft.click = draft.click===true?false:true;
           console.log('버튼클릭 테스트', draft.click)
       }),
 

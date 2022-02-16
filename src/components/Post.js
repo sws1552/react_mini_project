@@ -18,8 +18,6 @@ const Post = ({post}) => {
   // const likers = useSelector((state)=>state.likes.list)
   const isLiking = post.Likers.find(liker => liker.id === _user.id)
  
-  // console.log(post)
-
   
   // const [islike, setlike] = React.useState(isLiking)
   
