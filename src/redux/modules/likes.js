@@ -10,7 +10,7 @@ const SET_LIKE = "SET_LIKE";
 const CALL_LIKE = "CALL_LIKE";
 
 // 액션 만들어줌
-const setLike = createAction(SET_LIKE,(post_list) => ({post_list}))
+// const setLike = createAction(SET_LIKE,(post_list) => ({post_list}))
 const callLike = createAction(CALL_LIKE,() => ({}))
 
 
@@ -82,8 +82,8 @@ const setLikeFB = () => {
         })
         .then(function (response) {
           console.log('setLIKE', response.data);
-          dispatch(setLike(response.data))
-        // 데이터 하나만 나옴
+          dispatch(postActions.setPost(response.data))
+
         })
         .catch(function (error) {
             console.log(error);
@@ -98,10 +98,10 @@ export default handleActions (
     {
 
         // 내가찜한사진
-        [SET_LIKE] : (state, action) => produce(state, (draft)=> {
-            draft.list = action.payload.post_list;
-            console.log('draft',draft.list)
-        }),
+        // [SET_LIKE] : (state, action) => produce(state, (draft)=> {
+        //     draft.list = action.payload.post_list;
+        //     console.log('draft',draft.list)
+        // }),
 
         [CALL_LIKE] : (state, action) => produce(state, (draft)=> {
           // draft.click이 true면 false, false면 true로 바꾸는거 작업 필요
@@ -118,7 +118,7 @@ export default handleActions (
 
 const actionCreators = {
     likePostFB,
-    setLike,
+    // setLike,
     setLikeFB,
     deleteLikeFB,
     callLike,

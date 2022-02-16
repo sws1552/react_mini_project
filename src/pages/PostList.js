@@ -29,11 +29,12 @@ const PostList = (props) => {
     // 이미 리스트 있을 때는 getPostFB 따로 안하고 기존에 있던 리덕스에서 불러옴
     // if(post_list.length === 0) {
         if(!likeButton){
+          console.log('전체사진볼거야')
           dispatch(postActions.getPostFB());
         }
         else {
-          console.log('클릭했음')
-          // dispatch(likeActions.setLike());
+          console.log('내가찜한사진볼거야')
+          dispatch(likeActions.setLikeFB());
         }
       // }
 }, [likeButton]);
@@ -54,20 +55,21 @@ const PostList = (props) => {
   return (
     <React.Fragment>
       {/* <Grid is_flex margin="30px 0px"> */}
-      {/* post_list에 있는 카드 수만큼 그려주기 */}
-      {/* {post_list.map((p, idx) => { */}
-      {/* <Grid _wrap is_flex> */}
 
-        <Postcards>
+          <Postcards>
           {post_list.map((e, idx) => {
             return (
-              <Post
-                _onClick={() => {
-                  history.push(`/detail/${e.id}`);
-                }}
-                key={e.id}
-                post={e}
-              />
+              // <Items key={idx}>
+                // <Figure>
+                  <Post
+                    _onClick={() => {
+                      history.push(`/detail/${e.id}`);
+                    }}
+                    key={e.id}
+                    post={e}
+                  />
+              // </Figure>
+              // </Items>
             );
           })}
         </Postcards>
@@ -93,16 +95,34 @@ const PostList = (props) => {
 
 // 카드 나타나는 전체 넓이
 const Postcards = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
-  margin: auto;
+  // display: flex;
+  // flex-wrap: wrap;
+  // justify-content: center;
+  // width: 100%;
+  // margin: auto;
 
-  // display: grid;
-  // grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 30px;
 
+  column-count: 4;
+  column-gap: 1em;
 
+  
+
+  
 `
+
+
+// const Items = styled.div`
+// display: flex;
+// justify-content: center;
+// margin-bottom: 1em;
+// cursor: pointer; `;
+
+// const Figure = styled.div`
+// display: inline-block;
+
+// `;
+
+
 
 export default PostList;

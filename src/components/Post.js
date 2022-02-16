@@ -116,36 +116,55 @@ Post.defaultProps = {
 
 // 포스트 전체크기
 const Postcard = styled.div`
-    margin:30px 8px 8px 8px;
-    width: 20%;
-    min-width: 200px;
+    // margin:30px 8px 8px 8px;
+    // width: 20%;
+    // min-width: 200px;
+    // border-radius: 15px;
+    // box-shadow: 4px 4px 10px 2px #dadada;
+    // background-color: white;
+    // height: auto;
+
     border-radius: 15px;
-    box-shadow: 4px 4px 10px 2px #dadada;
+    margin-bottom:1rem;
     background-color: white;
-    height: auto;
 
 `
+
+
 // 하트포함 이미지
 const ImageBox = styled.div`
 position: relative;
 
+display: inline-flex;
+width: 100%;
+border-radius: 10px;
+overflow: hidden;
+
+    
 :hover {
   cursor:pointer;
+  box-shadow: rgba(0,0,0,0.2) 0 0 10px 3px;
 }
+
 
 `
 
 // 이미지 크기
 const PostImage = styled.img`
-    // position: relative;
-    width: 100%;
-    min-height: 100px;
-    height: auto;
-    border-radius: 15px;
 
-    :hover {
-      transition: all 0.3s ease-in;
-    }
+    // width: 100%;
+    // min-height: 100px;
+    // height: auto;
+    // border-radius: 15px;
+
+    // :hover {
+    //   transition: all 0.3s ease-in;
+    // }
+
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+
 
 `
 
