@@ -16,7 +16,7 @@ const Post = ({post}) => {
   const dispatch = useDispatch();
   const _user = useSelector((state)=>state.user.user)
   // const likers = useSelector((state)=>state.likes.list)
-  const isLiking = post.Likers.find(liker => liker.id === _user.id)
+  const isLiking = post.Likers!==undefined ? post.Likers.find(liker => liker.id === _user.id) : null
  
   
   // const [islike, setlike] = React.useState(isLiking)
@@ -120,6 +120,7 @@ const Postcard = styled.div`
 border-radius: 15px;
 margin-bottom:1rem;
 background-color: white;
+// 줄바꿈 방지
 display:inline-block;
 
 
@@ -129,7 +130,6 @@ display:inline-block;
 // 하트포함 이미지
 const ImageBox = styled.div`
 position: relative;
-
 display: inline-flex;
 width: 100%;
 border-radius: 10px;
