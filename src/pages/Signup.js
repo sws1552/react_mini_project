@@ -75,9 +75,9 @@ const Signup = (props) => {
 
         if (id === '') {
           window.alert('아이디를 입력 후 중복확인을 진행해주세요')
-        } else if (id !== undefined) {
+        } 
           dispatch(userActions.idCheckingFB(id));
-        }
+          // console.log(id)
         
 
     }
