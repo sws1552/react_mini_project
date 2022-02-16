@@ -200,6 +200,33 @@ const updateOnePostFB = (postId, title, tags) => {
 }
 
 
+const deleteOnePostFB = (postId) => {
+  return function(dispatch, getState, {history}) {
+    
+    axios
+        .delete(`/api/post/${postId}`, 
+        {
+            headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        })
+        .then(function (response) {
+          console.log('delete res !! ',response);
+        
+          history.replace('/');
+          
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+  }
+}
+
+
+
+
+
 
 export default handleActions (
     {
@@ -269,6 +296,7 @@ const actionCreators = {
     getOnePostFB,
     updateOnePostFB,
     likePost,
+    deleteOnePostFB,
     // addLike,
     // deleteLike,
 }
