@@ -16,9 +16,7 @@ const PostList = (props) => {
 
   const dispatch = useDispatch();
   const post_list = useSelector((state)=> state.post.list)
-  const like_list = useSelector((state)=> state.likes.list)
   const likeButton = useSelector((state)=>state.likes.click)
-  const _user = useSelector((state)=>state.user.user)
   
   // likeButton 눌렀는지 확인 > true면 눌린거
   console.log('useS', likeButton)
@@ -27,14 +25,14 @@ const PostList = (props) => {
   React.useEffect(() => {
     // post_list가 0일 때만 getPostFB 하는거!
     // 이미 리스트 있을 때는 getPostFB 따로 안하고 기존에 있던 리덕스에서 불러옴
-    // if(post_list.length === 0) {
+    if(post_list.length === 0) {
         if(!likeButton){
           dispatch(postActions.getPostFB());
         }
         else {
           dispatch(likeActions.setLikeFB());
         }
-      // }
+      }
 }, [likeButton]);
 
 
@@ -81,24 +79,9 @@ const PostList = (props) => {
 
 // 카드 나타나는 전체 넓이
 const Postcards = styled.div`
-
+  
   column-count: 4;
   column-gap: 1em;
   
 `
-
-
-// const Items = styled.div`
-// display: flex;
-// justify-content: center;
-// margin-bottom: 1em;
-// cursor: pointer; `;
-
-// const Figure = styled.div`
-// display: inline-block;
-
-// `;
-
-
-
 export default PostList;

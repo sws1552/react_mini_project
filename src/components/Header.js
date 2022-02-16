@@ -38,6 +38,7 @@ const Header = (props) => {
             margin="0px"
             size="20px"
             bold
+            hover 
             _onClick={() => {
               history.replace("/");
               dispatch(postActions.getPostFB());

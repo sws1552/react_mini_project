@@ -10,7 +10,6 @@ import { history } from "../redux/configureStore";
 import { batch } from 'react-redux'
 
 import Badge from 'react-bootstrap/Badge'
-import { BsColumns, BsHeart, BsHeartFill } from "react-icons/bs";
 import { TiHeartOutline, TiHeart } from "react-icons/ti";
 
 import '../shared/App.css';
@@ -19,7 +18,7 @@ const Post = ({post}) => {
   const dispatch = useDispatch();
   const _user = useSelector((state)=>state.user.user)
   const isLiking = post.Likers!==undefined ? post.Likers.find(liker => liker.id === _user.id) : null
- 
+  // console.log(post)
 
   let likeButton = () => {
       
@@ -46,28 +45,27 @@ const Post = ({post}) => {
               }}
               src={post.imageUrl}
               ></PostImage>
-            {/* 하트 클릭 시 색깔 변경, 데이터 속성 넘겨주기 */}
-            {/* 삼항연산자 써서 해야하나? */}
 
-              {/* useSelector로 받아온 liked가 true/false이냐에 따라서 나누면 될 듯 */}
-            {!isLiking?
-            // 빈하트
-            <TiHeartOutline
-              onClick={likeButton}
-              style={{ position: "absolute", fontSize:"2.5rem", top:"10px", right:"10px", zIndex: "1", color:"white"}} />
-              :
-               // 채워진
-              <TiHeart
-              onClick={dislikeButton}
-              style={{ position: "absolute", fontSize:"2.5rem", top:"10px", right:"10px", zIndex: "1", color:"red",}} />
-             }
-
+            <Heart>
+              {!isLiking?
+              // 빈하트
+              <TiHeartOutline
+                onClick={likeButton}
+                style={{ position: "absolute", fontSize:"2.5rem", top:"10px", right:"10px", zIndex: "1", color:"white"}} />
+                :
+                // 채워진
+                <TiHeart
+                onClick={dislikeButton}
+                style={{ position: "absolute", fontSize:"2.5rem", top:"10px", right:"10px", zIndex: "1", color:"red",}} />
+              }
+            </Heart>
 
           </ImageBox>
           {/* 태그 map*/}
 
 
-          <div style={{padding:"15px"}}>
+          <div style={{padding:"10px 15px 15px 15px"}}>
+          <Text size="12px" margin="0px"><TiHeart />{post.Likers.length}</Text>
           <Text margin="0px" bold>
             {post.title}
           </Text>
@@ -88,7 +86,7 @@ const Post = ({post}) => {
                   bg="dark"
                   key={idx}
                   style={{
-                    margin: "2px",
+                    margin: "7px 2px 2px 2px",
                     padding: "6px 10px",
                     fontSize: "0.8rem",
                     fontFamily: "Pretendard-Thin"
@@ -137,25 +135,22 @@ overflow: hidden;
   box-shadow: rgba(0,0,0,0.2) 0 0 10px 3px;
 }
 
+`
+const Heart = styled.div`
+
+
+`
+const Count = styled.p`
+z-index:1
 
 `
 
 // 이미지 크기
 const PostImage = styled.img`
 
-    // width: 100%;
-    // min-height: 100px;
-    // height: auto;
-    // border-radius: 15px;
-
-    // :hover {
-    //   transition: all 0.3s ease-in;
-    // }
-
     width: 100%;
     height: 100%;
     object-fit: cover;
-
 
 `
 
