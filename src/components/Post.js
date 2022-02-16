@@ -116,17 +116,12 @@ Post.defaultProps = {
 
 // 포스트 전체크기
 const Postcard = styled.div`
-    // margin:30px 8px 8px 8px;
-    // width: 20%;
-    // min-width: 200px;
-    // border-radius: 15px;
-    // box-shadow: 4px 4px 10px 2px #dadada;
-    // background-color: white;
-    // height: auto;
 
-    border-radius: 15px;
-    margin-bottom:1rem;
-    background-color: white;
+border-radius: 15px;
+margin-bottom:1rem;
+background-color: white;
+display:inline-block;
+
 
 `
 
