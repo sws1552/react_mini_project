@@ -48,22 +48,22 @@ const signupFB = (id, pwd, nickname) => {
 }
 
 // 회원가입 시 아이디 중복 확인
-const idCheckingFB = (id) => {
-  axios.post('/api/user/check',
-    {userID:id},
-    )
-  .then(function(response) {
-    console.log(response);
-    if (response.data.msg === '가입가능') {
-      window.alert('사용 가능한 ID입니다')
-    } else if (response.data.errorMessage==="이미 있는 아이디입니다."){
-      window.alert(response.data.errorMessage)
-    };
-  })
-  .catch(function (error) {
-    console.log(error);
-  });
-}
+// const idCheckingFB = (id) => {
+//   axios.post('/api/user/check',
+//     {userID:id},
+//     )
+//   .then(function(response) {
+//     console.log(response);
+//     if (response.data.msg === '가입가능') {
+//       window.alert('사용 가능한 ID입니다')
+//     } else if (response.data.errorMessage==="이미 있는 아이디입니다."){
+//       window.alert(response.data.errorMessage)
+//     };
+//   })
+//   .catch(function (error) {
+//     console.log(error);
+//   });
+// }
 
 
 // 로그인 된 상태인지 확인
@@ -179,7 +179,7 @@ const actionCreators = {
     logOut,
     getUser,
     signupFB,
-    idCheckingFB,
+    // idCheckingFB,
     loginFB,
     logoutFB,
     loginCheckFB,

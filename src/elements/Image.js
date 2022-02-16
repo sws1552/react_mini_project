@@ -41,7 +41,6 @@ Image.defaultProps = {
 const AspectOutter = styled.div`
     width: 100%;
     min-width: 250px;
-    // ${(props) => (props.hover? `&:hover: ba;` : '')}
 `;
 
 const AspectInner = styled.div`
@@ -53,7 +52,7 @@ const AspectInner = styled.div`
     background-position: center;
     ${(props) => (props.width? `width: ${props.width};` : '')}
     border-radius: 5%;
-    box-shadow: 3px 3px 3px 3px gray;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
 
 `;
 

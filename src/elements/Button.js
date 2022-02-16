@@ -3,12 +3,12 @@ import styled from "styled-components";
 
 
 const Button = (props) => {
-  const { text, _onClick, is_float, children, margin, padding, width, disabled, radius, displayNone } = props;
+  const { text, _onClick, is_float, children, margin, padding, width, disabled, radius, displayNone} = props;
 
   if (is_float) {
     return (
       <React.Fragment>
-        <FloatButton onClick={_onClick}>{text? text : children}</FloatButton>
+        <FloatButton onClick={_onClick} >{text? text : children}</FloatButton>
       </React.Fragment>
     );
   }
@@ -52,14 +52,15 @@ const ElButton = styled.button`
   ${(props) => (props.radius? `border-radius: ${props.radius};` : '')}
   ${(props) => (props.margin? `margin: ${props.margin};` : '')}
   ${(props) => (props.displayNone ? 'display: none;' : "")}
-  border-radius: 20px;
+  border-radius: 30px;
   transition: 0.2s;
-  box-shadow: 1px 1px 1px 1px gray;
+  box-shadow: rgba(0,0,0,0.2) 0 0 10px 2px;
 
   :hover {
     cursor: pointer;
     background: red;
     transition: background 0.2s
+    box-shadow: rgba(0.2,0,0,0) 0 0 10px 2px;
   }
 `;
 
@@ -81,6 +82,7 @@ const FloatButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 3;
 
   :hover {
     cursor: pointer;

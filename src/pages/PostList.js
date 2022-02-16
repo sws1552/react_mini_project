@@ -39,18 +39,6 @@ const PostList = (props) => {
       // }
 }, [likeButton]);
 
-  // React.useEffect(() => {
-  //   // post_list가 0일 때만 getPostFB 하는거!
-  //   // 이미 리스트 있을 때는 getPostFB 따로 안하고 기존에 있던 리덕스에서 불러옴
-  //   // if(post_list.length === 0) {
-  //       // if(!likeButton){
-  //         // dispatch(postActions.getPostFB());
-  //       // }
-  //       // else {
-  //         dispatch(likeActions.setLikeFB());
-  //       // }
-  // }, []);
-
 
   return (
     <React.Fragment>
@@ -95,7 +83,6 @@ const PostList = (props) => {
 
 // 카드 나타나는 전체 넓이
 const Postcards = styled.div`
-  margin-top: 30px;
 
   column-count: 4;
   column-gap: 1em;

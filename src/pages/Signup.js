@@ -7,6 +7,7 @@ import { Text, Input, Grid, Button } from "../elements";
 import { useDispatch } from "react-redux"
 import { actionCreators as userActions } from "../redux/modules/user"
 import { idCheck, passwordCheck } from "../shared/common";
+import axios from "axios";
 
 
 const Signup = (props) => {
@@ -69,16 +70,29 @@ const Signup = (props) => {
 
     }
 
-
+    
       const idChecking = () => {
         // console.log(id)
 
         if (id === '') {
           window.alert('아이디를 입력 후 중복확인을 진행해주세요')
         } 
-          dispatch(userActions.idCheckingFB(id));
+          // dispatch(userActions.idCheckingFB(id));
           // console.log(id)
-        
+          axios.post('/api/user/check',
+            {userID:id},
+            )
+          .then(function(response) {
+            console.log(response);
+            if (response.data.msg === '가입가능') {
+              window.alert('사용 가능한 ID입니다')
+            } else if (response.data.errorMessage==="이미 있는 아이디입니다."){
+              window.alert(response.data.errorMessage)
+            };
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
 
     }
     
@@ -91,7 +105,7 @@ const Signup = (props) => {
                 회원가입 정보 작성
             </Text>
 
-          <Grid padding="16px" base_align>
+          <Grid padding="16px" flex_end>
             <Input
             label="아이디"
             placeholder="숫자 혹은 영어로만 4글자 이상 20글자 이하로 입력해주세요"

@@ -52,6 +52,7 @@ const PostDetail = (props) => {
     
     return (
         <React.Fragment>
+            <Container>
             <Grid padding="16px">
                 <Text margin="0px" size="36px" bold>상세페이지</Text>
             </Grid>
@@ -77,7 +78,7 @@ const PostDetail = (props) => {
                 </Grid>
             </Grid>
 
-            <Grid padding="16px" is_flex>
+            <Grid padding="16px" flex_basic>
                 <Permit>
                     <Button width="20%" displayNone={_disabled} _onClick={updatePostBtn} text="수정하기" ></Button>
                     <Button width="20%" displayNone={_disabled} _onClick={deletePostBtn} text="삭제하기" ></Button>
@@ -86,18 +87,35 @@ const PostDetail = (props) => {
                     props.history.replace('/');
                 }} text="돌아가기" ></Button>
             </Grid>
+            </Container>
         </React.Fragment>
     )
     
 
 }
 
-const TitleInput = styled.input`
-    border: 1px solid #212121;
-    width: 100%;
-    padding: 12px 4px;
-    box-sizing: border-box;
+const Container = styled.div`
+    width: 50%;
+    margin: 0px auto 50px auto;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
+    padding: 30px;
     border-radius: 20px;
+`;
+
+
+const TitleInput = styled.input`
+border: 1px solid #eee;
+width: 100%;
+padding: 12px 10px;
+box-sizing: border-box;
+border-radius: 20px;
+box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 5px 0px;
+background-color: white;
+
+&:focus{
+  outline: none;
+  box-shadow: 0 0 0 3px #9E56EB;
+}
 `;
 
 const Taginput = styled.input`

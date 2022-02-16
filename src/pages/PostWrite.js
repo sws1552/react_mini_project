@@ -159,9 +159,10 @@ const PostWrite = (props) => {
 }
 
 const Container = styled.div`
-    width: 70%;
-    margin: auto;
-    border: 3px solid white;
+    width: 50%;
+    margin: 0px auto 50px auto;
+    // border: 1px solid white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 20px 0px;
     padding: 30px;
     border-radius: 20px;
 `;
@@ -174,7 +175,7 @@ const TagInput = styled.input`
     width: 15%;
     text-align: center;
     border-radius: 20px;
-    box-shadow: 3px 3px 3px 3px gray;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 5px 0px;
     &:focus{
         outline: none;
         box-shadow: 0 0 0 3px #9E56EB;

@@ -48,12 +48,12 @@ const ElTextarea = styled.textarea`
 
 
 const ElInput = styled.input`
-  border: 1px solid #212121;
+  border: 1px solid #eee;
   width: 100%;
-  padding: 12px 4px;
+  padding: 12px 10px;
   box-sizing: border-box;
   border-radius: 20px;
-  box-shadow: 3px 3px 3px 3px gray;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 5px 0px;
 
   &:focus{
     outline: none;

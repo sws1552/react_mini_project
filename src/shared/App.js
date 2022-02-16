@@ -59,7 +59,7 @@ function App() {
 
 const Background = styled.div`
 // vh,vw는 부모 상관없이 브라우저 넓이에 따라 결정
-  min-height: 100vh;
+  min-height: 120vh;
   height: 100%;
   width: 100vw;
   background-color: #eee;

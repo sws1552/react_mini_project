@@ -22,7 +22,7 @@ const Header = (props) => {
     return (
       // 로그인 되어 있을 때
       <React.Fragment>
-        <Grid padding="5px 20px" is_flex bg="#FFFFFF">
+        <Grid padding="5px 20px" margin="0px 0px 50px 0px" is_flex bg="#FFFFFF">
           
           <Grid>
             <Text margin="0px" size="20px" bold>
@@ -30,7 +30,7 @@ const Header = (props) => {
             </Text>
           </Grid>
 
-          <Grid flex_basic>
+          <Grid flex_end>
             {/* toggle 사용하면 될 듯
             내가찜한사진 클릭 > likedPostFB
             한번 더 클릭 > getPostFB*/}
@@ -61,7 +61,7 @@ const Header = (props) => {
             </Text>
           </Grid>
 
-          <Grid flex_basic>
+          <Grid flex_end>
             <Button
               radius="100px"
               width="130px"

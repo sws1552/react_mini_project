@@ -4,7 +4,7 @@ import isNull from "redux-actions/lib/utils/isNull";
 import styled from "styled-components";
 
 const Grid = (props) => {
-  const { is_flex, width, margin, padding, bg, children, center, _wrap, tag_flex, flex_basic, base_align} = props;
+  const { is_flex, width, margin, padding, bg, children, center, _wrap, tag_flex, flex_basic, flex_end, alignItems} = props;
 
 
   const styles = {
@@ -17,7 +17,8 @@ const Grid = (props) => {
       center: center,
       _wrap: _wrap,
       tag_flex: tag_flex,
-      base_align: base_align,
+      flex_end: flex_end,
+      alignItems: alignItems,
   };
   return (
     <React.Fragment>
@@ -30,7 +31,7 @@ Grid.defaultProps = {
   chidren: null,
   is_flex: false,
   flex_basic: false,
-  base_align: false,
+  flex_end: false,
   width: "100%",
   padding: false,
   margin: false,
@@ -38,6 +39,7 @@ Grid.defaultProps = {
   center: false,
   _wrap: null,
   tag_flex: false,
+  alignItems: '',
 };
 
 const GridBox = styled.div`
@@ -52,13 +54,14 @@ const GridBox = styled.div`
       ? `display: flex; align-items: center; justify-content: space-between;`: "")}
   ${(props) =>
     (props.flex_basic
-      ? `display: flex; align-items: center; justify-content: end`: "")}
-  ${(props) => (props.base_align ? 
+      ? `display: flex; align-items: center; justify-content: center`: "")}
+  ${(props) => (props.flex_end ? 
     `display: flex; align-items: flex-end; justify-content: end`: "")}
   
   ${(props) => (props.center ? `text-align: center` : '')}
   ${(props) => (props._wrap ? `flex-flow: wrap` : '')}
   ${(props) => (props.tag_flex ? `display: flex` : "" )}
+  ${(props) => (props.alignItems ? `align-items: ${props.alignItems}` : "" )}
   
 `
   
