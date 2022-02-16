@@ -14,7 +14,10 @@ import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import PostWrite from '../pages/PostWrite';
 import PostDetail from "../pages/PostDetail";
+import Masonry from "react-masonry-css";
+import "./styles.css";
 import './App.css';
+
 
 
 
@@ -34,7 +37,7 @@ function App() {
 
   return (
     <React.Fragment>
-      
+
       {/* <Grid width="60%" margin ="auto"> */}
       <Background>
         <Header></Header>
@@ -49,7 +52,7 @@ function App() {
             </ConnectedRouter>
           </Container>
         </Background>
-        
+
         {/* </Grid> */}
       
     </React.Fragment>
