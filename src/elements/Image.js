@@ -52,7 +52,7 @@ const AspectInner = styled.div`
     background-size: cover;
     background-position: center;
     ${(props) => (props.width? `width: ${props.width};` : '')}
-
+    border-radius: 5%;
 
 `;
 
