@@ -2,7 +2,8 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {actionCreators as imageActions} from "../redux/modules/image";
 
-import {Button} from "../elements";
+import {Button, Image} from "../elements";
+import styled from "styled-components";
 
 
 
@@ -25,13 +26,32 @@ const Upload = (props) => {
 
     return (
         <React.Fragment>
-            
-            <input type="file" onChange={selectfile} ref={props._ref}/>
+            <Label htmlFor="ex_file">
+                <Image shape="rectangle" src={props.preview ? props.preview : "https://wpi.digication.com/srvs/filemanager/campus/jDt5abnGTNWMW3zpvKz5/resize=fit:crop,align:center,width:1182,height:667/compress/cache?access_token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnQiOiJjYW1wdXMiLCJrZXkiOiJqRHQ1YWJuR1ROV01XM3pwdkt6NSIsImV4cCI6OTk5OTk5OTk5OX0.UJ6s9UfmkeztKB_VajDR7LD1aOvLSrtPLz-gfi5I2_M"}></Image>
+            </Label>
+
+            <FileInput id="ex_file" accept="image/jpg, image/png, image/jpeg" type="file" onChange={selectfile} ref={props._ref}/>
+
             {/* <Button _onClick={() => {}}>업로드</Button> */}
         </React.Fragment>
     )
 }
 
+const Label = styled.label`
+    cursor: pointer;
+    width: 100%;
+`;
+
+const FileInput = styled.input`
+    position: absolute;
+    width: 0;
+    height: 0;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+`;
 
 
 export default Upload;
