@@ -55,6 +55,8 @@ const ElButton = styled.button`
 
   :hover {
     cursor: pointer;
+    background: red;
+    transition: background 0.2s
   }
 `;
 
