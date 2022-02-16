@@ -23,29 +23,29 @@ const PostList = (props) => {
   console.log('useS', likeButton)
   
 
-//   React.useEffect(() => {
-//     // post_list가 0일 때만 getPostFB 하는거!
-//     // 이미 리스트 있을 때는 getPostFB 따로 안하고 기존에 있던 리덕스에서 불러옴
-//     // if(post_list.length === 0) {
-//         // if(!likeButton){
-//           dispatch(postActions.getPostFB());
-//         // }
-//         // else {
-//         //   dispatch(likeActions.setLike());
-//         // }
-// }, []);
-
   React.useEffect(() => {
     // post_list가 0일 때만 getPostFB 하는거!
     // 이미 리스트 있을 때는 getPostFB 따로 안하고 기존에 있던 리덕스에서 불러옴
     // if(post_list.length === 0) {
         // if(!likeButton){
-          // dispatch(postActions.getPostFB());
+          dispatch(postActions.getPostFB());
         // }
         // else {
-          dispatch(likeActions.setLikeFB());
+        //   dispatch(likeActions.setLike());
         // }
-  }, []);
+}, []);
+
+  // React.useEffect(() => {
+  //   // post_list가 0일 때만 getPostFB 하는거!
+  //   // 이미 리스트 있을 때는 getPostFB 따로 안하고 기존에 있던 리덕스에서 불러옴
+  //   // if(post_list.length === 0) {
+  //       // if(!likeButton){
+  //         // dispatch(postActions.getPostFB());
+  //       // }
+  //       // else {
+  //         dispatch(likeActions.setLikeFB());
+  //       // }
+  // }, []);
 
 
   return (
@@ -55,7 +55,7 @@ const PostList = (props) => {
         {/* {post_list.map((p, idx) => { */}
           {/* <Grid _wrap is_flex> */}
           <Postcards>
-            {like_list.map((e,idx) => {
+            {post_list.map((e,idx) => {
               return (
                 <Post
                 _onClick={() => {
