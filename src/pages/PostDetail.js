@@ -45,6 +45,10 @@ const PostDetail = (props) => {
 
     }
 
+    const deletePostBtn = () => {
+        dispatch(postActions.deleteOnePostFB(postId));
+    }
+
     
     return (
         <React.Fragment>
@@ -76,7 +80,7 @@ const PostDetail = (props) => {
             <Grid padding="16px" is_flex>
                 <Permit>
                     <Button width="20%" displayNone={_disabled} _onClick={updatePostBtn} text="수정하기" ></Button>
-                    <Button width="20%" displayNone={_disabled} _onClick={() => {}} text="삭제하기" ></Button>
+                    <Button width="20%" displayNone={_disabled} _onClick={deletePostBtn} text="삭제하기" ></Button>
                 </Permit>
                 <Button width="20%" _onClick={() => {
                     props.history.replace('/');
