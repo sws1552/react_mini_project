@@ -6,15 +6,17 @@ import axios from "axios";
 
 // 액션타입 만들어줌
 const LIKE_POST = "LIKE_POST";
-const LIKE_SET = "LIKE_SET";
+const SET_LIKE = "SET_LIKE";
+const CALL_LIKE = "CALL_LIKE";
 
 // 액션 만들어줌
-const likePost = createAction(LIKE_POST,(post_id, user_id,likers) => ({post_id, user_id,likers}))
-const setLike = createAction(LIKE_SET,(post_list) => ({post_list}))
+const setLike = createAction(SET_LIKE,(post_list) => ({post_list}))
+const callLike = createAction(CALL_LIKE,() => ({}))
 
 
 const initialState = {
     list:[{postId:"postid", id:"user_id", like:false}],
+    click:false,
 };
 
 
@@ -72,53 +74,39 @@ const deleteLikeFB = (postId) => {
 
 const setLikeFB = () => {
     return function (dispatch, getState, {history}) {
-        // axios.get
-        // 헤더도 있어야 할 듯
+        axios
+        .get('/api/posts/likes', {
+            headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        })
+        .then(function (response) {
+          console.log('setLIKE', response.data);
+          dispatch(setLike(response.data))
+        // 데이터 하나만 나옴
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
     }
-}
+    }
 
 
 // 리듀서
 export default handleActions (
     {
-        // 찜등록/해제
-        // [LIKE_POST] : (state, action) => produce(state, (draft)=> {
-        //     // console.log('데이터 확인', {...action.payload.user_id, like:false})
-        //     // console.log('전체리스트', action.payload.likers)
-        //     // console.log('현재유저', action.payload.user_id.id)
-
-        //     let target_list = action.payload.likers.filter( e => {
-        //         return parseInt(e.id) === action.payload.user_id.id
-        //     }
-            
-        //     )
-        //     console.log('일치여부', target_list.length)
-
-        //     if(target_list.length > 0) {
-        //         draft.list.push({...action.payload.post_id, ...action.payload.user_id, like:true})
-        //         console.log("true테스트")
-        //     } else {
-        //         draft.list.push({...action.payload.post_id, ...action.payload.user_id, like:false})
-        //         console.log("false테스트")
-        //     }
-
-        //     // if(action.payload.likers.includes(action.payload.user_id)===true) {
-        //     //     draft.list = [{...action.payload.post_id, ...action.payload.user_id, like:true}]
-        //     //     console.log("true테스트")
-        //     // } else {
-        //     //     draft.list = [{...action.payload.post_id, ...action.payload.user_id, like:false}]
-        //     //     console.log("false테스트")
-        //     // }
-        //     // likers에 user_id 없으면 initialState>like>false -> useSelector빈칸(좋아요X)
-        //     // draft.like = false
-        //     // likers에 user_id 있으면 initialState>like>false -> useSelector색깔(좋아요O)
-        //     // draft.like = true
-        // }),
 
         // 내가찜한사진
-        [LIKE_SET] : (state, action) => produce(state, (draft)=> {
-
+        [SET_LIKE] : (state, action) => produce(state, (draft)=> {
+            draft.list = action.payload.post_list;
+            console.log('draft',draft.list)
         }),
+
+        [CALL_LIKE] : (state, action) => produce(state, (draft)=> {
+          draft.click = true;
+          console.log('버튼클릭 테스트', draft.click)
+      }),
 
 
     }, initialState
@@ -128,11 +116,11 @@ export default handleActions (
 
 
 const actionCreators = {
-    likePost,
     likePostFB,
     setLike,
     setLikeFB,
     deleteLikeFB,
+    callLike,
 }
 
 export {actionCreators};

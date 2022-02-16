@@ -3,6 +3,7 @@ import { history } from "../redux/configureStore";
 import { useSelector, useDispatch } from "react-redux";
 
 import { actionCreators as userActions } from "../redux/modules/user"
+import { actionCreators as likeActions } from "../redux/modules/likes"
 import { Grid, Text, Button } from "../elements"
 
 
@@ -10,6 +11,11 @@ const Header = (props) => {
   const dispatch = useDispatch();
   const is_login = useSelector((state) => state.user.is_login);
   const is_token = localStorage.getItem("token") ? true : false;
+
+  const myLike = () => {
+    dispatch(likeActions.callLike());
+  }
+
 
   if (is_login && is_token) {
     return (
@@ -28,6 +34,7 @@ const Header = (props) => {
             내가찜한사진 클릭 > likedPostFB
             한번 더 클릭 > getPostFB*/}
             <Button
+              _onClick={myLike}
               radius="100px"
               width="120px"
               margin="3px">내가찜한사진</Button>

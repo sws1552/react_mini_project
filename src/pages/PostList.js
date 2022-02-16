@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import { history } from "../redux/configureStore";
 import { actionCreators as postActions } from "../redux/modules/post";
+import { actionCreators as likeActions } from "../redux/modules/likes";
 import { Text, Input, Grid, Button } from "../elements";
 import Permit from "../shared/Permit";
 
@@ -15,20 +16,37 @@ const PostList = (props) => {
 
   const dispatch = useDispatch();
   const post_list = useSelector((state)=> state.post.list)
+  const like_list = useSelector((state)=> state.likes.list)
+  const likeButton = useSelector((state)=>state.likes.click)
   const _user = useSelector((state)=>state.user.user)
   // const _like = useSelector((state)=> state.likes)
+  console.log('useS', likeButton)
+  
 
+//   React.useEffect(() => {
+//     // post_list가 0일 때만 getPostFB 하는거!
+//     // 이미 리스트 있을 때는 getPostFB 따로 안하고 기존에 있던 리덕스에서 불러옴
+//     // if(post_list.length === 0) {
+//         // if(!likeButton){
+//           dispatch(postActions.getPostFB());
+//         // }
+//         // else {
+//         //   dispatch(likeActions.setLike());
+//         // }
+// }, []);
 
   React.useEffect(() => {
     // post_list가 0일 때만 getPostFB 하는거!
     // 이미 리스트 있을 때는 getPostFB 따로 안하고 기존에 있던 리덕스에서 불러옴
     // if(post_list.length === 0) {
-        // dispatch(postActions.getPostFB());
-        dispatch(postActions.getPostFB());
-        
-    // }
-// 처음 페이지 켰을 때 한번만 불러오기 때문에 빈 배열
-}, []);
+        // if(!likeButton){
+          // dispatch(postActions.getPostFB());
+        // }
+        // else {
+          dispatch(likeActions.setLikeFB());
+        // }
+  }, []);
+
 
   return (
     <React.Fragment>
@@ -37,7 +55,7 @@ const PostList = (props) => {
         {/* {post_list.map((p, idx) => { */}
           {/* <Grid _wrap is_flex> */}
           <Postcards>
-            {post_list.map((e,idx) => {
+            {like_list.map((e,idx) => {
               return (
                 <Post
                 _onClick={() => {

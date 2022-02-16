@@ -3,8 +3,9 @@ import styled from "styled-components";
 import { ConnectedRouter } from "connected-react-router";
 import { history } from "../redux/configureStore";
 import { Route } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { actionCreators as userActions } from "../redux/modules/user";
+import { actionCreators as likeActions } from "../redux/modules/likes";
 
 import Header from "../components/Header";
 import {Grid, Button} from "../elements";
@@ -29,6 +30,7 @@ function App() {
       dispatch(userActions.loginCheckFB());
     }
   }, []);
+  
 
   return (
     <React.Fragment>
