@@ -43,8 +43,6 @@ const PostList = (props) => {
           <Postcards>
           {post_list.map((e, idx) => {
             return (
-              // <Items key={idx}>
-                // <Figure>
                   <Post
                     _onClick={() => {
                       history.push(`/detail/${e.id}`);
@@ -52,16 +50,10 @@ const PostList = (props) => {
                     key={e.id}
                     post={e}
                   />
-              // </Figure>
-              // </Items>
             );
           })}
         </Postcards>
 
-
-      {/* </Grid> */}
-      {/* })} */}
-      {/* </Grid> */}
       <Permit>
         <Button
           is_float
@@ -79,7 +71,7 @@ const PostList = (props) => {
 
 // 카드 나타나는 전체 넓이
 const Postcards = styled.div`
-  
+
   column-count: 4;
   column-gap: 1em;
   
