@@ -38,7 +38,7 @@ const Header = (props) => {
               _onClick={myLike}
               radius="100px"
               width="120px"
-              margin="3px">내가찜한사진</Button>
+              margin="3px">{likeButton?'전체사진':'내가찜한사진'}</Button>
             <Button
               radius="100px"
               width="120px"
