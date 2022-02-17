@@ -101,6 +101,7 @@ const Post = ({post}) => {
     );
 }
 
+
 Post.defaultProps = {
     title: "존예존예존예존예!",
     tags: ["태그1", "태그2"],

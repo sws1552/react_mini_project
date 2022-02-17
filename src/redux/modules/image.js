@@ -25,7 +25,7 @@ const uploadImageFB = (imageForm) => {
         
         dispatch(uploading(true));
 
-        console.log(imageForm);
+        // console.log(imageForm);
 
         axios.post('/api/post/image',imageForm, // 미리 약속한 주소
                 
@@ -37,7 +37,7 @@ const uploadImageFB = (imageForm) => {
                 //     },
                 // } // 누가 요청했는 지 알려줍니다. (config에서 해요!)
             ).then(function (res) {
-                console.log("upload response !! ", res);
+                // console.log("upload response !! ", res);
 
                 // dispatch(uploadImage(`http://14.45.204.153:8080/${res.data}`));
                 dispatch(uploadImage(`http://3.34.137.81:80/${res.data}`));

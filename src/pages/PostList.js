@@ -19,7 +19,7 @@ const PostList = (props) => {
   const likeButton = useSelector((state)=>state.likes.click)
   
   // likeButton 눌렀는지 확인 > true면 눌린거
-  console.log('useS', likeButton)
+  // console.log('useS', likeButton)
   
 
   React.useEffect(() => {

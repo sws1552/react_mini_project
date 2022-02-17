@@ -96,7 +96,7 @@ const Signup = (props) => {
             {userID:id},
             )
           .then(function(response) {
-            console.log(response);
+            // console.log(response);
             if (response.data.msg === '가입가능') {
               window.alert('사용 가능한 ID입니다')
             } else if (response.data.errorMessage==="이미 있는 아이디입니다."){

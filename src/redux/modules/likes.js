@@ -33,7 +33,7 @@ const likePostFB = (postId) => {
               },
             })
             .then(function (response) {
-              console.log('추가된데이터', response);
+              // console.log('추가된데이터', response);
             //   dispatch(postActions.setPost(response.data))
             // 데이터 하나만 나옴
               dispatch(postActions.likePost(response.data))
@@ -57,7 +57,7 @@ const deleteLikeFB = (postId) => {
             },
         })
         .then(function (response) {
-          console.log('삭제된데이터',response);
+          // console.log('삭제된데이터',response);
         //   dispatch(postActions.setPost(response.data))
         // 데이터 하나만 나옴
           dispatch(postActions.likePost(response.data))
@@ -74,7 +74,7 @@ const deleteLikeFB = (postId) => {
 
 const setLikeFB = () => {
     return function (dispatch, getState, {history}) {
-      console.log("setLike 넘어옴")
+      // console.log("setLike 넘어옴")
         axios
         .get('/api/posts/likes', {
             headers: {
@@ -82,7 +82,7 @@ const setLikeFB = () => {
             },
         })
         .then(function (response) {
-          console.log('setLIKE', response.data);
+          // console.log('setLIKE', response.data);
           dispatch(postActions.setPost(response.data))
 
         })
@@ -107,7 +107,7 @@ export default handleActions (
         [CALL_LIKE] : (state, action) => produce(state, (draft)=> {
           // draft.click이 true면 false, false면 true로 바꾸는거 작업 필요
           draft.click = draft.click===true?false:true;
-          console.log('버튼클릭 테스트', draft.click)
+          // console.log('버튼클릭 테스트', draft.click)
       }),
 
 

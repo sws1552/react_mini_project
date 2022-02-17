@@ -61,7 +61,7 @@ const loginCheckFB = () => {
     )
     
     .then(function(response) {
-      console.log("logincheckFB !! ", response);
+      // console.log("logincheckFB !! ", response);
       
       if(response.data.user) {
         dispatch(setUser({
@@ -103,7 +103,7 @@ const loginFB = (id, pwd) => {
       //   // authorization: `Bearer ${localStorage.getItem("token")}`
       // } // 누가 요청했는 지 알려줍니다. (config에서 해요!)
     ).then(function (response) {
-      console.log('로그인정보확인',response);
+      // console.log('로그인정보확인',response);
 
       dispatch(setUser({
         userID: response.data.user.userID,

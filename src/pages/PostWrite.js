@@ -73,7 +73,7 @@ const PostWrite = (props) => {
     
     // 게시글 작성 완료 버튼
     const postBtn = () => {
-        console.log("버튼 클릭!");
+        // console.log("버튼 클릭!");
 
         const tagResult = tagData.filter((item, i) => item !== '');
         if(tagResult.length === 0){window.alert('한개이상의 태그 작성해주세요~'); return;}
