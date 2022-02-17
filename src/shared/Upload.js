@@ -12,6 +12,19 @@ const Upload = (props) => {
     const dispatch = useDispatch();
 
     const selectfile = (e) => {
+
+        let file_kind = e.target.value.lastIndexOf('.');
+        let file_name = e.target.value.substring(file_kind+1, e.target.value.length);
+        let file_type = file_name.toLowerCase();
+
+        let check_file_type = ['jpg','gif','png','jpeg'];
+        
+        if(check_file_type.indexOf(file_type) === -1){
+            window.alert('사진만 업로드 가능합니다!');
+            e.target.value = '';
+            return false;
+        }
+
         const reader = new FileReader();
         const file = props._ref.current.files[0];
         

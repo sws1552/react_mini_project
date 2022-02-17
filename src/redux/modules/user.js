@@ -116,6 +116,7 @@ const loginFB = (id, pwd) => {
       
     })
     .catch(function (error) {
+      window.alert('아이디 혹은 비밀번호가 일치하지 않습니다.');
       console.log(error);
     });
 
