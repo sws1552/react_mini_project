@@ -74,6 +74,7 @@ const PostDetailOne = (props) => {
 
             <Grid padding="16px">
                 <Text bold margin="0">tag</Text>
+                <Text margin="0px" size="16px" bold fontFamily='Malssami815'>*빈칸으로 남기시면 삭제됩니다.</Text>
                 <Grid>
                     <Permit>
                         <Button displayNone={_disabled} text="태그 추가" width="15%" _onClick={tagPlus}></Button>
