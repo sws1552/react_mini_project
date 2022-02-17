@@ -74,6 +74,7 @@ const deleteLikeFB = (postId) => {
 
 const setLikeFB = () => {
     return function (dispatch, getState, {history}) {
+      console.log("setLike 넘어옴")
         axios
         .get('/api/posts/likes', {
             headers: {
