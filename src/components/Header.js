@@ -22,7 +22,7 @@ const Header = (props) => {
   // const get_url = useParams();
   // console.log('파라미터 가져오기',get_url)
 
-  console.log('태그리스트', tagButton)
+  // console.log('태그리스트', tagButton)
 
 
   const myLike = () => {
