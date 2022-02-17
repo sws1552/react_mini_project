@@ -17,15 +17,22 @@ import '../shared/App.css';
 const Post = ({post}) => {
   const dispatch = useDispatch();
   const _user = useSelector((state)=>state.user.user)
+  const is_login = useSelector((state) => state.user.is_login);
   const isLiking = post.Likers!==undefined ? post.Likers.find(liker => liker.id === _user.id) : null
   // console.log(post)
 
   let likeButton = () => {
+    if(is_login) {
       dispatch(likeActions.likePostFB(post.id))
+    } else {
+      window.alert('로그인 후 찜하기를 눌러주세요!')
+      history.push('/login')
+    }
   }
 
   let dislikeButton = () => {
       dispatch(likeActions.deleteLikeFB(post.id))
+      
   }
 
 
@@ -34,15 +41,17 @@ const Post = ({post}) => {
     return (
       <React.Fragment>
         <Postcard>
-
+          {/*  */}
           <ImageBox>
             {/* 이미지 클릭 시 상세페이지로 이동 */}
-            <PostImage
-              onClick={()=> {
-                history.push(`/detail/${post.id}`)
-              }}
-              src={post.imageUrl}
-              ></PostImage>
+            <ImageSize>
+              <PostImage
+                onClick={()=> {
+                  history.push(`/detail/${post.id}`)
+                }}
+                src={post.imageUrl}
+                ></PostImage>
+            </ImageSize>
 
             <Heart>
               {!isLiking?
@@ -59,44 +68,45 @@ const Post = ({post}) => {
             </Heart>
 
           </ImageBox>
-          {/* 태그 map*/}
-
-
+          
+          {/* 텍스트박스 */}
           <div style={{padding:"10px 15px 15px 15px"}}>
-          <Text size="12px" margin="0px"><TiHeart />{post.Likers.length}</Text>
-          <Text margin="0px" bold>
-            {post.title}
-          </Text>
+            <Text size="12px" margin="0px"><TiHeart />{post.Likers.length}</Text>
+            <Text margin="0px" bold>
+              {post.title}
+            </Text>
 
-          <Tag>
-            {/* 서버 tags DB 저장형태에 따라 수정해야 할 수 있음 */}
-            {post.tags.map((p, idx) => {
-              return (
-                <Badge
-                  className="tag"
-                  pill
-                  onClick={() => {
-                    batch(() => {
-                    dispatch(postActions.tagListFB(p.name))
-                    dispatch(postActions.tagClick())
-                    })
-                  }}
-                  bg="dark"
-                  key={idx}
-                  style={{
-                    margin: "7px 2px 2px 2px",
-                    padding: "6px 10px",
-                    fontSize: "0.8rem",
-                    fontFamily: "Pretendard-Thin"
-                  }}
-                >
-                  {p.name}
-                </Badge>
-              );
-            })}
-          </Tag>
+            <Tag>
+              {/* 서버 tags DB 저장형태에 따라 수정해야 할 수 있음 */}
+              {post.tags.map((p, idx) => {
+                return (
+                  <Badge
+                    className="tag"
+                    pill
+                    onClick={() => {
+                      batch(() => {
+                      dispatch(postActions.tagListFB(p.name))
+                      dispatch(postActions.tagClick())
+                      })
+                    }}
+                    bg="dark"
+                    key={idx}
+                    style={{
+                      margin: "7px 2px 2px 2px",
+                      padding: "6px 10px",
+                      fontSize: "0.8rem",
+                      fontFamily: "Pretendard-Thin"
+                    }}
+                  >
+                    {p.name}
+                  </Badge>
+                );
+              })}
+            </Tag>
           </div>
         </Postcard>
+
+        
       </React.Fragment>
     );
 }
@@ -137,9 +147,13 @@ overflow: hidden;
 
 `
 const Heart = styled.div`
+`
 
+const ImageSize = styled.div`
+min-width:22vw;
 
 `
+
 const Count = styled.p`
 z-index:1
 
