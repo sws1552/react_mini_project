@@ -115,6 +115,7 @@ margin-bottom:1rem;
 background-color: white;
 // 줄바꿈 방지
 display:inline-block;
+min-width: 40%
 
 `
 

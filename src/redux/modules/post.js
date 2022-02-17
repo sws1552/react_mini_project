@@ -23,27 +23,7 @@ let createdAt = new Date()
 
 
 const initialState = {
-  list: [
-    // {
-    //   id: 1,
-    //   // 수정/삭제 버튼 보여주려면 둘중에 하나 있어야 할 듯
-    //   // (서버에서 요청할 때도!) userID: "ID입니다" 이나 nickname:"닉네임입니다"
-    //   title: "전지현 너무 예뻐",
-    //   createdAt: createdAt,
-    //   imageUrl:
-    //     "https://thumb.mt.co.kr/06/2021/09/2021092406423496252_1.jpg/dims/optimize/",
-    //   tags: [
-    //     {
-    //       id: 12,
-    //       name: "전지현",
-    //     },
-    //     {
-    //       id: 13,
-    //       name: "화보",
-    //     },
-    //   ],
-    // },
-  ],
+  list: [],
   one_post: {
     user: {
       userID: ""
