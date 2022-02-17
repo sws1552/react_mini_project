@@ -90,6 +90,7 @@ const addPostFB = (title, tagData, imageForm) => {
                     // console.log('addPostFB res !! ', res2);
 
                     const post = {
+                      Likers: res2.data.Likers,
                       id: res2.data.id,
                       createdAt: createdAt,
                       title: res2.data.title,
