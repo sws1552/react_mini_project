@@ -71,7 +71,7 @@ const PostList = (props) => {
 const Postcards = styled.div`
 
   column-count: 4;
-  column-gap: 1em;
+  column-gap: 2em;
   
 `
 export default PostList;
