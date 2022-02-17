@@ -171,7 +171,7 @@ const Container = styled.div`
 const TagInput = styled.input`
     padding: 10px 3px;
     box-sizing: border-box;
-    border: 1px solid black;
+    border: 1px solid #eee;
     margin-left: 10px;
     width: 15%;
     text-align: center;

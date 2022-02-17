@@ -78,10 +78,10 @@ const PostDetail = (props) => {
 
             <Grid padding="16px" flex_basic>
                 <Permit>
-                    <Button width="20%" displayNone={_disabled} _onClick={updatePostBtn} text="수정하기" ></Button>
-                    <Button width="20%" displayNone={_disabled} _onClick={deletePostBtn} text="삭제하기" ></Button>
+                    <Button width="20%" margin="5px" displayNone={_disabled} _onClick={updatePostBtn} text="수정하기" ></Button>
+                    <Button width="20%" margin="5px" displayNone={_disabled} _onClick={deletePostBtn} text="삭제하기" ></Button>
                 </Permit>
-                <Button width="20%" _onClick={() => {
+                <Button width="20%" margin="5px" _onClick={() => {
                     props.history.replace('/');
                 }} text="돌아가기" ></Button>
             </Grid>
@@ -117,8 +117,18 @@ background-color: white;
 `;
 
 const Taginput = styled.input`
-    margin-left: 10px;
-    width:20%;
+    padding: 10px 3px;
+    box-sizing: border-box;
+    border: 1px solid #eee;
+    margin: 10px 10px 0px 0px;
+    width: 15%;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 5px 0px;
+    &:focus{
+        outline: none;
+        box-shadow: 0 0 0 3px #9E56EB;
+    }
 `;
 
 
