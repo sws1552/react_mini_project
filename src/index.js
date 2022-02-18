@@ -13,6 +13,9 @@ import axios from "axios";
 // EC2
 axios.defaults.baseURL = "http://3.34.137.81:80";
 // axios.defaults.baseURL = "http://15.164.165.217:80";
+ 
+// 성원님 서버 (검색기능)
+// axios.defaults.baseURL = "http://175.112.86.142:8080"
 
 ReactDOM.render(
   <Provider store={store}>

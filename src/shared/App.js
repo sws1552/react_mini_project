@@ -39,7 +39,9 @@ function App() {
       {/* <Grid width="60%" margin ="auto"> */}
       <Background>
         <Header></Header>
-          <Container>
+        
+
+          <Container> 
             <ConnectedRouter history={history}>
               
               <Route path="/" exact component={PostList} />

@@ -57,7 +57,7 @@ const ElInput = styled.input`
 
   &:focus{
     outline: none;
-    box-shadow: 0 0 0 3px #9E56EB;
+    box-shadow: 0 0 0 3px red;
   }
 
 `;

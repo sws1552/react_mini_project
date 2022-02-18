@@ -11,6 +11,7 @@ const ADD_POST = "ADD_POST"
 const ONE_POST = "ONE_POST"
 const LIKE_POST = "LIKE_POST"
 const TAG_CLICK = "TAG_CLICK"
+const SET_KEYWORD = "SET_KEYWORD"
 
 // 액션 생성 함수
 const setPost = createAction(SET_POST, (post_list)=> ({post_list}))
@@ -139,6 +140,24 @@ const getOnePostFB = (postId) => {
   }
 }
 
+const searchFB = (keyword) => {
+  return function(dispatch, getState, {history}) {
+    axios
+      .get(`/api/posts/search/${keyword}`)
+      .then(function (res) {
+        console.log('데이터나오나?',res)
+        if(res.data === undefined) {
+          window.alert('찾으시는 키워드가 없어요! 가장 먼저 게시물을 등록해보세요!')
+        } else {
+          dispatch(setPost(res.data))
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+}
+
 
 const updateOnePostFB = (postId, title, tags) => {
   return function(dispatch, getState, {history}) {
@@ -258,6 +277,7 @@ const actionCreators = {
     deleteOnePostFB,
     tagListFB,
     tagClick,
+    searchFB,
 }
 
 export {actionCreators}

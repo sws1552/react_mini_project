@@ -45,7 +45,6 @@ const Header = (props) => {
             hover
             fontFamily='Malssami815' 
             _onClick={() => {
-              history.replace("/");
               dispatch(postActions.getPostFB());
             }}>
             {/* <IoHome style={{fontSize:"2rem"}}/> */}
